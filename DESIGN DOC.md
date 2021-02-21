@@ -89,7 +89,8 @@ exist in a fully fledged game. Certain things like a player name, or a visible a
 date.
 
 ## 4. SPECIFICATIONS
-
+TBD
 
 
 ## 5. USER INTERFACE
+TBD
