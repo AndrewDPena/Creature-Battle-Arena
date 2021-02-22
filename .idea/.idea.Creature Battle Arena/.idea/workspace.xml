@@ -10,18 +10,18 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="StupidFuckingSolution.cs" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Assets/Scripts/StupidFuckingSolution.cs">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="CreatureMove.cs" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/CreatureMove.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
+            <state relative-caret-position="420">
               <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
               <folding>
-                <marker date="1613971698289" expanded="false" signature="6:78" ph="..." />
-                <marker date="1613971698289" expanded="true" signature="130:703" ph="{...}" />
-                <marker date="1613971698289" expanded="true" signature="286:369" ph="{...}" />
-                <marker date="1613971698289" expanded="true" signature="427:701" ph="{...}" />
-                <marker date="1613971698289" expanded="true" signature="626:695" ph="{...}" />
+                <marker date="1613973072769" expanded="true" signature="6:78" ph="..." />
+                <marker date="1613973072769" expanded="true" signature="121:692" ph="{...}" />
+                <marker date="1613973072769" expanded="true" signature="277:360" ph="{...}" />
+                <marker date="1613973072769" expanded="true" signature="418:690" ph="{...}" />
+                <marker date="1613973072769" expanded="true" signature="617:684" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -33,13 +33,13 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/StupidFuckingSolution.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/CreatureMove.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/CreatureMove.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/StupidFuckingSolution.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/CreatureMove.cs" />
       </list>
     </option>
   </component>
@@ -96,24 +96,6 @@
               <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
               <item name="Scripts" type="977d5f41:SolutionExplorerNodeRider" />
             </path>
-            <path>
-              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
-              <item name="Creature Battle Arena (2 projects)" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Assembly-CSharp-Editor-firstpass" type="977d5f41:SolutionExplorerNodeRider" />
-            </path>
-            <path>
-              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
-              <item name="Creature Battle Arena (2 projects)" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Assembly-CSharp-Editor-firstpass" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
-            </path>
-            <path>
-              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
-              <item name="Creature Battle Arena (2 projects)" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Assembly-CSharp-Editor-firstpass" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Assets" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Plugins" type="977d5f41:SolutionExplorerNodeRider" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -155,12 +137,13 @@
       <option name="presentableId" value="Default" />
       <updated>1613967953954</updated>
       <workItem from="1613967975527" duration="60000" />
-      <workItem from="1613970272522" duration="1652000" />
+      <workItem from="1613970272522" duration="2660000" />
+      <workItem from="1613972984602" duration="341000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1712000" />
+    <option name="totallyTimeSpent" value="3061000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -209,10 +192,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/CreatureMove.cs">
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/StupidFuckingSolution.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -221,12 +204,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
           <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/CreatureMove.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
           <folding>
-            <marker date="1613971698289" expanded="false" signature="6:78" ph="..." />
-            <marker date="1613971698289" expanded="true" signature="130:703" ph="{...}" />
-            <marker date="1613971698289" expanded="true" signature="286:369" ph="{...}" />
-            <marker date="1613971698289" expanded="true" signature="427:701" ph="{...}" />
-            <marker date="1613971698289" expanded="true" signature="626:695" ph="{...}" />
+            <marker date="1613973072769" expanded="true" signature="6:78" ph="..." />
+            <marker date="1613973072769" expanded="true" signature="121:692" ph="{...}" />
+            <marker date="1613973072769" expanded="true" signature="277:360" ph="{...}" />
+            <marker date="1613973072769" expanded="true" signature="418:690" ph="{...}" />
+            <marker date="1613973072769" expanded="true" signature="617:684" ph="{...}" />
           </folding>
         </state>
       </provider>

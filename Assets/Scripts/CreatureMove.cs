@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StupidFuckingSolution : MonoBehaviour
+public class CreatureMove : MonoBehaviour
 {
     private CharacterController _controller;
     private float playerSpeed = 2.0f;
@@ -17,12 +17,12 @@ public class StupidFuckingSolution : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
         _controller.Move(move * Time.deltaTime * playerSpeed);
 
         if (move != Vector3.zero)
         {
-            gameObject.transform.forward = move;
+            gameObject.transform.right = move;
         }
     }
 }
