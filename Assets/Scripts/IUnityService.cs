@@ -6,6 +6,7 @@ public interface IUnityService
 {
     float GetAxis(string axisName);
     float GetDeltaTime();
+    bool GetKeyDown(string key);
 }
 
 public class UnityService : IUnityService
@@ -18,5 +19,10 @@ public class UnityService : IUnityService
     public float GetDeltaTime()
     {
         return Time.deltaTime;
+    }
+
+    public bool GetKeyDown(string key)
+    {
+        return Input.GetKeyDown(key);
     }
 }

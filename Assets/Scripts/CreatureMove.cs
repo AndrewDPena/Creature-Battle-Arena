@@ -6,11 +6,11 @@ using UnityEngine;
 public class CreatureMove : MonoBehaviour
 {
     private CharacterController _controller;
-    private float _creatureSpeed = 2.0f;
+    public float CreatureSpeed;
+    private Vector2 _velocityVector;
     public IUnityService UnityService;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         _controller = gameObject.GetComponent<CharacterController>();
         if (UnityService == null)
@@ -19,15 +19,21 @@ public class CreatureMove : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetVelocity(Vector2 velocity)
     {
-        var move = new Vector2(UnityService.GetAxis("Horizontal"), UnityService.GetAxis("Vertical"));
-        _controller.Move(move * UnityService.GetDeltaTime() * _creatureSpeed);
+        _velocityVector = velocity;
+    }
 
-        if (move != Vector2.zero)
+    private void Update()
+    {
+        _controller.Move(_velocityVector * UnityService.GetDeltaTime() * CreatureSpeed);
+
+        // This block of code caused the adorable and hilarious rotation. Leaving it here so I can always re-enable
+        // its awfulness.
+        /**
+        if (_velocityVector != Vector2.zero)
         {
-            gameObject.transform.right = move;
-        }
+            gameObject.transform.right = _velocityVector;
+        } **/
     }
 }

@@ -49,3 +49,6 @@ crashlytics-build.properties
 
 # .idea folder
 .idea/*
+
+# Code Coverage Folder
+CodeCoverage/*

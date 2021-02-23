@@ -6,7 +6,7 @@ using UnityEngine.TestTools;
 
 namespace PlayTest
 {
-    public class CreatureBehavior
+    public class CreatureBehaviorTest
     {
         private GameObject _gameObject;
         private CreatureMove _move;
