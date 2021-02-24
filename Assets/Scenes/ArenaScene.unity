@@ -264,7 +264,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 69
   CurrentHealth: 0
-  HealthBar: {fileID: 848852186}
+  HealthBar: {fileID: 1250931152}
 --- !u!1 &421422807
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,7 +392,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &848852186 stripped
+--- !u!114 &1250931152 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4066896646672547327, guid: f157df67c923d124dbc74d3d80391253,
     type: 3}

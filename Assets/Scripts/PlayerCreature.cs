@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Text;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerCreature : MonoBehaviour
 {
     public int MaxHealth = 69;
     public int CurrentHealth;
-    [SerializeReference]
     public HealthBar HealthBar;
     
     private void Start()
