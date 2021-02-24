@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿// This was ONLY possible thanks to this tutorial on reflection with unity components
+// Singh, Kuldeep, "Practical Unit Testing in Unity3D", Medium.com, accessed at:
+// https://medium.com/xrpractices/practical-unit-testing-in-unity3d-f8d5f777c5db
+
+using System.Collections;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
