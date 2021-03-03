@@ -131,10 +131,11 @@ GameObject:
   m_Component:
   - component: {fileID: 189496915}
   - component: {fileID: 189496914}
-  - component: {fileID: 189496916}
   - component: {fileID: 189496919}
   - component: {fileID: 189496917}
   - component: {fileID: 189496918}
+  - component: {fileID: 189496916}
+  - component: {fileID: 189496920}
   m_Layer: 0
   m_Name: Cube Creature
   m_TagString: Player
@@ -207,24 +208,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!143 &189496916
-CharacterController:
+--- !u!50 &189496916
+Rigidbody2D:
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 189496913}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 10
+  m_AngularDrag: 0
+  m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 1
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!114 &189496917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,7 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a1792f1561f51c419ba12ab3251615e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CreatureSpeed: 2
+  CreatureSpeed: 1000
 --- !u!114 &189496918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,6 +269,39 @@ MonoBehaviour:
   MaxHealth: 69
   CurrentHealth: 0
   HealthBar: {fileID: 1250931152}
+--- !u!60 &189496920
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189496913}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.08388376, y: -0.2774799}
+      - {x: 0.009822607, y: -0.013125777}
+      - {x: -0.5, y: -0.245893}
+      - {x: -0.021807194, y: -0.474509}
+      - {x: -0.0053350925, y: -0.48725438}
+      - {x: 0.5, y: -0.22904015}
+      - {x: 0.01566863, y: 0.0037267208}
+      - {x: 0.14926338, y: -0.26473415}
 --- !u!1 &421422807
 GameObject:
   m_ObjectHideFlags: 0
@@ -618,7 +655,7 @@ GameObject:
   - component: {fileID: 1565984388}
   - component: {fileID: 1565984390}
   m_Layer: 0
-  m_Name: Tilemap
+  m_Name: Map Surface
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2179,8 +2216,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.9848914, y: 2.9967692}
-  - {x: 5.474409, y: -0.23696077}
+  - {x: 5.464367, y: -0.27884197}
+  - {x: -0.52964985, y: -3.2614925}
+  - {x: -7.0082946, y: 0.01673977}
+  - {x: -1.0136156, y: 3.0109203}
+  - {x: 5.474409, y: -0.23696113}
 --- !u!224 &1880960702 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4066896646672547326, guid: f157df67c923d124dbc74d3d80391253,

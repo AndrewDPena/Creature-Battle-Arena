@@ -10,6 +10,7 @@ namespace PlayTest
     {
         private GameObject _gameObject;
         private PlayerInputKeyboard _input;
+        private Rigidbody2D _body;
         private CreatureMove _move;
         
         [SetUp]
@@ -17,8 +18,9 @@ namespace PlayTest
         {
             _gameObject = GameObject.Instantiate(new GameObject());
             _input = _gameObject.AddComponent<PlayerInputKeyboard>();
+            _body = _gameObject.AddComponent<Rigidbody2D>();
             _move = _gameObject.AddComponent<CreatureMove>();
-            _move.CreatureSpeed = 2.0f;
+            _move.CreatureSpeed = 1000.0f;
         }
 
         [TearDown]
@@ -40,11 +42,12 @@ namespace PlayTest
         {
             Vector2 position = _move.transform.position;
             
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.5f);
 
             Vector2 newPosition = _move.transform.position;
             
-            Assert.AreEqual(position, newPosition, "Move Test Passed, PlayerInputKeyboard does not call movement without input.");
+            Assert.AreEqual(position, newPosition, 
+                "Move Test Passed, PlayerInputKeyboard does not call movement without input.");
         }
         
         [UnityTest]
@@ -57,11 +60,12 @@ namespace PlayTest
 
             _input.UnityService = unityService; 
             
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.5f);
 
             Vector2 newPosition = _move.transform.position;
             
-            Assert.AreNotEqual(newPosition.x, position.x, "Move Test Passed, PlayerInputKeyboard calls movement with input.");
+            Assert.AreNotEqual(position.x, newPosition.x, 
+                "Move Test Passed, PlayerInputKeyboard calls movement with input.");
         }
         
         [UnityTest]
@@ -74,11 +78,12 @@ namespace PlayTest
 
             _input.UnityService = unityService; 
             
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.5f);
 
             Vector2 newPosition = _move.transform.position;
             
-            Assert.AreEqual(newPosition.x, position.x, "Move Test Passed, PlayerInputKeyboard calls zero movement with zero vector.");
+            Assert.AreEqual(newPosition.x, position.x, 
+                "Move Test Passed, PlayerInputKeyboard calls zero movement with zero vector.");
         }
     }
 }
