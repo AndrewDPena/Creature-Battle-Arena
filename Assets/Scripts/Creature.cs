@@ -5,8 +5,10 @@ using System.Text;
 using UnityEditor;
 using UnityEngine;
 
-public class PlayerCreature : MonoBehaviour
+public class Creature : MonoBehaviour
 {
+    public string Name;
+    public int Strength;
     public int MaxHealth = 69;
     public int CurrentHealth;
     public HealthBar HealthBar;
