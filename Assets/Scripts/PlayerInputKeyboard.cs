@@ -25,7 +25,7 @@ public class PlayerInputKeyboard : MonoBehaviour
         // This should be removed once a second creature is on the field and health can be tested that way
         if (UnityService.GetKeyDown("left shift"))
         {
-            gameObject.GetComponent<PlayerCreature>().TakeDamage(10);
+            gameObject.GetComponent<Creature>().TakeDamage(10);
         }
     }
 }

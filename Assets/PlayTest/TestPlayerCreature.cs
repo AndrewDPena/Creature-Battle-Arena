@@ -14,7 +14,7 @@ namespace PlayTest
         private Slider _slider;
         private Image _fill;
         private Gradient _gradient;
-        private PlayerCreature _creature;
+        private Creature _creature;
         
         [SetUp]
         public void Setup()
@@ -24,7 +24,7 @@ namespace PlayTest
             _fill = _gameObject.AddComponent<Image>();
             _gradient = new Gradient();
             _healthBar = _gameObject.AddComponent<HealthBar>();
-            _creature = _gameObject.AddComponent<PlayerCreature>();
+            _creature = _gameObject.AddComponent<Creature>();
             _healthBar.GetType().GetField("Slider")?.SetValue(_healthBar, _slider);
             _healthBar.GetType().GetField("Fill")?.SetValue(_healthBar, _fill);
             _healthBar.GetType().GetField("Gradient")?.SetValue(_healthBar, _gradient);
