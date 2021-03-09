@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2842247937345939411
+--- !u!1 &9008446441984262242
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,26 +8,26 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2842247937345939409}
-  - component: {fileID: 2842247937345939408}
-  - component: {fileID: 2842247937345939414}
-  - component: {fileID: 2842247937345939413}
-  - component: {fileID: 2842247937345939415}
-  - component: {fileID: 2842247937345939412}
+  - component: {fileID: 9008446441984262240}
+  - component: {fileID: 9008446441984262241}
+  - component: {fileID: 9008446441984262244}
+  - component: {fileID: 9008446441984262246}
+  - component: {fileID: 9008446441984262247}
+  - component: {fileID: 9008446441984262251}
   m_Layer: 0
-  m_Name: Cube Creature
+  m_Name: CreaturePrefab
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2842247937345939409
+--- !u!4 &9008446441984262240
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2842247937345939411}
+  m_GameObject: {fileID: 9008446441984262242}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3.01, y: -1.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -35,13 +35,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &2842247937345939408
+--- !u!212 &9008446441984262241
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2842247937345939411}
+  m_GameObject: {fileID: 9008446441984262242}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -86,62 +86,87 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 2
   m_SpriteSortPoint: 0
---- !u!143 &2842247937345939414
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2842247937345939411}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 1
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2842247937345939413
+--- !u!114 &9008446441984262244
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2842247937345939411}
+  m_GameObject: {fileID: 9008446441984262242}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62e59b6a0609a98438b265713e875fd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: Cubey
+  Strength: 0
   MaxHealth: 69
   CurrentHealth: 0
-  HealthBar: {fileID: 4066896646672547327, guid: f157df67c923d124dbc74d3d80391253,
-    type: 3}
---- !u!114 &2842247937345939415
+  HealthBar: {fileID: 0}
+--- !u!114 &9008446441984262246
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2842247937345939411}
+  m_GameObject: {fileID: 9008446441984262242}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a1792f1561f51c419ba12ab3251615e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CreatureSpeed: 2
---- !u!114 &2842247937345939412
-MonoBehaviour:
+  CreatureSpeed: 1000
+--- !u!50 &9008446441984262247
+Rigidbody2D:
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2842247937345939411}
+  m_GameObject: {fileID: 9008446441984262242}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 10
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
+--- !u!60 &9008446441984262251
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9008446441984262242}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79decad71e6023b4b8d444fb5165461b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.08388376, y: -0.2774799}
+      - {x: 0.009822607, y: -0.013125777}
+      - {x: -0.5, y: -0.245893}
+      - {x: -0.021807194, y: -0.474509}
+      - {x: -0.0053350925, y: -0.48725438}
+      - {x: 0.5, y: -0.22904015}
+      - {x: 0.01566863, y: 0.0037267208}
+      - {x: 0.14926338, y: -0.26473415}

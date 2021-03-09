@@ -30,7 +30,7 @@ public class CreatureMove : MonoBehaviour
         _rigidbody2D.AddRelativeForce(_velocityVector * UnityService.GetDeltaTime() * CreatureSpeed);
 
         // This block of code caused the adorable and hilarious rotation. Leaving it here so I can always re-enable
-        // its awfulness.
+        // its awfulness. It is MUCH worse now that the game uses physics.
         /**
         if (_velocityVector != Vector2.zero)
         {
