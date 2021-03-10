@@ -27,5 +27,10 @@ public class PlayerInputKeyboard : MonoBehaviour
         {
             gameObject.GetComponent<Creature>().TakeDamage(10);
         }
+
+        if (UnityService.GetKeyDown("left ctrl"))
+        {
+            gameObject.GetComponent<Creature>().Attack(move);
+        }
     }
 }
