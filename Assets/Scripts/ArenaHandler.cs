@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Attacks;
 
 public class ArenaHandler : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class ArenaHandler : MonoBehaviour
 
         var playerCreature = playerCreatureGO.GetComponent<Creature>();
         SetupCreature(playerCreature, "Cubey", 10, 69, HumanPlayer);
+        playerCreature.LearnAttack(new ConeAttack());
 
         var enemyCreature = enemyCreatureGO.GetComponent<Creature>();
         SetupCreature(enemyCreature, "Cylindork", 5, 80, NPCPlayer);

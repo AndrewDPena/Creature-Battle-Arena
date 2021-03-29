@@ -13,10 +13,9 @@ public class Creature : MonoBehaviour
     public int Strength;
     public int MaxHealth;
     public int CurrentHealth;
-    [SerializeField] 
-    private GameObject _attackPrefab;
-    [SerializeField] 
-    private Transform[] _exitPoints;
+    [SerializeField] private Transform[] _exitPoints;
+    [SerializeField] private GameObject _attack1Prefab;
+    [SerializeField] private IAttack _attack1;
     private Player _owner;
 
     public void Setup(string creatureName, int strength, int maxHealth, Player player)
@@ -34,27 +33,13 @@ public class Creature : MonoBehaviour
         _owner.UpdateHUD(this, CurrentHealth);
     }
 
-    public void Attack(Vector2 direction)
+    public void Attack1(Vector2 direction)
     {
-        StartCoroutine(BreatheFire(direction));
+        StartCoroutine(_attack1.Attack(direction, _exitPoints, _attack1Prefab));
     }
 
-    private IEnumerator BreatheFire(Vector2 direction)
+    public void LearnAttack(IAttack attack)
     {
-        var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        var cast = angle - (angle % 45);
-        var point = (int) (cast / 45);
-        if (point < 0)
-        {
-            point += _exitPoints.Length;
-        }
-        var breath = Instantiate(_attackPrefab, _exitPoints[point].position, Quaternion.identity);
-
-
-        breath.transform.rotation = Quaternion.AngleAxis(cast, Vector3.forward);
-
-        yield return new WaitForSeconds(.25f);
-        
-        Destroy(breath);
+        _attack1 = attack;
     }
 }

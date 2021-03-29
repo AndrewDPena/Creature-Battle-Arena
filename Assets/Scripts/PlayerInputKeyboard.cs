@@ -30,7 +30,7 @@ public class PlayerInputKeyboard : MonoBehaviour
 
         if (UnityService.GetKeyDown("left ctrl"))
         {
-            gameObject.GetComponent<Creature>().Attack(move);
+            gameObject.GetComponent<Creature>().Attack1(move);
         }
     }
 }

@@ -350,8 +350,6 @@ MonoBehaviour:
   Strength: 0
   MaxHealth: 69
   CurrentHealth: 0
-  _attackPrefab: {fileID: 7690406326559367239, guid: a700647e74a4b8b4198bc1bc912a6eae,
-    type: 3}
   _exitPoints:
   - {fileID: 4123705677000651467}
   - {fileID: 1441747975190738022}
@@ -361,6 +359,8 @@ MonoBehaviour:
   - {fileID: 2080635843754873059}
   - {fileID: 5309510693319673139}
   - {fileID: 3306842005287199957}
+  _attack1Prefab: {fileID: 7690406326559367239, guid: a700647e74a4b8b4198bc1bc912a6eae,
+    type: 3}
 --- !u!114 &9008446441984262246
 MonoBehaviour:
   m_ObjectHideFlags: 0
