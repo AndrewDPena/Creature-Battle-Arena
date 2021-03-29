@@ -73,15 +73,14 @@ namespace PlayTest
         public IEnumerator PlayerCreatureAttacks()
         {
             var direction = new Vector2(1,1);
-            var testAttack = new TestPrefab();
+            var testAttack = Substitute.For<IAttack>();
             _creature.LearnAttack(testAttack);
             _creature.Attack1(direction);
             
             yield return new WaitForSeconds(0.1f);
-            
-            
-            
-            Assert.AreEqual(direction, testAttack.GetDirection(), "Creature calls the attack coroutine successfully.");
+
+            testAttack.ReceivedWithAnyArgs().Attack(default(Vector2), default(Transform[]), default(GameObject));
+            Debug.Log("Creature calls the attack coroutine successfully.");
         }
     }
 }
