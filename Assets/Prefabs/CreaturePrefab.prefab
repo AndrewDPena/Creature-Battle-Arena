@@ -361,6 +361,8 @@ MonoBehaviour:
   - {fileID: 3306842005287199957}
   _attack1Prefab: {fileID: 7690406326559367239, guid: a700647e74a4b8b4198bc1bc912a6eae,
     type: 3}
+  _attack2Prefab: {fileID: 2076616070413368170, guid: 535178a8e6a70ed4ba7346b4e6ac6884,
+    type: 3}
 --- !u!114 &9008446441984262246
 MonoBehaviour:
   m_ObjectHideFlags: 0

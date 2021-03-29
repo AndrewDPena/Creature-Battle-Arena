@@ -9,6 +9,7 @@ public class Creature : MonoBehaviour, ICreature
     public int CurrentHealth;
     [SerializeField] private Transform[] _exitPoints;
     [SerializeField] private GameObject _attack1Prefab;
+    [SerializeField] private GameObject _attack2Prefab;
     [SerializeField] private IAttack _attack1;
     [SerializeField] private IAttack _attack2;
 
@@ -37,7 +38,7 @@ public class Creature : MonoBehaviour, ICreature
 
     public void Attack2(Vector2 direction)
     {
-        StartCoroutine(_attack2.Attack(direction, _exitPoints, _attack1Prefab));
+        StartCoroutine(_attack2.Attack(direction, _exitPoints, _attack2Prefab));
     }
 
     public void LearnAttack(IAttack attack)
@@ -45,6 +46,7 @@ public class Creature : MonoBehaviour, ICreature
         if (_attack1 == null)
         {
             _attack1 = attack;
+            //_attack1Prefab = attackPrefab;
         }
         else
         {
