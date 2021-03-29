@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Text;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.U2D;
 
-public class Creature : MonoBehaviour
+public class Creature : MonoBehaviour, ICreature
 {
     public string Name;
     public int Strength;
@@ -16,6 +10,8 @@ public class Creature : MonoBehaviour
     [SerializeField] private Transform[] _exitPoints;
     [SerializeField] private GameObject _attack1Prefab;
     [SerializeField] private IAttack _attack1;
+    [SerializeField] private IAttack _attack2;
+
     private Player _owner;
 
     public void Setup(string creatureName, int strength, int maxHealth, Player player)
@@ -33,13 +29,26 @@ public class Creature : MonoBehaviour
         _owner.UpdateHUD(this, CurrentHealth);
     }
 
+    // Change to one method with a dictionary or something, potentially
     public void Attack1(Vector2 direction)
     {
         StartCoroutine(_attack1.Attack(direction, _exitPoints, _attack1Prefab));
     }
 
+    public void Attack2(Vector2 direction)
+    {
+        StartCoroutine(_attack2.Attack(direction, _exitPoints, _attack1Prefab));
+    }
+
     public void LearnAttack(IAttack attack)
     {
-        _attack1 = attack;
+        if (_attack1 == null)
+        {
+            _attack1 = attack;
+        }
+        else
+        {
+            _attack2 = attack;
+        }
     }
 }
