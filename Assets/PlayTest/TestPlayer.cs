@@ -24,7 +24,6 @@ namespace PlayTest
         {
             _gameObject = GameObject.Instantiate(new GameObject());
             _creature = _gameObject.AddComponent<Creature>();
-            //_playerHud = _gameObject.AddComponent<PlayerHUD>();
             _player = new Player();
             _playerHud = Instantiate(Resources.Load<PlayerHUD>("Prefabs/PlayerHudPrefab"), Vector3.zero, Quaternion.identity);
             _player.SetHUD(_playerHud);
@@ -33,7 +32,9 @@ namespace PlayTest
         [TearDown]
         public void Teardown()
         {
-            GameObject.Destroy(_gameObject);
+            foreach (GameObject o in Object.FindObjectsOfType<GameObject>()) {
+                Destroy(o);
+            }
         }
 
         [UnityTest]
@@ -47,7 +48,6 @@ namespace PlayTest
         [UnityTest]
         public IEnumerator PlayerCanAssignAHud()
         {
-            // _player.SetHUD(_playerHud);
 
             yield return new WaitForSeconds(0.1f);
 
