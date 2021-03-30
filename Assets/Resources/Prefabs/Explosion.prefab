@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8745663308410090322}
+  - component: {fileID: 5106607191314079711}
   m_Layer: 0
   m_Name: Explosion
   m_TagString: Untagged
@@ -31,6 +32,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5106607191314079711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2076616070413368170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 394c39818295480ea217cfa3b188b683, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _collider: {fileID: 9079842988561869780}
 --- !u!1 &6253335784835395099
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,7 +57,6 @@ GameObject:
   - component: {fileID: 193361403746265492}
   - component: {fileID: 706254076809457691}
   - component: {fileID: 9079842988561869780}
-  - component: {fileID: 5421566638977853292}
   m_Layer: 0
   m_Name: ExplosionSprite
   m_TagString: Untagged
@@ -174,16 +187,3 @@ PolygonCollider2D:
       - {x: 0.18339035, y: 0.3222214}
       - {x: -0.17693743, y: 0.31830484}
       - {x: -0.24351975, y: 0.2595557}
---- !u!114 &5421566638977853292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6253335784835395099}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 394c39818295480ea217cfa3b188b683, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _collider: {fileID: 9079842988561869780}

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2340658633141373233}
   - component: {fileID: 4579194436961041185}
   - component: {fileID: 7333788409402055096}
-  - component: {fileID: 2265514118753522731}
   m_Layer: 0
   m_Name: FireBreathSprite
   m_TagString: Untagged
@@ -141,19 +140,6 @@ PolygonCollider2D:
       - {x: 0.25, y: 0.069570825}
       - {x: 0.21551272, y: 0.08025518}
       - {x: 0.21913919, y: 0.14494963}
---- !u!114 &2265514118753522731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2611792725122732076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: debc520f1602e6846b61a5113251ad8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _collider: {fileID: 7333788409402055096}
 --- !u!1 &7690406326559367239
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,6 +149,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4577748757526558395}
+  - component: {fileID: 3941134773680999518}
   m_Layer: 0
   m_Name: FireBreath
   m_TagString: Untagged
@@ -185,3 +172,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3941134773680999518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7690406326559367239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: debc520f1602e6846b61a5113251ad8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _collider: {fileID: 7333788409402055096}
