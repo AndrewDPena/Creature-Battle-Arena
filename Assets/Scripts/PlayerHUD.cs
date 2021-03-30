@@ -27,6 +27,11 @@ public class PlayerHUD : MonoBehaviour
         SetHealthDisplayText(health);
     }
 
+    public int GetHealth()
+    {
+        return HealthBar.GetHealth();
+    }
+
     private void SetHealthDisplayText(int health)
     {
         HealthDisplay.text = health + " / " + HealthBar.GetMaxHealth();

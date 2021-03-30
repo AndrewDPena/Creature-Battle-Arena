@@ -32,6 +32,11 @@ public class Player
         return CreaturePocket[slot];
     }
 
+    public Creature GetActiveCreature()
+    {
+        return _activeCreature;
+    }
+
     public void UpdateHUD(Creature creature, int currentHealth)
     {
         if (creature == _activeCreature)

@@ -3,6 +3,7 @@ using System.Data;
 using System.Reflection;
 using NSubstitute;
 using NUnit.Framework;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.UI;
@@ -23,8 +24,10 @@ namespace PlayTest
         {
             _gameObject = GameObject.Instantiate(new GameObject());
             _creature = _gameObject.AddComponent<Creature>();
-            _playerHud = _gameObject.AddComponent<PlayerHUD>();
+            //_playerHud = _gameObject.AddComponent<PlayerHUD>();
             _player = new Player();
+            _playerHud = Instantiate(Resources.Load<PlayerHUD>("Prefabs/PlayerHudPrefab"), Vector3.zero, Quaternion.identity);
+            _player.SetHUD(_playerHud);
         }
 
         [TearDown]
@@ -42,9 +45,9 @@ namespace PlayTest
         }
 
         [UnityTest]
-        public IEnumerator PlayerCanAssignAHUD()
+        public IEnumerator PlayerCanAssignAHud()
         {
-            _player.SetHUD(_playerHud);
+            // _player.SetHUD(_playerHud);
 
             yield return new WaitForSeconds(0.1f);
 
@@ -62,6 +65,36 @@ namespace PlayTest
             yield return new WaitForSeconds(0.1f);
             
             Assert.AreEqual(1, _player.GetPocketSize(), "Player pocket increases when creature is added.");
+        }
+
+        [UnityTest]
+        public IEnumerator PlayerCanSummonACreature()
+        {
+            _player.AddCreature(_creature);
+            yield return new WaitForSeconds(0.1f);
+            Assert.AreNotEqual(_creature, _player.GetActiveCreature(), "Player starts without an active creature.");
+
+            _player.SummonCreature(0);
+
+            yield return new WaitForSeconds(0.1f);
+            
+            Assert.AreEqual(_creature, _player.GetActiveCreature(), "Player successfully summons creature.");
+        }
+
+        [UnityTest]
+        public IEnumerator PlayerCanUpdateHud()
+        {
+            _creature.Setup("Test", 0, 100, _player);
+            _player.AddCreature(_creature);
+            _player.SummonCreature(0);
+            
+            yield return new WaitForSeconds(0.1f);
+            Assert.AreEqual(100, _playerHud.GetHealth(), "Hud updates to summoned creature.");
+            
+            _player.UpdateHUD(_creature, 10);            
+            yield return new WaitForSeconds(0.1f);
+            Assert.AreEqual(10, _playerHud.GetHealth(), "Player can update HUD values.");
+
         }
     }
 }
