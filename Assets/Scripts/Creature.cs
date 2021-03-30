@@ -10,8 +10,8 @@ public class Creature : MonoBehaviour, ICreature
     [SerializeField] private Transform[] _exitPoints;
     [SerializeField] private GameObject _attack1Prefab;
     [SerializeField] private GameObject _attack2Prefab;
-    [SerializeField] private IAttack _attack1;
-    [SerializeField] private IAttack _attack2;
+    [SerializeField] private IAttackType _attack1;
+    [SerializeField] private IAttackType _attack2;
 
     private Player _owner;
 
@@ -41,16 +41,16 @@ public class Creature : MonoBehaviour, ICreature
         StartCoroutine(_attack2.Attack(direction, _exitPoints, _attack2Prefab));
     }
 
-    public void LearnAttack(IAttack attack)
+    public void LearnAttack(IAttackType attackType)
     {
         if (_attack1 == null)
         {
-            _attack1 = attack;
+            _attack1 = attackType;
             //_attack1Prefab = attackPrefab;
         }
         else
         {
-            _attack2 = attack;
+            _attack2 = attackType;
         }
     }
 }

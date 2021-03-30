@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AttackTypes
 {
-    public class CenteredAttack : IAttack
+    public class CenteredAttackType : IAttackType
     {
         public IEnumerator Attack(Vector2 direction, Transform[] exitPoints, GameObject attackPrefab)
         {

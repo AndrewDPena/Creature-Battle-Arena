@@ -32,8 +32,8 @@ public class ArenaHandler : MonoBehaviour
 
         var playerCreature = playerCreatureGO.GetComponent<Creature>();
         SetupCreature(playerCreature, "Cubey", 10, 69, HumanPlayer);
-        playerCreature.LearnAttack(new ConeAttack());
-        playerCreature.LearnAttack(new CenteredAttack());
+        playerCreature.LearnAttack(new ConeAttackType());
+        playerCreature.LearnAttack(new CenteredAttackType());
 
         var enemyCreature = enemyCreatureGO.GetComponent<Creature>();
         SetupCreature(enemyCreature, "Cylindork", 5, 80, NPCPlayer);

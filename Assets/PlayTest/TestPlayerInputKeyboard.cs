@@ -97,8 +97,8 @@ namespace PlayTest
             unityService.GetKeyDown("left ctrl").Returns(true);
 
 
-            var testAttack1 = Substitute.For<IAttack>();
-            var testAttack2 = Substitute.For<IAttack>();
+            var testAttack1 = Substitute.For<IAttackType>();
+            var testAttack2 = Substitute.For<IAttackType>();
             _creature.LearnAttack(testAttack1);
             _creature.LearnAttack(testAttack2);
 
@@ -119,8 +119,8 @@ namespace PlayTest
             unityService.GetKeyDown("left ctrl").Returns(false);
 
 
-            var testAttack1 = Substitute.For<IAttack>();
-            var testAttack2 = Substitute.For<IAttack>();
+            var testAttack1 = Substitute.For<IAttackType>();
+            var testAttack2 = Substitute.For<IAttackType>();
             _creature.LearnAttack(testAttack1);
             _creature.LearnAttack(testAttack2);
 

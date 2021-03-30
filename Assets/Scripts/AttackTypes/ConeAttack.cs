@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AttackTypes
 {
-    public class ConeAttack : IAttack
+    public class ConeAttackType : IAttackType
     {
         public IEnumerator Attack(Vector2 direction, Transform[] exitPoints, GameObject attackPrefab)
         {

@@ -73,7 +73,7 @@ namespace PlayTest
         public IEnumerator PlayerCreatureAttacks()
         {
             var direction = new Vector2(1,1);
-            var testAttack = Substitute.For<IAttack>();
+            var testAttack = Substitute.For<IAttackType>();
             _creature.LearnAttack(testAttack);
             _creature.Attack1(direction);
             
