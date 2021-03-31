@@ -28,6 +28,8 @@ public class Player
     public Creature SummonCreature(int slot)
     {
         _activeCreature = CreaturePocket[slot];
+        CreaturePocket[slot] = CreaturePocket[0];
+        CreaturePocket[0] = _activeCreature;
         _hud.InitializeHUD(_activeCreature);
         return CreaturePocket[slot];
     }

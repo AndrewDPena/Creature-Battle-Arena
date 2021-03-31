@@ -35,10 +35,10 @@ namespace AttackList
 
         private void OnTriggerStay2D(Collider2D other)
         {
-            Debug.Log("Events are working.");
             var c = other.GetComponentInParent<Creature>();
             if (c != null & _battlePower > 0)
             {
+                Debug.Log("You shouldn't see me if you're burning the tree.");
                 c.TakeDamage(_damagePerUpdate);
                 _battlePower -= _damagePerUpdate;
             }

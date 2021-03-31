@@ -53,4 +53,12 @@ public class Creature : MonoBehaviour, ICreature
             _attack2 = attackType;
         }
     }
+
+    public void Return(int slot)
+    {
+        if (_owner.GetPocketSize() > slot)
+        {
+            _owner.SummonCreature(slot);
+        }
+    }
 }

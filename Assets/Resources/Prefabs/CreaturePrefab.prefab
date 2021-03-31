@@ -376,7 +376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CreatureSpeed: 1000
-  tilemap: {fileID: 0}
+  TerrainSpeedModifier: 1
 --- !u!50 &9008446441984262247
 Rigidbody2D:
   serializedVersion: 4

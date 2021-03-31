@@ -7,10 +7,12 @@ public class PlayerInputKeyboard : MonoBehaviour
     
     public IUnityService UnityService;
     private CreatureMove _move;
+    private Creature _creature;
 
     private void Start()
     {
         _move = gameObject.GetComponent<CreatureMove>();
+        _creature = gameObject.GetComponent<Creature>();
         if (UnityService == null)
         {
             UnityService = new UnityService();
@@ -24,12 +26,17 @@ public class PlayerInputKeyboard : MonoBehaviour
 
         if (UnityService.GetKeyDown("left shift"))
         {
-            gameObject.GetComponent<Creature>().Attack2(move);
+            _creature.Attack2(move);
         }
 
         if (UnityService.GetKeyDown("left ctrl"))
         {
-            gameObject.GetComponent<Creature>().Attack1(move);
+            _creature.GetComponent<Creature>().Attack1(move);
+        }
+
+        if (UnityService.GetKeyDown("1"))
+        {
+            _creature.Return(1);
         }
     }
 }

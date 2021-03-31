@@ -34,11 +34,17 @@ public class ArenaHandler : MonoBehaviour
         SetupCreature(playerCreature, "Cubey", 10, 69, HumanPlayer);
         playerCreature.LearnAttack(new ConeAttackType());
         playerCreature.LearnAttack(new CenteredAttackType());
+        
+        var backupGO = new GameObject();
+        var backupCreature = backupGO.AddComponent<Creature>();
+        SetupCreature(backupCreature, "OtherCube", 10, 120, HumanPlayer);
+        playerCreature.LearnAttack(new ConeAttackType());
 
         var enemyCreature = enemyCreatureGO.GetComponent<Creature>();
         SetupCreature(enemyCreature, "Cylindork", 5, 80, NPCPlayer);
         
         HumanPlayer.AddCreature(playerCreature);
+        HumanPlayer.AddCreature(backupCreature);
         NPCPlayer.AddCreature(enemyCreature);
 
         HumanPlayer.SummonCreature(0);
