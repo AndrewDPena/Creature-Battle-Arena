@@ -7,28 +7,23 @@ namespace AttackList
 
     public class Explosion : MonoBehaviour
     {
-        [SerializeField] 
-        private Collider2D _collider;
-        // Start is called before the first frame update
+        private int _battlePower;
+        private int _damagePerUpdate;
+            
         void Start()
         {
-            
+            _battlePower = 20;
+            _damagePerUpdate = 5;
         }
     
-        // Update is called once per frame
-        void Update()
+        private void OnTriggerStay2D(Collider2D other)
         {
-            var results = new Collider2D[10];
-            if (Physics2D.OverlapCollider(_collider, new ContactFilter2D(), results) > 0)
+            Debug.Log("Events are working.");
+            var c = other.GetComponentInParent<Creature>();
+            if (c != null & _battlePower > 0)
             {
-                foreach (var collider in results)
-                {
-                    if (collider.gameObject.GetComponent<Creature>() != null)
-                    {
-                        var creature = collider.gameObject.GetComponent<Creature>();
-                        creature.TakeDamage(5);
-                    }
-                }
+                c.TakeDamage(_damagePerUpdate);
+                _battlePower -= _damagePerUpdate;
             }
         }
     }
