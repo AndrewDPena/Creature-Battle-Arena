@@ -1,18 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class CreatureMove : MonoBehaviour
 {
-    private CharacterController _controller;
+    private Rigidbody2D _rigidbody2D;
     public float CreatureSpeed;
+    public float TerrainSpeedModifier;
     private Vector2 _velocityVector;
     public IUnityService UnityService;
 
     private void Awake()
     {
-        _controller = gameObject.GetComponent<CharacterController>();
+        TerrainSpeedModifier = 1;
+        _rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
+        _rigidbody2D.gravityScale = 0;
         if (UnityService == null)
         {
             UnityService = new UnityService();
@@ -24,12 +29,17 @@ public class CreatureMove : MonoBehaviour
         _velocityVector = velocity;
     }
 
+    public void SetTerrainModifier(float modifier)
+    {
+        TerrainSpeedModifier = modifier;
+    }
+
     private void Update()
     {
-        _controller.Move(_velocityVector * UnityService.GetDeltaTime() * CreatureSpeed);
+        _rigidbody2D.AddRelativeForce(_velocityVector * UnityService.GetDeltaTime() * CreatureSpeed * TerrainSpeedModifier);
 
         // This block of code caused the adorable and hilarious rotation. Leaving it here so I can always re-enable
-        // its awfulness.
+        // its awfulness. It is MUCH worse now that the game uses physics.
         /**
         if (_velocityVector != Vector2.zero)
         {
@@ -37,3 +47,4 @@ public class CreatureMove : MonoBehaviour
         } **/
     }
 }
+

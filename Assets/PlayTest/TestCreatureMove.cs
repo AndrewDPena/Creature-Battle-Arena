@@ -9,13 +9,17 @@ namespace PlayTest
     {
         private GameObject _gameObject;
         private CreatureMove _move;
+        private BoxCollider2D _collider;
+        private BoxCollider2D _box;
         
         [SetUp]
         public void Setup()
         {
             _gameObject = GameObject.Instantiate(new GameObject());
+            _collider = _gameObject.AddComponent<BoxCollider2D>();
+            _collider.size = new Vector2(0.5f, 0.5f);
             _move = _gameObject.AddComponent<CreatureMove>();
-            _move.CreatureSpeed = 2.0f;
+            _move.CreatureSpeed = 1000.0f;
         }
 
         [TearDown]
@@ -27,17 +31,17 @@ namespace PlayTest
         [UnityTest]
         public IEnumerator PlayerInputKeyboardHasUnityService()
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.5f);
             
             Assert.NotNull(_move.UnityService, "CreatureMove has a UnityService.");
         }
         
         [UnityTest]
-        public IEnumerator CreatureMoveHasCharacterController()
+        public IEnumerator CreatureMoveHasRigidBody()
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.5f);
             
-            Assert.NotNull(_move.GetComponent<CharacterController>(), "CreatureMove has a Character Controller attached.");
+            Assert.NotNull(_move.GetComponent<Rigidbody2D>(), "CreatureMove has a RigidBody2D attached.");
         }
         
         [UnityTest]
@@ -45,7 +49,7 @@ namespace PlayTest
         {
             Vector2 position = _move.transform.position;
             
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.5f);
 
             Vector2 newPosition = _move.transform.position;
             
@@ -60,7 +64,7 @@ namespace PlayTest
             var movementVector = new Vector2(1, 0);
             _move.SetVelocity(movementVector);
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.5f);
 
             Vector2 newPosition = _move.transform.position;
             
@@ -76,7 +80,7 @@ namespace PlayTest
             var movementVector = new Vector2(0, 1);
             _move.SetVelocity(movementVector);
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.5f);
 
             Vector2 newPosition = _move.transform.position;
             
@@ -92,12 +96,71 @@ namespace PlayTest
             var movementVector = new Vector2(1, 1);
             _move.SetVelocity(movementVector);
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.5f);
 
             Vector2 newPosition = _move.transform.position;
             
             Assert.AreNotEqual(position.y, newPosition.y, "Move Test Passed, CreatureMove moved vertically.");
             Assert.AreNotEqual(newPosition.x, position.x, "Move Test Passed, CreatureMove moved horizontally.");
+        }
+
+        [UnityTest]
+        public IEnumerator CreatureCollidesWithWall()
+        {
+            _move.transform.position = new Vector2(0, 0);            
+            var movementVector = new Vector2(1, 0);
+            _move.SetVelocity(movementVector);
+            yield return new WaitForSeconds(0.5f);
+            
+            Vector2 unblockedPosition = _move.transform.position;
+            
+            _move.transform.position = new Vector2(0, 0);
+
+            _box = _gameObject.AddComponent<BoxCollider2D>();
+            _box.size = new Vector2(0.5f, 100f);
+            _box.transform.position = new Vector2(1f, 0);
+            
+            _move.SetVelocity(movementVector);
+            yield return new WaitForSeconds(0.5f);
+
+            Vector2 blockedPosition = _move.transform.position;
+
+            Debug.Log("unblocked position is: " + unblockedPosition);
+            Debug.Log("blocked position is: " + blockedPosition);
+            Assert.AreNotEqual(unblockedPosition.x, blockedPosition.x, 
+                "Move Test Passed, CreatureMove didn't move the same distance with a collider in the way.");
+        }
+
+        [UnityTest]
+        public IEnumerator CreatureMoveTerrainModifierCanBeSet()
+        {
+            _move.SetTerrainModifier(500f);
+            
+            yield return new WaitForSeconds(0.1f);
+            
+            Assert.AreEqual(500, _move.TerrainSpeedModifier, 
+                "SetTerrainModifier successfully changes the terrain mod for CreatureMove.");
+        }
+
+        [UnityTest]
+        public IEnumerator TerrainModifierChangesCreatureMoveSpeed()
+        {
+            _move.SetTerrainModifier(1.0f);
+            _move.transform.position = new Vector2(0, 0);            
+            var movementVector = new Vector2(1, 0);
+            _move.SetVelocity(movementVector);
+            
+            yield return new WaitForSeconds(0.1f);
+
+            var defaultPosition = _move.transform.position;
+            
+            _move.SetTerrainModifier(500.0f);
+            _move.transform.position = new Vector2(0, 0);            
+            
+            yield return new WaitForSeconds(0.1f);
+
+            Assert.Less(defaultPosition.x, _move.transform.position.x, 
+                "Creature Moved less in X direction with default terrain modifier.");
         }
     }
 }
