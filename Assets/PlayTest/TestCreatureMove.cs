@@ -130,5 +130,37 @@ namespace PlayTest
             Assert.AreNotEqual(unblockedPosition.x, blockedPosition.x, 
                 "Move Test Passed, CreatureMove didn't move the same distance with a collider in the way.");
         }
+
+        [UnityTest]
+        public IEnumerator CreatureMoveTerrainModifierCanBeSet()
+        {
+            _move.SetTerrainModifier(500f);
+            
+            yield return new WaitForSeconds(0.1f);
+            
+            Assert.AreEqual(500, _move.TerrainSpeedModifier, 
+                "SetTerrainModifier successfully changes the terrain mod for CreatureMove.");
+        }
+
+        [UnityTest]
+        public IEnumerator TerrainModifierChangesCreatureMoveSpeed()
+        {
+            _move.SetTerrainModifier(1.0f);
+            _move.transform.position = new Vector2(0, 0);            
+            var movementVector = new Vector2(1, 0);
+            _move.SetVelocity(movementVector);
+            
+            yield return new WaitForSeconds(0.1f);
+
+            var defaultPosition = _move.transform.position;
+            
+            _move.SetTerrainModifier(500.0f);
+            _move.transform.position = new Vector2(0, 0);            
+            
+            yield return new WaitForSeconds(0.1f);
+
+            Assert.Less(defaultPosition.x, _move.transform.position.x, 
+                "Creature Moved less in X direction with default terrain modifier.");
+        }
     }
 }
