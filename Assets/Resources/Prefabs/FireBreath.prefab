@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7232334511437569396}
   - component: {fileID: 2340658633141373233}
-  - component: {fileID: 4579194436961041185}
-  - component: {fileID: 7333788409402055096}
   m_Layer: 0
   m_Name: FireBreathSprite
   m_TagString: Untagged
@@ -83,63 +81,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &4579194436961041185
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2611792725122732076}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!60 &7333788409402055096
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2611792725122732076}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 0.5}
-    newSize: {x: 0.5, y: 0.5}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.1372475, y: 0.23947808}
-      - {x: 0.078125, y: 0.234375}
-      - {x: -0.24897937, y: 0.023327187}
-      - {x: -0.25, y: -0.063447066}
-      - {x: -0.20579761, y: -0.107575886}
-      - {x: -0.09759034, y: -0.14283484}
-      - {x: 0.03390199, y: -0.25056645}
-      - {x: 0.25, y: -0.25}
-      - {x: 0.25, y: 0.069570825}
-      - {x: 0.21551272, y: 0.08025518}
-      - {x: 0.21913919, y: 0.14494963}
 --- !u!1 &7690406326559367239
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,6 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4577748757526558395}
   - component: {fileID: 3941134773680999518}
+  - component: {fileID: 3802536770364768128}
   m_Layer: 0
   m_Name: FireBreath
   m_TagString: Untagged
@@ -184,4 +126,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: debc520f1602e6846b61a5113251ad8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collider: {fileID: 7333788409402055096}
+--- !u!60 &3802536770364768128
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7690406326559367239}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.38263392, y: 0.24033374}
+      - {x: -0.0007035732, y: 0.03377813}
+      - {x: -0.003744118, y: -0.06398712}
+      - {x: 0.2857551, y: -0.25197873}
+      - {x: 0.49950117, y: -0.24555624}
+      - {x: 0.5015896, y: 0.065514065}
