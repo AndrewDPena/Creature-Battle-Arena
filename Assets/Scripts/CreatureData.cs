@@ -14,7 +14,6 @@ public class CreatureData
         Strength = strength;
         MaxHealth = maxHealth;
         CurrentHealth = MaxHealth;
-        // _owner = player;
     }
 
     public void TakeDamage(int damage)
