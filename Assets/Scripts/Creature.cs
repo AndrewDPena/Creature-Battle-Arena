@@ -3,10 +3,11 @@ using UnityEngine;
 
 public class Creature : MonoBehaviour, ICreature
 {
-    public string Name;
+    /*public string Name;
     public int Strength;
     public int MaxHealth;
-    public int CurrentHealth;
+    public int CurrentHealth;*/
+    public CreatureData CurrentCreature;
     [SerializeField] private Transform[] _exitPoints;
     [SerializeField] private GameObject _attack1Prefab;
     [SerializeField] private GameObject _attack2Prefab;
@@ -15,19 +16,20 @@ public class Creature : MonoBehaviour, ICreature
 
     private Player _owner;
 
-    public void Setup(string creatureName, int strength, int maxHealth, Player player)
+    public void AssignPlayer(Player player)
     {
-        Name = creatureName;
-        Strength = strength;
-        MaxHealth = maxHealth;
-        CurrentHealth = MaxHealth;
         _owner = player;
+    }
+
+    public void Summon(CreatureData creature)
+    {
+        CurrentCreature = creature;
     }
 
     public void TakeDamage(int damage)
     {
-        CurrentHealth -= damage;
-        _owner.UpdateHUD(this, CurrentHealth);
+        CurrentCreature.TakeDamage(damage);
+        _owner.UpdateHUD(CurrentCreature);
     }
 
     // Change to one method with a dictionary or something, potentially
@@ -58,7 +60,7 @@ public class Creature : MonoBehaviour, ICreature
     {
         if (_owner.GetPocketSize() > slot)
         {
-            _owner.SummonCreature(slot);
+            Summon(_owner.SummonCreature(slot));
         }
     }
 }

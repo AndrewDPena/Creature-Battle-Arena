@@ -31,24 +31,30 @@ public class ArenaHandler : MonoBehaviour
         NPCPlayer.SetHUD(NPCHud);
 
         var playerCreature = playerCreatureGO.GetComponent<Creature>();
-        SetupCreature(playerCreature, "Cubey", 10, 69, HumanPlayer);
+        var playerCreatureData = new CreatureData("Cubey", 10, 69);
+        //SetupCreature(playerCreature, "Cubey", 10, 69, HumanPlayer);
         playerCreature.LearnAttack(new ConeAttackType());
         playerCreature.LearnAttack(new CenteredAttackType());
         
-        var backupGO = new GameObject();
-        var backupCreature = backupGO.AddComponent<Creature>();
-        SetupCreature(backupCreature, "OtherCube", 10, 120, HumanPlayer);
-        playerCreature.LearnAttack(new ConeAttackType());
+        //var backupGO = new GameObject();
+        //var backupCreature = backupGO.AddComponent<Creature>();
+        //SetupCreature(backupCreature, "OtherCube", 10, 120, HumanPlayer);
+        //playerCreature.LearnAttack(new ConeAttackType());
+        var backupCreatureData = new CreatureData("Blocky", 5, 120);
 
         var enemyCreature = enemyCreatureGO.GetComponent<Creature>();
-        SetupCreature(enemyCreature, "Cylindork", 5, 80, NPCPlayer);
+        var enemyCreatureData = new CreatureData("Cylindork", 5, 80);
+        //SetupCreature(enemyCreature, "Cylindork", 5, 80, NPCPlayer);
         
-        HumanPlayer.AddCreature(playerCreature);
-        HumanPlayer.AddCreature(backupCreature);
-        NPCPlayer.AddCreature(enemyCreature);
+        playerCreature.AssignPlayer(HumanPlayer);
+        HumanPlayer.AddCreature(playerCreatureData);
+        HumanPlayer.AddCreature(backupCreatureData);
+        //HumanPlayer.AddCreature(backupCreature);
+        enemyCreature.AssignPlayer(NPCPlayer);
+        NPCPlayer.AddCreature(enemyCreatureData);
 
-        HumanPlayer.SummonCreature(0);
-        NPCPlayer.SummonCreature(0);
+        playerCreature.Summon(HumanPlayer.SummonCreature(0));
+        enemyCreature.Summon(NPCPlayer.SummonCreature(0));
     }
 
     // Update is called once per frame
@@ -59,6 +65,6 @@ public class ArenaHandler : MonoBehaviour
 
     private static void SetupCreature(Creature creature, string name, int strength, int maxHealth, Player player)
     {
-        creature.Setup(name, strength, maxHealth, player);
+        //creature.Setup(name, strength, maxHealth, player);
     }
 }

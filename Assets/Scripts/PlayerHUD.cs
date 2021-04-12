@@ -9,7 +9,7 @@ public class PlayerHUD : MonoBehaviour
     public Text HealthDisplay;
     public HealthBar HealthBar;
 
-    public void InitializeHUD(Creature creature)
+    public void InitializeHUD(CreatureData creature)
     {
         Name.text = creature.Name;
         SetMaxHealth(creature.MaxHealth);

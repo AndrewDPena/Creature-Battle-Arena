@@ -22,7 +22,8 @@ namespace PlayTest
             _player = new Player();
             _creature = Instantiate(Resources.Load<Creature>("Prefabs/CreaturePrefab"), 
                 Vector3.zero, Quaternion.identity);
-            _creature.Setup("Test", 0, 100, _player);
+            _creature.AssignPlayer(_player);
+            _creature.Summon(new CreatureData("Test", 0, 100));
         }
         
         [TearDown]
@@ -36,14 +37,14 @@ namespace PlayTest
         [UnityTest]
         public IEnumerator FireBreathDamagesCreature()
         {
-            var health = _creature.CurrentHealth;
+            var health = _creature.CurrentCreature.CurrentHealth;
             var attack = Instantiate(Resources.Load<FireBreath>("Prefabs/FireBreath"), 
                 new Vector3(10, 10, 0), Quaternion.identity);
             
             yield return new WaitForSeconds(0.1f);
             Destroy(attack);
             
-            Assert.AreEqual(health, _creature.CurrentHealth, 
+            Assert.AreEqual(health, _creature.CurrentCreature.CurrentHealth, 
                 "Creature does not take damage when not in contact with FireBreath.");
 
             var attack2 = Instantiate(Resources.Load<FireBreath>("Prefabs/FireBreath"), 
@@ -53,21 +54,21 @@ namespace PlayTest
             
             Destroy(attack2);
             
-            Assert.Less(_creature.CurrentHealth, health,
+            Assert.Less(_creature.CurrentCreature.CurrentHealth, health,
                 "Creature does take damage when in contact with FireBreath.");
         }
         
         [UnityTest]
         public IEnumerator ExplosionDamagesCreature()
         {
-            var health = _creature.CurrentHealth;
+            var health = _creature.CurrentCreature.CurrentHealth;
             var attack = Instantiate(Resources.Load<Explosion>("Prefabs/Explosion"), 
                 new Vector3(10, 10, 0), Quaternion.identity);
             
             yield return new WaitForSeconds(0.1f);
             Destroy(attack);
             
-            Assert.AreEqual(health, _creature.CurrentHealth, 
+            Assert.AreEqual(health, _creature.CurrentCreature.CurrentHealth, 
                 "Creature does not take damage when not in contact with Explosion.");
 
             var attack2 = Instantiate(Resources.Load<Explosion>("Prefabs/Explosion"), 
@@ -77,7 +78,7 @@ namespace PlayTest
             
             Destroy(attack2);
             
-            Assert.Less(_creature.CurrentHealth, health,
+            Assert.Less(_creature.CurrentCreature.CurrentHealth, health,
                 "Creature does take damage when in contact with Explosion.");
         }
     }

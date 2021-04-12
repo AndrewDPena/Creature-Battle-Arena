@@ -7,10 +7,10 @@ public class Player
 {
     public string Name;
     private PlayerHUD _hud;
-    private List<Creature> CreaturePocket = new List<Creature>();
-    private Creature _activeCreature;
+    private List<CreatureData> CreaturePocket = new List<CreatureData>();
+    private CreatureData _activeCreature;
 
-    public void AddCreature(Creature creature)
+    public void AddCreature(CreatureData creature)
     {
         CreaturePocket.Add(creature);
     }
@@ -22,28 +22,28 @@ public class Player
 
     public void SetHUD(PlayerHUD HUD)
     {
-        this._hud = HUD;
+        _hud = HUD;
     }
 
-    public Creature SummonCreature(int slot)
+    public CreatureData SummonCreature(int slot)
     {
         _activeCreature = CreaturePocket[slot];
         CreaturePocket[slot] = CreaturePocket[0];
         CreaturePocket[0] = _activeCreature;
         _hud.InitializeHUD(_activeCreature);
-        return CreaturePocket[slot];
+        return _activeCreature;
     }
 
-    public Creature GetActiveCreature()
+    public CreatureData GetActiveCreature()
     {
         return _activeCreature;
     }
 
-    public void UpdateHUD(Creature creature, int currentHealth)
+    public void UpdateHUD(CreatureData creature)
     {
         if (creature == _activeCreature)
         {
-            _hud.SetHealth(currentHealth);
+            _hud.SetHealth(creature.CurrentHealth);
         }
     }
 }
