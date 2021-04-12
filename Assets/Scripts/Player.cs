@@ -20,6 +20,16 @@ public class Player
         return CreaturePocket.Count;
     }
 
+    public bool CanSummonCreature(int slot)
+    {
+        if (slot >= GetPocketSize())
+        {
+            return false;
+        }
+
+        return CreaturePocket[slot].CurrentHealth > 0;
+    }
+
     public void SetHUD(PlayerHUD HUD)
     {
         _hud = HUD;

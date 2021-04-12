@@ -14,11 +14,11 @@ public class Creature : MonoBehaviour, ICreature
     [SerializeField] private IAttackType _attack1;
     [SerializeField] private IAttackType _attack2;
 
-    private Player _owner;
+    public Player Owner;
 
     public void AssignPlayer(Player player)
     {
-        _owner = player;
+        Owner = player;
     }
 
     public void Summon(CreatureData creature)
@@ -26,10 +26,18 @@ public class Creature : MonoBehaviour, ICreature
         CurrentCreature = creature;
     }
 
+    public void Swap(int slot)
+    {
+        if (Owner.CanSummonCreature(slot))
+        {
+            Summon(Owner.SummonCreature(slot));
+        }
+    }
+
     public void TakeDamage(int damage)
     {
         CurrentCreature.TakeDamage(damage);
-        _owner.UpdateHUD(CurrentCreature);
+        Owner.UpdateHUD(CurrentCreature);
     }
 
     // Change to one method with a dictionary or something, potentially
@@ -53,14 +61,6 @@ public class Creature : MonoBehaviour, ICreature
         else
         {
             _attack2 = attackType;
-        }
-    }
-
-    public void Return(int slot)
-    {
-        if (_owner.GetPocketSize() > slot)
-        {
-            Summon(_owner.SummonCreature(slot));
         }
     }
 }

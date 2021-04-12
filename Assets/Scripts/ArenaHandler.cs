@@ -18,9 +18,9 @@ public class ArenaHandler : MonoBehaviour
 
     void Start()
     {
-        HumanPlayer = new Player();
+        HumanPlayer = new Player{};
         HumanPlayer.Name = "Human";
-        NPCPlayer = new Player();
+        NPCPlayer = new Player{};
         NPCPlayer.Name = "NPC";
 
         var playerCreatureGO = Instantiate(CreaturePrefab, PlayerSpawn.position, Quaternion.identity);
@@ -61,10 +61,5 @@ public class ArenaHandler : MonoBehaviour
     void Update()
     {
         
-    }
-
-    private static void SetupCreature(Creature creature, string name, int strength, int maxHealth, Player player)
-    {
-        //creature.Setup(name, strength, maxHealth, player);
     }
 }

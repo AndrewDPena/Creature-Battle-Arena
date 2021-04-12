@@ -13,6 +13,7 @@ namespace PlayTest
         private Rigidbody2D _body;
         private CreatureMove _move;
         private Creature _creature;
+        private IUnityService _unityService;
         
         [SetUp]
         public void Setup()
@@ -23,6 +24,7 @@ namespace PlayTest
             _move = _gameObject.AddComponent<CreatureMove>();
             _move.CreatureSpeed = 1000.0f;
             _creature = _gameObject.AddComponent<Creature>();
+            _unityService = Substitute.For<IUnityService>();
         }
 
         [TearDown]
@@ -56,11 +58,10 @@ namespace PlayTest
         public IEnumerator PlayerInputKeyboardCallsMovementOnInput()
         {
             Vector2 position = _move.transform.position;
-            var unityService = Substitute.For<IUnityService>();
-            unityService.GetAxis("Horizontal").Returns(1);
-            unityService.GetDeltaTime().Returns(1);
+            _unityService.GetAxis("Horizontal").Returns(1);
+            _unityService.GetDeltaTime().Returns(1);
 
-            _input.UnityService = unityService; 
+            _input.UnityService = _unityService; 
             
             yield return new WaitForSeconds(0.5f);
 
@@ -74,11 +75,10 @@ namespace PlayTest
         public IEnumerator PlayerInputKeyboardCallsNoMovementWithoutInput()
         {
             Vector2 position = _move.transform.position;
-            var unityService = Substitute.For<IUnityService>();
-            unityService.GetAxis("Horizontal").Returns(0);
-            unityService.GetDeltaTime().Returns(1);
+            _unityService.GetAxis("Horizontal").Returns(0);
+            _unityService.GetDeltaTime().Returns(1);
 
-            _input.UnityService = unityService; 
+            _input.UnityService = _unityService; 
             
             yield return new WaitForSeconds(0.5f);
 
@@ -88,13 +88,19 @@ namespace PlayTest
                 "Move Test Passed, PlayerInputKeyboard calls zero movement with zero vector.");
         }
 
-        
+        [UnityTest]
+        public IEnumerator CreatureAttachedToInputIsNotNull()
+        {
+            yield return new WaitForSeconds(0.1f);
+            
+            Assert.NotNull(_creature, "The creature object exists and is attached to the input.");
+        }
+
         [UnityTest]
         public IEnumerator PlayerInputCallsAttackWithCtrl()
         {
-            var unityService = Substitute.For<IUnityService>();
-            unityService.GetKeyDown("left shift").Returns(false);
-            unityService.GetKeyDown("left ctrl").Returns(true);
+            _unityService.GetKeyDown("left shift").Returns(false);
+            _unityService.GetKeyDown("left ctrl").Returns(true);
 
 
             var testAttack1 = Substitute.For<IAttackType>();
@@ -102,7 +108,7 @@ namespace PlayTest
             _creature.LearnAttack(testAttack1);
             _creature.LearnAttack(testAttack2);
 
-            _input.UnityService = unityService;
+            _input.UnityService = _unityService;
             
             yield return new WaitForSeconds(0.1f);
 
@@ -114,9 +120,8 @@ namespace PlayTest
         [UnityTest]
         public IEnumerator PlayerInputCallsAttackWithShift()
         {
-            var unityService = Substitute.For<IUnityService>();
-            unityService.GetKeyDown("left shift").Returns(true);
-            unityService.GetKeyDown("left ctrl").Returns(false);
+            _unityService.GetKeyDown("left shift").Returns(true);
+            _unityService.GetKeyDown("left ctrl").Returns(false);
 
 
             var testAttack1 = Substitute.For<IAttackType>();
@@ -124,13 +129,32 @@ namespace PlayTest
             _creature.LearnAttack(testAttack1);
             _creature.LearnAttack(testAttack2);
 
-            _input.UnityService = unityService;
+            _input.UnityService = _unityService;
             
             yield return new WaitForSeconds(0.1f);
 
             testAttack1.DidNotReceiveWithAnyArgs().Attack(default(Vector2), default(Transform[]), default(GameObject));
             testAttack2.ReceivedWithAnyArgs().Attack(default(Vector2), default(Transform[]), default(GameObject));
             Debug.Log("PlayerInput calls the shift attack coroutine successfully.");
+        }
+        
+        [UnityTest]
+        public IEnumerator PlayerInputCallsASwap()
+        {
+            _unityService.InputString().Returns("abcde1fg");
+
+            var player = new Player { };
+            player.AddCreature(new CreatureData("test1", 10, 10));
+            player.SetHUD(GameObject.Instantiate(Resources.Load<PlayerHUD>("Prefabs/PlayerHudPrefab"), 
+                Vector3.zero, Quaternion.identity));
+            _creature.AssignPlayer(player);
+            _creature.Summon(player.SummonCreature(0));
+            player.AddCreature(new CreatureData("test2", 10, 10));
+            
+            _input.UnityService = _unityService;
+            yield return new WaitForSeconds(0.1f);
+            
+            Assert.AreEqual("test2", player.GetActiveCreature().Name, "Player Input causes creatures to swap.");
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerInputKeyboard : MonoBehaviour
@@ -8,10 +8,12 @@ public class PlayerInputKeyboard : MonoBehaviour
     public IUnityService UnityService;
     private CreatureMove _move;
     private Creature _creature;
+    private readonly List<string> _slots = new List<string>(){"1", "2", "3", "4"};
 
     private void Start()
     {
         _move = gameObject.GetComponent<CreatureMove>();
+
         _creature = gameObject.GetComponent<Creature>();
         if (UnityService == null)
         {
@@ -31,12 +33,14 @@ public class PlayerInputKeyboard : MonoBehaviour
 
         if (UnityService.GetKeyDown("left ctrl"))
         {
-            _creature.GetComponent<Creature>().Attack1(move);
+            _creature.Attack1(move);
         }
 
-        if (UnityService.GetKeyDown("1"))
+        var inputs = UnityService.InputString();
+
+        if (_slots.Any(s=>inputs.Contains(s)))
         {
-            _creature.Return(1);
+            _creature.Swap(int.Parse(_slots.First(s=>inputs.Contains(s))));
         }
     }
 }

@@ -3,23 +3,27 @@ using NUnit.Framework;
 using NSubstitute;
 using UnityEngine;
 using UnityEngine.TestTools;
-using UnityEngine.UI;
 
 namespace PlayTest
 {
-    /*
+    
     public class TestPlayerCreature
     {
         private GameObject _gameObject;
         private Player _player;
         private Creature _creature;
+        private CreatureData _data;
+        private PlayerHUD _playerHud;
         
         [SetUp]
         public void Setup()
         {
             _gameObject = GameObject.Instantiate(new GameObject());
             _player = new Player();
+            _playerHud = GameObject.Instantiate(Resources.Load<PlayerHUD>("Prefabs/PlayerHudPrefab"), Vector3.zero, Quaternion.identity);
+            _player.SetHUD(_playerHud);
             _creature = _gameObject.AddComponent<Creature>();
+            _data = new CreatureData("Test", 10, 100);
         }
 
         [TearDown]
@@ -35,39 +39,48 @@ namespace PlayTest
             
             Assert.NotNull(_creature, "Creature instantiates correctly.");
         }
-
+        
         [UnityTest]
-        public IEnumerator PlayerCreatureSpawnsWithDefaultValues()
+        public IEnumerator PlayerCreatureCanAssignAPlayer()
         {
+            
             yield return new WaitForSeconds(0.1f);
-            Assert.Null(_creature.Name, "Name is null.");
-            Assert.AreEqual(0, _creature.Strength, "Strength is 0.");
-            Assert.AreEqual(0, _creature.CurrentHealth, "CurrentHealth is 0.");
-            Assert.AreEqual(0, _creature.MaxHealth, "MaxHealth is 0.");
+            Assert.Null(_creature.Owner, "Player starts null.");
+            
+            _creature.AssignPlayer(_player);
+            yield return new WaitForSeconds(0.1f);
+
+            
+            Assert.AreEqual(_player, _creature.Owner, "Creature assigns its owner correctly.");
         }
         
         [UnityTest]
-        public IEnumerator PlayerCreatureSetsValuesCorrectly()
+        public IEnumerator PlayerCreatureCanCummonACreature()
         {
-            //_creature.Setup("Name", 1, 2, _player);
-            yield return new WaitForSeconds(0.1f);
             
-            Assert.AreEqual(2, _creature.MaxHealth,  
-                "Creature sets the second int to max health.");
-            Assert.AreEqual("Name", _creature.Name,
-                "Creature sets the first param to be its Name.");
+            yield return new WaitForSeconds(0.1f);
+            Assert.Null(_creature.CurrentCreature, "CurrentCreature starts null.");
+            
+            _creature.Summon(_data);
+            yield return new WaitForSeconds(0.1f);
+
+            
+            Assert.AreEqual(_data, _creature.CurrentCreature, "Creature assigns data object correctly.");
         }
         
         [UnityTest]
         public IEnumerator PlayerCreatureTakesDamage()
         {
-            //_creature.Setup("Name", 1, 20, _player);
-            yield return new WaitForSeconds(0.1f);
-            var newHealth = _creature.MaxHealth - 10;
-            _creature.TakeDamage(10);
+            _creature.Summon(_data);
+            _creature.AssignPlayer(_player);
+            var health = _creature.CurrentCreature.CurrentHealth;
+            var damage = 10;
+            _creature.TakeDamage(damage);
+            
             yield return new WaitForSeconds(0.1f);
             
-            Assert.AreEqual(newHealth, _creature.CurrentHealth, "Creature updates current health when taking damage.");
+            Assert.AreEqual(health - damage, _creature.CurrentCreature.CurrentHealth, 
+                "Creature passes along the correct amount of damage.");
         }
 
         [UnityTest]
@@ -83,5 +96,25 @@ namespace PlayTest
             testAttack.ReceivedWithAnyArgs().Attack(default(Vector2), default(Transform[]), default(GameObject));
             Debug.Log("Creature calls the attack coroutine successfully.");
         }
-    }*/
+
+        [UnityTest]
+        public IEnumerator CreatureCanSwap()
+        {
+            var newTest = new CreatureData("NewTest", 100, 100);
+            _creature.AssignPlayer(_player);
+            _creature.Summon(_data);
+            _player.AddCreature(_data);
+            _player.AddCreature(newTest);
+            
+            _creature.Swap(2);
+            yield return new WaitForSeconds(0.1f);
+            
+            Assert.AreEqual(_creature.CurrentCreature, _data, "Creature doesn't swap to bad swap values.");
+            
+            _creature.Swap(1);
+            yield return new WaitForSeconds(0.1f);
+            
+            Assert.AreEqual(_creature.CurrentCreature, newTest, "Creature Swaps on good value.");
+        }
+    }
 }
