@@ -7,6 +7,7 @@ public class Player
 {
     public string Name;
     private PlayerHUD _hud;
+    private PocketHUD _pocketHud;
     private List<CreatureData> CreaturePocket = new List<CreatureData>();
     private CreatureData _activeCreature;
 
@@ -35,12 +36,27 @@ public class Player
         _hud = HUD;
     }
 
+    public void SetPocketHUD(PocketHUD HUD)
+    {
+        _pocketHud = HUD;
+        SetHUD(_pocketHud.GetPrimaryHud());
+    }
+
+    private void UpdatePocketHUD()
+    {
+        for (var i = 0; i < 5; i++)
+        {
+            var creature = i > GetPocketSize() - 1 ? null : CreaturePocket[i];
+            _pocketHud.SetHud(creature, i);
+        }
+    }
+
     public CreatureData SummonCreature(int slot)
     {
         _activeCreature = CreaturePocket[slot];
         CreaturePocket[slot] = CreaturePocket[0];
         CreaturePocket[0] = _activeCreature;
-        _hud.InitializeHUD(_activeCreature);
+        UpdatePocketHUD();
         return _activeCreature;
     }
 

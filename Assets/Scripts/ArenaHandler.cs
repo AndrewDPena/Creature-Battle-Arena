@@ -10,6 +10,7 @@ public class ArenaHandler : MonoBehaviour
 
     public PlayerHUD PlayerHud;
     public PlayerHUD NPCHud;
+    public PocketHUD PlayerPocketHud;
 
     public GameObject CreaturePrefab;
 
@@ -27,7 +28,8 @@ public class ArenaHandler : MonoBehaviour
         playerCreatureGO.AddComponent<PlayerInputKeyboard>();
         var enemyCreatureGO = Instantiate(CreaturePrefab, NPCSpawn.position, Quaternion.identity);
 
-        HumanPlayer.SetHUD(PlayerHud);
+        //HumanPlayer.SetHUD(PlayerHud);
+        HumanPlayer.SetPocketHUD(PlayerPocketHud);
         NPCPlayer.SetHUD(NPCHud);
 
         var playerCreature = playerCreatureGO.GetComponent<Creature>();

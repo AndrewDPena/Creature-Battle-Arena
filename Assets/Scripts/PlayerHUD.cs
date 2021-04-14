@@ -11,9 +11,19 @@ public class PlayerHUD : MonoBehaviour
 
     public void InitializeHUD(CreatureData creature)
     {
-        Name.text = creature.Name;
-        SetMaxHealth(creature.MaxHealth);
-        SetHealth(creature.CurrentHealth);
+        if (creature == null)
+        {
+            Name.text = "";
+            SetMaxHealth(0);
+            SetHealth(0);
+        }
+        else
+        {
+            Name.text = creature.Name;
+            SetMaxHealth(creature.MaxHealth);
+            SetHealth(creature.CurrentHealth);
+        }
+        
     }
 
     private void SetMaxHealth(int health)
