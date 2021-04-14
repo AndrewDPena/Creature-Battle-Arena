@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class CreatureData
@@ -7,6 +8,16 @@ public class CreatureData
     public int Strength;
     public int MaxHealth;
     public int CurrentHealth;
+    public Sprite Sprite;
+
+    public CreatureData(CreatureBase cBase)
+    {
+        Name = cBase.Name;
+        Strength = cBase.Strength;
+        MaxHealth = cBase.MaxHealth;
+        CurrentHealth = MaxHealth;
+        Sprite = cBase.CreatureSprite;
+    }
     
     public CreatureData(string creatureName, int strength, int maxHealth)
     {

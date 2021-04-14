@@ -3,11 +3,9 @@ using UnityEngine;
 
 public class Creature : MonoBehaviour, ICreature
 {
-    /*public string Name;
-    public int Strength;
-    public int MaxHealth;
-    public int CurrentHealth;*/
     public CreatureData CurrentCreature;
+    //private Sprite _sprite;
+    private SpriteRenderer _renderer;
     [SerializeField] private Transform[] _exitPoints;
     [SerializeField] private GameObject _attack1Prefab;
     [SerializeField] private GameObject _attack2Prefab;
@@ -15,6 +13,11 @@ public class Creature : MonoBehaviour, ICreature
     [SerializeField] private IAttackType _attack2;
 
     public Player Owner;
+
+    private void Start()
+    {
+        _renderer = GetComponent<SpriteRenderer>();
+    }
 
     public void AssignPlayer(Player player)
     {
@@ -24,6 +27,7 @@ public class Creature : MonoBehaviour, ICreature
     public void Summon(CreatureData creature)
     {
         CurrentCreature = creature;
+        _renderer.sprite = creature.Sprite;
     }
 
     public void Swap(int slot)
@@ -56,7 +60,6 @@ public class Creature : MonoBehaviour, ICreature
         if (_attack1 == null)
         {
             _attack1 = attackType;
-            //_attack1Prefab = attackPrefab;
         }
         else
         {
