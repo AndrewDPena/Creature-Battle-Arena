@@ -13,20 +13,21 @@ namespace PlayTest
 
     public class TestPlayer : MonoBehaviour
     {
-        //private GameObject _gameObject;
+        private GameObject _gameObject;
+        private PocketHUD _pocketHud;
         private PlayerHUD _playerHud;
-        //private Creature _creature;
         private Player _player;
 
 
         [SetUp]
         public void Setup()
         {
-            //_gameObject = GameObject.Instantiate(new GameObject());
-            //_creature = _gameObject.AddComponent<Creature>();
+            _gameObject = Instantiate(new GameObject());
+            _pocketHud = _gameObject.AddComponent<PocketHUD>();
             _player = new Player();
             _playerHud = Instantiate(Resources.Load<PlayerHUD>("Prefabs/PlayerHudPrefab"), Vector3.zero, Quaternion.identity);
-            _player.SetHUD(_playerHud);
+            _pocketHud.AddHud(_playerHud);
+            _player.SetPocketHUD(_pocketHud);
         }
 
         [TearDown]
