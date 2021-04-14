@@ -4,7 +4,6 @@ using UnityEngine;
 public class Creature : MonoBehaviour, ICreature
 {
     public CreatureData CurrentCreature;
-    //private Sprite _sprite;
     private SpriteRenderer _renderer;
     [SerializeField] private Transform[] _exitPoints;
     [SerializeField] private GameObject _attack1Prefab;
@@ -27,7 +26,15 @@ public class Creature : MonoBehaviour, ICreature
     public void Summon(CreatureData creature)
     {
         CurrentCreature = creature;
-        _renderer.sprite = creature.Sprite;
+
+        try
+        {
+            _renderer.sprite = CurrentCreature.Sprite;
+        }
+        catch (NullReferenceException ex)
+        {
+            Debug.Log("Why on Earth does this fail?");
+        }
     }
 
     public void Swap(int slot)

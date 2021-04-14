@@ -23,12 +23,7 @@ public class Player
 
     public bool CanSummonCreature(int slot)
     {
-        if (slot >= GetPocketSize())
-        {
-            return false;
-        }
-
-        return CreaturePocket[slot].CurrentHealth > 0;
+        return !(slot >= GetPocketSize()) && CreaturePocket[slot].CurrentHealth > 0;
     }
 
     public void SetHUD(PlayerHUD HUD)
@@ -44,9 +39,9 @@ public class Player
 
     private void UpdatePocketHUD()
     {
-        for (var i = 0; i < 5; i++)
+        for (var i = 0; i < _pocketHud.GetNumOfHuds(); i++)
         {
-            var creature = i > GetPocketSize() - 1 ? null : CreaturePocket[i];
+            var creature = i > GetPocketSize() - 1 ? null : CreaturePocket[i];            
             _pocketHud.SetHud(creature, i);
         }
     }

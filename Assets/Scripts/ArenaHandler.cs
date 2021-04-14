@@ -8,13 +8,12 @@ public class ArenaHandler : MonoBehaviour
     public Player HumanPlayer;
     public Player NPCPlayer;
 
-    public PlayerHUD NPCHud;
+    public PocketHUD NPCHud;
     public PocketHUD PlayerPocketHud;
 
-    [SerializeField] private GameObject _cubePrefab;
-    [SerializeField] private GameObject _cylinderPrefab;
-
+    [SerializeField] private GameObject _creaturePrefab;
     [SerializeField] private CreatureBase[] _playerCreatures;
+    [SerializeField] private CreatureBase[] _npcCreatures;
 
 
     public Transform PlayerSpawn;
@@ -27,33 +26,30 @@ public class ArenaHandler : MonoBehaviour
         NPCPlayer = new Player{};
         NPCPlayer.Name = "NPC";
 
-        var playerCreatureGO = Instantiate(_cubePrefab, PlayerSpawn.position, Quaternion.identity);
+        var playerCreatureGO = Instantiate(_creaturePrefab, PlayerSpawn.position, Quaternion.identity);
         playerCreatureGO.AddComponent<PlayerInputKeyboard>();
-        var enemyCreatureGO = Instantiate(_cylinderPrefab, NPCSpawn.position, Quaternion.identity);
+        var enemyCreatureGO = Instantiate(_creaturePrefab, NPCSpawn.position, Quaternion.identity);
 
         HumanPlayer.SetPocketHUD(PlayerPocketHud);
-        NPCPlayer.SetHUD(NPCHud);
+        NPCPlayer.SetPocketHUD(NPCHud);
 
         var playerCreature = playerCreatureGO.GetComponent<Creature>();
-        //var playerCreatureData = new CreatureData("Cubey", 10, 69);
         playerCreature.LearnAttack(new ConeAttackType());
         playerCreature.LearnAttack(new CenteredAttackType());
-        
-        /*var backupCreatureData = new CreatureData("Blocky", 5, 120);
-        var backupCreatureData2 = new CreatureData("Testo", 5, 120);
-        var backupCreatureData3 = new CreatureData("Testa", 5, 120);
-        var backupCreatureData4 = new CreatureData("Paul", 5, 120);*/
 
         var enemyCreature = enemyCreatureGO.GetComponent<Creature>();
-        var enemyCreatureData = new CreatureData("Cylindork", 5, 80);
         
         playerCreature.AssignPlayer(HumanPlayer);
         foreach (var cBase in _playerCreatures)
         {
             HumanPlayer.AddCreature(new CreatureData(cBase));
         }
+        
         enemyCreature.AssignPlayer(NPCPlayer);
-        NPCPlayer.AddCreature(enemyCreatureData);
+        foreach (var cBase in _npcCreatures)
+        {
+            NPCPlayer.AddCreature(new CreatureData(cBase));
+        }
 
         playerCreature.Summon(HumanPlayer.SummonCreature(0));
         enemyCreature.Summon(NPCPlayer.SummonCreature(0));

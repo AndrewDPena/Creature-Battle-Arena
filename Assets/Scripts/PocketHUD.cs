@@ -14,4 +14,9 @@ public class PocketHUD : MonoBehaviour
     {
         return _hudList[0];
     }
+
+    public int GetNumOfHuds()
+    {
+        return _hudList.Length;
+    }
 }
