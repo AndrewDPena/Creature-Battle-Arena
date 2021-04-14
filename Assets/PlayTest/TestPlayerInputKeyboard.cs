@@ -23,6 +23,7 @@ namespace PlayTest
             _body = _gameObject.AddComponent<Rigidbody2D>();
             _move = _gameObject.AddComponent<CreatureMove>();
             _move.CreatureSpeed = 1000.0f;
+            _gameObject.AddComponent<SpriteRenderer>();
             _creature = _gameObject.AddComponent<Creature>();
             _unityService = Substitute.For<IUnityService>();
         }
@@ -142,11 +143,13 @@ namespace PlayTest
         public IEnumerator PlayerInputCallsASwap()
         {
             _unityService.InputString().Returns("abcde1fg");
+            var pocketHud = _gameObject.AddComponent<PocketHUD>();
+            pocketHud.AddHud(GameObject.Instantiate(Resources.Load<PlayerHUD>("Prefabs/PlayerHudPrefab"), 
+                Vector3.zero, Quaternion.identity));
 
             var player = new Player { };
             player.AddCreature(new CreatureData("test1", 10, 10));
-            player.SetHUD(GameObject.Instantiate(Resources.Load<PlayerHUD>("Prefabs/PlayerHudPrefab"), 
-                Vector3.zero, Quaternion.identity));
+            player.SetPocketHUD(pocketHud);
             _creature.AssignPlayer(player);
             _creature.Summon(player.SummonCreature(0));
             player.AddCreature(new CreatureData("test2", 10, 10));

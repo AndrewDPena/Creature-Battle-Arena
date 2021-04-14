@@ -13,7 +13,7 @@ public class Creature : MonoBehaviour, ICreature
 
     public Player Owner;
 
-    private void Start()
+    private void Awake()
     {
         _renderer = GetComponent<SpriteRenderer>();
     }

@@ -1,13 +1,19 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PocketHUD : MonoBehaviour
 {
-    [SerializeField] private PlayerHUD[] _hudList;
+    [SerializeField] private List<PlayerHUD> _hudList = new List<PlayerHUD>();
 
     public void SetHud(CreatureData creature, int slot)
     {
         _hudList[slot].InitializeHUD(creature);
+    }
+
+    public void AddHud(PlayerHUD hud)
+    {
+        _hudList.Add(hud);
     }
 
     public PlayerHUD GetPrimaryHud()
@@ -17,6 +23,6 @@ public class PocketHUD : MonoBehaviour
 
     public int GetNumOfHuds()
     {
-        return _hudList.Length;
+        return _hudList.Count;
     }
 }
