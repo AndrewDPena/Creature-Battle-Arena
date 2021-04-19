@@ -153,6 +153,7 @@ namespace PlayTest
             _creature.AssignPlayer(player);
             _creature.Summon(player.SummonCreature(0));
             player.AddCreature(new CreatureData("test2", 10, 10));
+            Assert.True(player.CanSummonCreature(1));
             
             _input.UnityService = _unityService;
             yield return new WaitForSeconds(0.1f);
