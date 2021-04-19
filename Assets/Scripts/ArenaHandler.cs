@@ -8,57 +8,52 @@ public class ArenaHandler : MonoBehaviour
     public Player HumanPlayer;
     public Player NPCPlayer;
 
-    public PlayerHUD PlayerHud;
-    public PlayerHUD NPCHud;
+    public PocketHUD NPCHud;
+    public PocketHUD PlayerPocketHud;
 
-    public GameObject CreaturePrefab;
+    [SerializeField] private GameObject _creaturePrefab;
+    [SerializeField] private CreatureBase[] _playerCreatures;
+    [SerializeField] private CreatureBase[] _npcCreatures;
+
 
     public Transform PlayerSpawn;
     public Transform NPCSpawn;
 
     void Start()
     {
-        HumanPlayer = new Player();
+        HumanPlayer = new Player{};
         HumanPlayer.Name = "Human";
-        NPCPlayer = new Player();
+        NPCPlayer = new Player{};
         NPCPlayer.Name = "NPC";
 
-        var playerCreatureGO = Instantiate(CreaturePrefab, PlayerSpawn.position, Quaternion.identity);
+        var playerCreatureGO = Instantiate(_creaturePrefab, PlayerSpawn.position, Quaternion.identity);
         playerCreatureGO.AddComponent<PlayerInputKeyboard>();
-        var enemyCreatureGO = Instantiate(CreaturePrefab, NPCSpawn.position, Quaternion.identity);
+        var enemyCreatureGO = Instantiate(_creaturePrefab, NPCSpawn.position, Quaternion.identity);
+        var ai = enemyCreatureGO.AddComponent<BasicAI>();
+        ai.Player = playerCreatureGO;
 
-        HumanPlayer.SetHUD(PlayerHud);
-        NPCPlayer.SetHUD(NPCHud);
+        HumanPlayer.SetPocketHUD(PlayerPocketHud);
+        NPCPlayer.SetPocketHUD(NPCHud);
 
         var playerCreature = playerCreatureGO.GetComponent<Creature>();
-        SetupCreature(playerCreature, "Cubey", 10, 69, HumanPlayer);
         playerCreature.LearnAttack(new ConeAttackType());
         playerCreature.LearnAttack(new CenteredAttackType());
-        
-        var backupGO = new GameObject();
-        var backupCreature = backupGO.AddComponent<Creature>();
-        SetupCreature(backupCreature, "OtherCube", 10, 120, HumanPlayer);
-        playerCreature.LearnAttack(new ConeAttackType());
 
         var enemyCreature = enemyCreatureGO.GetComponent<Creature>();
-        SetupCreature(enemyCreature, "Cylindork", 5, 80, NPCPlayer);
         
-        HumanPlayer.AddCreature(playerCreature);
-        HumanPlayer.AddCreature(backupCreature);
-        NPCPlayer.AddCreature(enemyCreature);
-
-        HumanPlayer.SummonCreature(0);
-        NPCPlayer.SummonCreature(0);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        playerCreature.AssignPlayer(HumanPlayer);
+        foreach (var cBase in _playerCreatures)
+        {
+            HumanPlayer.AddCreature(new CreatureData(cBase));
+        }
         
-    }
+        enemyCreature.AssignPlayer(NPCPlayer);
+        foreach (var cBase in _npcCreatures)
+        {
+            NPCPlayer.AddCreature(new CreatureData(cBase));
+        }
 
-    private static void SetupCreature(Creature creature, string name, int strength, int maxHealth, Player player)
-    {
-        creature.Setup(name, strength, maxHealth, player);
+        playerCreature.Summon(HumanPlayer.SummonCreature(0));
+        enemyCreature.Summon(NPCPlayer.SummonCreature(0));
     }
 }

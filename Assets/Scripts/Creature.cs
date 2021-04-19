@@ -3,31 +3,52 @@ using UnityEngine;
 
 public class Creature : MonoBehaviour, ICreature
 {
-    public string Name;
-    public int Strength;
-    public int MaxHealth;
-    public int CurrentHealth;
+    public CreatureData CurrentCreature;
+    private SpriteRenderer _renderer;
     [SerializeField] private Transform[] _exitPoints;
     [SerializeField] private GameObject _attack1Prefab;
     [SerializeField] private GameObject _attack2Prefab;
     [SerializeField] private IAttackType _attack1;
     [SerializeField] private IAttackType _attack2;
 
-    private Player _owner;
+    public Player Owner;
 
-    public void Setup(string creatureName, int strength, int maxHealth, Player player)
+    private void Start()
     {
-        Name = creatureName;
-        Strength = strength;
-        MaxHealth = maxHealth;
-        CurrentHealth = MaxHealth;
-        _owner = player;
+        _renderer = GetComponent<SpriteRenderer>();
+    }
+
+    public void AssignPlayer(Player player)
+    {
+        Owner = player;
+    }
+
+    public void Summon(CreatureData creature)
+    {
+        CurrentCreature = creature;
+
+        try
+        {
+            _renderer.sprite = CurrentCreature.Sprite;
+        }
+        catch (NullReferenceException ex)
+        {
+            Debug.Log("Why on Earth does this fail?");
+        }
+    }
+
+    public void Swap(int slot)
+    {
+        if (Owner.CanSummonCreature(slot))
+        {
+            Summon(Owner.SummonCreature(slot));
+        }
     }
 
     public void TakeDamage(int damage)
     {
-        CurrentHealth -= damage;
-        _owner.UpdateHUD(this, CurrentHealth);
+        CurrentCreature.TakeDamage(damage);
+        Owner.UpdateHUD(CurrentCreature);
     }
 
     // Change to one method with a dictionary or something, potentially
@@ -46,19 +67,10 @@ public class Creature : MonoBehaviour, ICreature
         if (_attack1 == null)
         {
             _attack1 = attackType;
-            //_attack1Prefab = attackPrefab;
         }
         else
         {
             _attack2 = attackType;
-        }
-    }
-
-    public void Return(int slot)
-    {
-        if (_owner.GetPocketSize() > slot)
-        {
-            _owner.SummonCreature(slot);
         }
     }
 }

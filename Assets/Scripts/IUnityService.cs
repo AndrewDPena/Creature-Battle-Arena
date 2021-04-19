@@ -7,6 +7,7 @@ public interface IUnityService
     float GetAxis(string axisName);
     float GetDeltaTime();
     bool GetKeyDown(string key);
+    string InputString();
 }
 
 public class UnityService : IUnityService
@@ -24,5 +25,10 @@ public class UnityService : IUnityService
     public bool GetKeyDown(string key)
     {
         return Input.GetKeyDown(key);
+    }
+
+    public string InputString()
+    {
+        return Input.inputString;
     }
 }

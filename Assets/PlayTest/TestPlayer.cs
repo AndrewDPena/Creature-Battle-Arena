@@ -14,19 +14,20 @@ namespace PlayTest
     public class TestPlayer : MonoBehaviour
     {
         private GameObject _gameObject;
+        private PocketHUD _pocketHud;
         private PlayerHUD _playerHud;
-        private Creature _creature;
         private Player _player;
 
 
         [SetUp]
         public void Setup()
         {
-            _gameObject = GameObject.Instantiate(new GameObject());
-            _creature = _gameObject.AddComponent<Creature>();
+            _gameObject = Instantiate(new GameObject());
+            _pocketHud = _gameObject.AddComponent<PocketHUD>();
             _player = new Player();
             _playerHud = Instantiate(Resources.Load<PlayerHUD>("Prefabs/PlayerHudPrefab"), Vector3.zero, Quaternion.identity);
-            _player.SetHUD(_playerHud);
+            _pocketHud.AddHud(_playerHud);
+            _player.SetPocketHUD(_pocketHud);
         }
 
         [TearDown]
@@ -60,7 +61,7 @@ namespace PlayTest
         public IEnumerator PlayerCanStoreACreature()
         {
             Assert.AreEqual(0, _player.GetPocketSize(), "Player starts with an empty pocket.");
-            _player.AddCreature(_creature);
+            _player.AddCreature(new CreatureData("Test", 10, 10));
             
             yield return new WaitForSeconds(0.1f);
             
@@ -70,30 +71,32 @@ namespace PlayTest
         [UnityTest]
         public IEnumerator PlayerCanSummonACreature()
         {
-            _player.AddCreature(_creature);
+            var creature = new CreatureData("Test", 10, 10);
+            _player.AddCreature(creature);
             yield return new WaitForSeconds(0.1f);
-            Assert.AreNotEqual(_creature, _player.GetActiveCreature(), "Player starts without an active creature.");
+            Assert.AreNotEqual(creature, _player.GetActiveCreature(), "Player starts without an active creature.");
 
             _player.SummonCreature(0);
-
             yield return new WaitForSeconds(0.1f);
             
-            Assert.AreEqual(_creature, _player.GetActiveCreature(), "Player successfully summons creature.");
+            Assert.AreEqual(creature, _player.GetActiveCreature(), "Player successfully summons creature.");
         }
 
         [UnityTest]
         public IEnumerator PlayerCanUpdateHud()
         {
-            _creature.Setup("Test", 0, 100, _player);
-            _player.AddCreature(_creature);
+            var creature = new CreatureData("Test", 0, 100);
+            _player.AddCreature(creature);
             _player.SummonCreature(0);
             
             yield return new WaitForSeconds(0.1f);
             Assert.AreEqual(100, _playerHud.GetHealth(), "Hud updates to summoned creature.");
             
-            _player.UpdateHUD(_creature, 10);            
+            creature.TakeDamage(10);
+            
+            _player.UpdateHUD(creature);            
             yield return new WaitForSeconds(0.1f);
-            Assert.AreEqual(10, _playerHud.GetHealth(), "Player can update HUD values.");
+            Assert.AreEqual(90, _playerHud.GetHealth(), "Player can update HUD values.");
 
         }
     }
