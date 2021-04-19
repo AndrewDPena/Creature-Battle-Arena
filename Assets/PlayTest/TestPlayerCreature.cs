@@ -103,6 +103,13 @@ namespace PlayTest
         public IEnumerator CreatureCanSwap()
         {
             yield return new WaitForSeconds(0.1f);
+            
+            var pocketHud = _gameObject.AddComponent<PocketHUD>();
+            pocketHud.AddHud(GameObject.Instantiate(Resources.Load<PlayerHUD>("Prefabs/PlayerHudPrefab"), 
+                Vector3.zero, Quaternion.identity));
+            _player.SetPocketHUD(pocketHud);
+
+            
             var newTest = new CreatureData("NewTest", 100, 100);
             _creature.AssignPlayer(_player);
             _player.AddCreature(_data);
