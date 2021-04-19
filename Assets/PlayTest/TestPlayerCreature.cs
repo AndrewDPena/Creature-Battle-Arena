@@ -14,6 +14,7 @@ namespace PlayTest
         private Creature _creature;
         private CreatureData _data;
         private PlayerHUD _playerHud;
+        private SpriteRenderer _renderer;
         
         [SetUp]
         public void Setup()
@@ -23,6 +24,7 @@ namespace PlayTest
             _playerHud = GameObject.Instantiate(Resources.Load<PlayerHUD>("Prefabs/PlayerHudPrefab"), Vector3.zero, Quaternion.identity);
             _player.SetHUD(_playerHud);
             _creature = _gameObject.AddComponent<Creature>();
+            _renderer = _gameObject.AddComponent<SpriteRenderer>();
             _data = new CreatureData("Test", 10, 100);
         }
 
@@ -100,11 +102,13 @@ namespace PlayTest
         [UnityTest]
         public IEnumerator CreatureCanSwap()
         {
+            yield return new WaitForSeconds(0.1f);
             var newTest = new CreatureData("NewTest", 100, 100);
             _creature.AssignPlayer(_player);
-            _creature.Summon(_data);
             _player.AddCreature(_data);
             _player.AddCreature(newTest);
+            _creature.Summon(_data);
+
             
             _creature.Swap(2);
             yield return new WaitForSeconds(0.1f);
