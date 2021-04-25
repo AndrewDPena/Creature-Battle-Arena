@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 287764707529801251}
   - component: {fileID: 4994919436606863079}
   - component: {fileID: 2155480952931299129}
+  - component: {fileID: 6610373017866437920}
   m_Layer: 0
   m_Name: FireBreathObject
   m_TagString: Untagged
@@ -116,3 +117,15 @@ PolygonCollider2D:
       - {x: 0.25, y: -0.25}
       - {x: 0.25, y: 0.109375}
       - {x: 0.1875, y: 0.203125}
+--- !u!114 &6610373017866437920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4711585498158624681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc90b3fd08848c4b9a82c1dd03cadf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

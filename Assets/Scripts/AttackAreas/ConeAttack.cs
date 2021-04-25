@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using AttackList;
 using UnityEngine;
 
 
@@ -6,7 +7,7 @@ namespace AttackAreas
 {
     public class ConeAttack : AttackAreaOfEffect
     {
-        public override IEnumerator Attack(Vector2 direction, Transform[] exitPoints, GameObject attackPrefab)
+        public override IEnumerator Attack(Vector2 direction, Transform[] exitPoints, AttackBase attack)
         {
             var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             var cast = angle - (angle % 45);
@@ -15,15 +16,16 @@ namespace AttackAreas
             {
                 point += exitPoints.Length;
             }
-            
-            var breath = Object.Instantiate(attackPrefab, exitPoints[point].position, Quaternion.identity);
 
-
+            var spriteObject = attack.SpriteObject;
+            var breath = Instantiate(spriteObject, exitPoints[point].position, Quaternion.identity);
             breath.transform.rotation = Quaternion.AngleAxis(cast, Vector3.forward);
+            var damage = breath.GetComponent<DamageManager>();
+            damage.SetAttack(attack);
 
             yield return new WaitForSeconds(.25f);
     
-            Object.Destroy(breath);
+            Destroy(breath);
         }
     }
 }

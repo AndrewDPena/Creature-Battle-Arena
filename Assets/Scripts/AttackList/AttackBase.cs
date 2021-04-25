@@ -20,7 +20,7 @@ namespace AttackList
 
         public int DamagePerTick => _damagePerTick;
 
-        public GameObject AreaOfEffect => _areaOfEffect;
+        //public GameObject AreaOfEffect => _areaOfEffect;
 
         public GameObject SpriteObject => _spriteObject;
 
