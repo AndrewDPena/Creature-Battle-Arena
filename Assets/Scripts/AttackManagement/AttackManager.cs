@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using AttackList;
+using AttackAreas;
 
 namespace AttackManagement
 {

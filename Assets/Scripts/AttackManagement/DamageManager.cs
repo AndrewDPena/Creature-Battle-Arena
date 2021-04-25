@@ -1,37 +1,41 @@
-﻿using AttackList;
+﻿using AttackAreas;
 using UnityEngine;
 
-public class DamageManager : MonoBehaviour
+namespace AttackManagement
 {
-    private int _battlePower;
-    private int _damagePerTick;
-    private bool _canDamageSelf;
-    private Creature _attacker;
-
-    public void SetAttack(AttackBase attack)
+    public class DamageManager : MonoBehaviour
     {
-        _battlePower = attack.Damage;
-        _damagePerTick = attack.DamagePerTick;
-        _canDamageSelf = attack.CanDamageSelf;
-    }
+        private int _battlePower;
+        private int _damagePerTick;
+        private bool _canDamageSelf;
+        private Creature _attacker;
 
-    public void SetAttacker(Creature creature)
-    {
-        _attacker = creature;
-    }
-
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        var c = other.GetComponentInParent<Creature>();
-        if (c == _attacker && !_canDamageSelf)
+        public void SetAttack(AttackBase attack)
         {
-            return;
+            _battlePower = attack.Damage;
+            _damagePerTick = attack.DamagePerTick;
+            _canDamageSelf = attack.CanDamageSelf;
         }
-        if (c != null & _battlePower > 0)
+
+        public void SetAttacker(Creature creature)
         {
-            Debug.Log("You shouldn't see me if you're burning the tree.");
-            c.TakeDamage(_damagePerTick);
-            _battlePower -= _damagePerTick;
+            _attacker = creature;
+        }
+
+        private void OnTriggerStay2D(Collider2D other)
+        {
+            var c = other.GetComponentInParent<Creature>();
+            if (c == _attacker && !_canDamageSelf)
+            {
+                return;
+            }
+
+            if (c != null & _battlePower > 0)
+            {
+                Debug.Log("You shouldn't see me if you're burning the tree.");
+                c.TakeDamage(_damagePerTick);
+                _battlePower -= _damagePerTick;
+            }
         }
     }
 }

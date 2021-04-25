@@ -1,9 +1,12 @@
 ﻿using System.Collections;
-using AttackList;
+using AttackAreas;
 using UnityEngine;
 
-
-public abstract class AttackAreaOfEffect : MonoBehaviour
+namespace AttackManagement
 {
-    public abstract IEnumerator Attack(Vector2 direction, Transform[] exitPoints,AttackBase attack, Creature creature);
+    public abstract class AttackAreaOfEffect : MonoBehaviour
+    {
+        public abstract IEnumerator Attack(Vector2 direction, Transform[] exitPoints, AttackBase attack,
+            Creature creature);
+    }
 }

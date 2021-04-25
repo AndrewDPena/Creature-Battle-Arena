@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace AttackList
+namespace AttackManagement
 {
     [CreateAssetMenu(fileName = "Attack", menuName = "Attack/Create a new Attack")]
     public class AttackBase : ScriptableObject
