@@ -7,10 +7,7 @@ namespace AttackList
     {
         [SerializeField] private string _name;
         [SerializeField] private int _damage;
-
         [SerializeField] private int _damagePerTick;
-
-        //[SerializeField] Sprite attackSprite;
         [SerializeField] private GameObject _areaOfEffect;
         [SerializeField] private GameObject _spriteObject;
 
@@ -19,8 +16,6 @@ namespace AttackList
         public int Damage => _damage;
 
         public int DamagePerTick => _damagePerTick;
-
-        //public GameObject AreaOfEffect => _areaOfEffect;
 
         public GameObject SpriteObject => _spriteObject;
 

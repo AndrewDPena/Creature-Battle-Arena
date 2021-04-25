@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c28bdb1ba2b402cb2b93696652466e9, type: 3}
   m_Name: Pyramad
   m_EditorClassIdentifier: 
-  name: Pyramad
-  strength: 15
-  maxHealth: 40
-  creatureSprite: {fileID: 5947147746735066557, guid: 1141f830fba1ae74bb9e7d559ccd0e26,
+  _name: Pyramad
+  _strength: 15
+  _maxHealth: 40
+  _creatureSprite: {fileID: 5947147746735066557, guid: 1141f830fba1ae74bb9e7d559ccd0e26,
     type: 3}
+  _attacks:
+  - {fileID: 0}
+  - {fileID: 0}

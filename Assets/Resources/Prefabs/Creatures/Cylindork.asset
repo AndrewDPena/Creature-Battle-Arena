@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c28bdb1ba2b402cb2b93696652466e9, type: 3}
   m_Name: Cylindork
   m_EditorClassIdentifier: 
-  name: Cylindork
-  strength: 5
-  maxHealth: 120
-  creatureSprite: {fileID: 6359595092365016890, guid: aae2710c504880145b7e8e0932e834ed,
+  _name: Cylindork
+  _strength: 5
+  _maxHealth: 120
+  _creatureSprite: {fileID: 6359595092365016890, guid: aae2710c504880145b7e8e0932e834ed,
     type: 3}
+  _attacks:
+  - {fileID: 0}
+  - {fileID: 0}

@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c28bdb1ba2b402cb2b93696652466e9, type: 3}
   m_Name: Cubey
   m_EditorClassIdentifier: 
-  name: Cubey
-  strength: 10
-  maxHealth: 69
-  creatureSprite: {fileID: -6611454913772828434, guid: e7f647a0d60d106409c92442c5478f58,
+  _name: Cubey
+  _strength: 10
+  _maxHealth: 69
+  _creatureSprite: {fileID: -6611454913772828434, guid: e7f647a0d60d106409c92442c5478f58,
     type: 3}
   _attacks:
   - {fileID: 11400000, guid: 389e95b6fc57ab643b70bd2223914546, type: 2}
+  - {fileID: 11400000, guid: 3cf68639f64d6bb40bc136d7219c65eb, type: 2}

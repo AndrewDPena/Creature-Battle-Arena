@@ -4,34 +4,34 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Creature", menuName = "Creature/Create a new Creature")]
 public class CreatureBase : ScriptableObject
 {
-    [SerializeField] string name;
-    [SerializeField] int strength;
-    [SerializeField] int maxHealth;
-    [SerializeField] Sprite creatureSprite;
+    [SerializeField] private string _name;
+    [SerializeField] private int _strength;
+    [SerializeField] private int _maxHealth;
+    [SerializeField] private Sprite _creatureSprite;
     [SerializeField] private AttackBase[] _attacks;
 
     public string Name
     {
-        get { return name; }
-        set { name = value; }
+        get { return _name; }
+        set { _name = value; }
     }
 
     public int Strength
     {
-        get { return strength; }
-        set { strength = value; }
+        get { return _strength; }
+        set { _strength = value; }
     }
 
     public int MaxHealth
     {
-        get { return maxHealth; }
-        set { maxHealth = value; }
+        get { return _maxHealth; }
+        set { _maxHealth = value; }
     }
 
     public Sprite CreatureSprite
     {
-        get { return creatureSprite; }
-        set { creatureSprite = value; }
+        get { return _creatureSprite; }
+        set { _creatureSprite = value; }
     }
 
     public AttackBase[] Attacks

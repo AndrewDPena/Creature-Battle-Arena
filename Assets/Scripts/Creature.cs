@@ -66,7 +66,8 @@ public class Creature : MonoBehaviour//, ICreature
 
     public void Attack2(Vector2 direction)
     {
-        StartCoroutine(_attack2.Attack(direction, _exitPoints, _attack2Prefab));
+        _manager.Attack(_attacks[1], direction, _exitPoints);
+        //StartCoroutine(_attack2.Attack(direction, _exitPoints, _attack2Prefab));
     }
 
     public void LearnAttack(IAttackType attackType)
