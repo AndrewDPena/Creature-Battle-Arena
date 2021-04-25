@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using AttackList;
+﻿using AttackList;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class CreatureData
 {
@@ -9,7 +9,7 @@ public class CreatureData
     public int MaxHealth;
     public int CurrentHealth;
     public Sprite Sprite;
-    public AttackBase[] Attacks;
+    public List<AttackBase> Attacks = new List<AttackBase>();
 
     public CreatureData(CreatureBase cBase)
     {

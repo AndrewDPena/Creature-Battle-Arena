@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using AttackTypes;
 
 public class ArenaHandler : MonoBehaviour
 {
@@ -36,8 +35,6 @@ public class ArenaHandler : MonoBehaviour
         NPCPlayer.SetPocketHUD(NPCHud);
 
         var playerCreature = playerCreatureGO.GetComponent<Creature>();
-        playerCreature.LearnAttack(new ConeAttackType());
-        playerCreature.LearnAttack(new CenteredAttackType());
 
         var enemyCreature = enemyCreatureGO.GetComponent<Creature>();
         

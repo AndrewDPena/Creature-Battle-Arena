@@ -7,7 +7,7 @@ namespace AttackAreas
 {
     public class ConeAttack : AttackAreaOfEffect
     {
-        public override IEnumerator Attack(Vector2 direction, Transform[] exitPoints, AttackBase attack)
+        public override IEnumerator Attack(Vector2 direction, Transform[] exitPoints, AttackBase attackBase)
         {
             var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             var cast = angle - (angle % 45);
@@ -17,15 +17,15 @@ namespace AttackAreas
                 point += exitPoints.Length;
             }
 
-            var spriteObject = attack.SpriteObject;
-            var breath = Instantiate(spriteObject, exitPoints[point].position, Quaternion.identity);
-            breath.transform.rotation = Quaternion.AngleAxis(cast, Vector3.forward);
-            var damage = breath.GetComponent<DamageManager>();
-            damage.SetAttack(attack);
+            var spriteObject = attackBase.SpriteObject;
+            var attack = Instantiate(spriteObject, exitPoints[point].position, Quaternion.identity);
+            attack.transform.rotation = Quaternion.AngleAxis(cast, Vector3.forward);
+            var damage = attack.GetComponent<DamageManager>();
+            damage.SetAttack(attackBase);
 
             yield return new WaitForSeconds(.25f);
     
-            Destroy(breath);
+            Destroy(attack);
         }
     }
 }

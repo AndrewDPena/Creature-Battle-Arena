@@ -1,6 +1,7 @@
 ﻿using System;
 using AttackList;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Creature : MonoBehaviour//, ICreature
 {
@@ -8,12 +9,7 @@ public class Creature : MonoBehaviour//, ICreature
     private SpriteRenderer _renderer;
     [SerializeField] private Transform[] _exitPoints;
     [SerializeField] private AttackManager _manager;
-    [SerializeField] private AttackBase[] _attacks;
-    
-    [SerializeField] private GameObject _attack1Prefab;
-    [SerializeField] private GameObject _attack2Prefab;
-    [SerializeField] private IAttackType _attack1;
-    [SerializeField] private IAttackType _attack2;
+    [SerializeField] private List<AttackBase> _attacks = new List<AttackBase>();
 
     public Player Owner;
 
@@ -70,15 +66,8 @@ public class Creature : MonoBehaviour//, ICreature
         //StartCoroutine(_attack2.Attack(direction, _exitPoints, _attack2Prefab));
     }
 
-    public void LearnAttack(IAttackType attackType)
+    public void LearnAttack(AttackBase attack)
     {
-        if (_attack1 == null)
-        {
-            _attack1 = attackType;
-        }
-        else
-        {
-            _attack2 = attackType;
-        }
+        
     }
 }

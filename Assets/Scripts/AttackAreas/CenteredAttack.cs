@@ -16,7 +16,7 @@ namespace AttackAreas
 
             yield return new WaitForSeconds(.25f); 
     
-            Object.Destroy(attack);
+            Destroy(attack);
         }
     }
 }

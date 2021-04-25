@@ -96,7 +96,7 @@ namespace PlayTest
             
             Assert.NotNull(_creature, "The creature object exists and is attached to the input.");
         }
-
+        /*
         [UnityTest]
         public IEnumerator PlayerInputCallsAttackWithCtrl()
         {
@@ -116,8 +116,8 @@ namespace PlayTest
             testAttack1.ReceivedWithAnyArgs().Attack(default(Vector2), default(Transform[]), default(GameObject));
             testAttack2.DidNotReceiveWithAnyArgs().Attack(default(Vector2), default(Transform[]), default(GameObject));
             Debug.Log("PlayerInput calls the ctrl attack coroutine successfully.");
-        }
-        
+        }*/
+        /*
         [UnityTest]
         public IEnumerator PlayerInputCallsAttackWithShift()
         {
@@ -137,7 +137,7 @@ namespace PlayTest
             testAttack1.DidNotReceiveWithAnyArgs().Attack(default(Vector2), default(Transform[]), default(GameObject));
             testAttack2.ReceivedWithAnyArgs().Attack(default(Vector2), default(Transform[]), default(GameObject));
             Debug.Log("PlayerInput calls the shift attack coroutine successfully.");
-        }
+        }*/
         
         [UnityTest]
         public IEnumerator PlayerInputCallsASwap()

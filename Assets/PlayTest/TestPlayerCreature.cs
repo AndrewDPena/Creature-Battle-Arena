@@ -84,7 +84,7 @@ namespace PlayTest
             Assert.AreEqual(health - damage, _creature.CurrentCreature.CurrentHealth, 
                 "Creature passes along the correct amount of damage.");
         }
-
+        /*
         [UnityTest]
         public IEnumerator PlayerCreatureAttacks()
         {
@@ -97,7 +97,7 @@ namespace PlayTest
 
             testAttack.ReceivedWithAnyArgs().Attack(default(Vector2), default(Transform[]), default(GameObject));
             Debug.Log("Creature calls the attack coroutine successfully.");
-        }
+        }*/
 
         [UnityTest]
         public IEnumerator CreatureCanSwap()
