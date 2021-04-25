@@ -2,8 +2,9 @@
 using AttackList;
 using UnityEngine;
 using System.Collections.Generic;
+using AttackManagement;
 
-public class Creature : MonoBehaviour//, ICreature
+public class Creature : MonoBehaviour
 {
     public CreatureData CurrentCreature;
     private SpriteRenderer _renderer;
@@ -56,14 +57,12 @@ public class Creature : MonoBehaviour//, ICreature
     // Change to one method with a dictionary or something, potentially
     public void Attack1(Vector2 direction)
     {
-        _manager.Attack(_attacks[0], direction, _exitPoints);
-        //StartCoroutine(_attack1.Attack(direction, _exitPoints, _attack1Prefab));
+        _manager.Attack(_attacks[0], direction, _exitPoints, this);
     }
 
     public void Attack2(Vector2 direction)
     {
-        _manager.Attack(_attacks[1], direction, _exitPoints);
-        //StartCoroutine(_attack2.Attack(direction, _exitPoints, _attack2Prefab));
+        _manager.Attack(_attacks[1], direction, _exitPoints, this);
     }
 
     public void LearnAttack(AttackBase attack)

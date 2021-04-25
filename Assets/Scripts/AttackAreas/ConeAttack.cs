@@ -7,7 +7,7 @@ namespace AttackAreas
 {
     public class ConeAttack : AttackAreaOfEffect
     {
-        public override IEnumerator Attack(Vector2 direction, Transform[] exitPoints, AttackBase attackBase)
+        public override IEnumerator Attack(Vector2 direction, Transform[] exitPoints, AttackBase attackBase, Creature creature)
         {
             var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             var cast = angle - (angle % 45);
@@ -22,6 +22,7 @@ namespace AttackAreas
             attack.transform.rotation = Quaternion.AngleAxis(cast, Vector3.forward);
             var damage = attack.GetComponent<DamageManager>();
             damage.SetAttack(attackBase);
+            damage.SetAttacker(creature);
 
             yield return new WaitForSeconds(.25f);
     

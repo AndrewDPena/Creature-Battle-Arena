@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using AttackList;
 
-public class AttackManager : MonoBehaviour
-{  
-    public void Attack(AttackBase attack, Vector2 direction, Transform[] exitPoints)
+namespace AttackManagement
+{
+    public class AttackManager : MonoBehaviour
     {
-        var area = attack.GetAreaOfEffect();
-        StartCoroutine(area.Attack(direction, exitPoints, attack));
+        public void Attack(AttackBase attack, Vector2 direction, Transform[] exitPoints, Creature creature)
+        {
+            var area = attack.GetAreaOfEffect();
+            StartCoroutine(area.Attack(direction, exitPoints, attack, creature));
+        }
     }
 }
