@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using AttackList;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "Creature", menuName = "Creature/Create a new Creature")]
 public class CreatureBase : ScriptableObject
@@ -7,6 +8,7 @@ public class CreatureBase : ScriptableObject
     [SerializeField] int strength;
     [SerializeField] int maxHealth;
     [SerializeField] Sprite creatureSprite;
+    [SerializeField] private AttackBase[] _attacks;
 
     public string Name
     {
@@ -30,5 +32,11 @@ public class CreatureBase : ScriptableObject
     {
         get { return creatureSprite; }
         set { creatureSprite = value; }
+    }
+
+    public AttackBase[] Attacks
+    {
+        get { return _attacks; }
+        set { _attacks = value; }
     }
 }

@@ -1,11 +1,15 @@
 ﻿using System;
+using AttackList;
 using UnityEngine;
 
-public class Creature : MonoBehaviour, ICreature
+public class Creature : MonoBehaviour//, ICreature
 {
     public CreatureData CurrentCreature;
     private SpriteRenderer _renderer;
     [SerializeField] private Transform[] _exitPoints;
+    [SerializeField] private AttackManager _manager;
+    [SerializeField] private AttackBase[] _attacks;
+    
     [SerializeField] private GameObject _attack1Prefab;
     [SerializeField] private GameObject _attack2Prefab;
     [SerializeField] private IAttackType _attack1;
@@ -16,6 +20,7 @@ public class Creature : MonoBehaviour, ICreature
     private void Start()
     {
         _renderer = GetComponent<SpriteRenderer>();
+        _manager = GetComponent<AttackManager>();
     }
 
     public void AssignPlayer(Player player)
@@ -26,6 +31,7 @@ public class Creature : MonoBehaviour, ICreature
     public void Summon(CreatureData creature)
     {
         CurrentCreature = creature;
+        _attacks = creature.Attacks;
 
         try
         {
@@ -54,7 +60,8 @@ public class Creature : MonoBehaviour, ICreature
     // Change to one method with a dictionary or something, potentially
     public void Attack1(Vector2 direction)
     {
-        StartCoroutine(_attack1.Attack(direction, _exitPoints, _attack1Prefab));
+        _manager.Attack(_attacks[0], direction, _exitPoints);
+        //StartCoroutine(_attack1.Attack(direction, _exitPoints, _attack1Prefab));
     }
 
     public void Attack2(Vector2 direction)
