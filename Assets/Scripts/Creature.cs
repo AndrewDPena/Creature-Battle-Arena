@@ -1,5 +1,6 @@
 ﻿using System;
 using AttackAreas;
+using static TypeChart;
 using UnityEngine;
 using System.Collections.Generic;
 using AttackManagement;
@@ -39,8 +40,8 @@ public class Creature : MonoBehaviour
         CurrentCreature = creature;
         _attacks = creature.Attacks;
         _move.SetCreatureSpeed(creature.CreatureSpeed);
-        _move.IsFlying = (creature.CreatureType1 == TypeChart.CreatureType.Flying ||
-                          creature.CreatureType2 == TypeChart.CreatureType.Flying);
+        _move.IsFlying = (creature.CreatureType1 == CreatureType.Flying ||
+                          creature.CreatureType2 == CreatureType.Flying);
         
         try
         {
@@ -60,10 +61,10 @@ public class Creature : MonoBehaviour
         }
     }
 
-    public float GetDamageMultiplier(TypeChart.CreatureType attackType)
+    public float GetDamageMultiplier(CreatureType attackType)
     {
-        return TypeChart.DamageMult[attackType][CurrentCreature.CreatureType1] * 
-               TypeChart.DamageMult[attackType][CurrentCreature.CreatureType2];
+        return DamageMult[attackType][CurrentCreature.CreatureType1] * 
+               DamageMult[attackType][CurrentCreature.CreatureType2];
     }
 
     public void TakeDamage(int damage)
