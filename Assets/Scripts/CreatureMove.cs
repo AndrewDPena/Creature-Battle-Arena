@@ -37,7 +37,6 @@ public class CreatureMove : MonoBehaviour
 
     public bool IsFlying
     {
-        get { return _isFlying; }
         set { _isFlying = value; }
     }
 
