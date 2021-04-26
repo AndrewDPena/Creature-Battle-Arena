@@ -16,6 +16,7 @@ MonoBehaviour:
   _damage: 20
   _damagePerTick: 5
   _canDamageSelf: 1
+  _attackType: 1
   _areaOfEffect: {fileID: 6487142264891995890, guid: 633712aaf26d23946bfc1c792c98f83e,
     type: 3}
   _spriteObject: {fileID: 4711585498158624681, guid: df10450202b413a43a76c204ab63c53e,

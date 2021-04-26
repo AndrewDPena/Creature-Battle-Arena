@@ -9,6 +9,7 @@ namespace AttackManagement
         [SerializeField] private int _damage;
         [SerializeField] private int _damagePerTick;
         [SerializeField] private bool _canDamageSelf;
+        [SerializeField] private TypeChart.CreatureType _attackType;
         [SerializeField] private GameObject _areaOfEffect;
         [SerializeField] private GameObject _spriteObject;
 
@@ -19,6 +20,8 @@ namespace AttackManagement
         public int DamagePerTick => _damagePerTick;
 
         public bool CanDamageSelf => _canDamageSelf;
+
+        public TypeChart.CreatureType AttackType => _attackType;
 
         public GameObject SpriteObject => _spriteObject;
 

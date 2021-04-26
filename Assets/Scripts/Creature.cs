@@ -48,6 +48,12 @@ public class Creature : MonoBehaviour
         }
     }
 
+    public float GetDamageMultiplier(TypeChart.CreatureType attackType)
+    {
+        return TypeChart.DamageMult[attackType][CurrentCreature.CreatureType1] * 
+               TypeChart.DamageMult[attackType][CurrentCreature.CreatureType2];
+    }
+
     public void TakeDamage(int damage)
     {
         CurrentCreature.TakeDamage(damage);

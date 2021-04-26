@@ -8,6 +8,7 @@ namespace AttackManagement
         private int _battlePower;
         private int _damagePerTick;
         private bool _canDamageSelf;
+        private TypeChart.CreatureType _attackType;
         private Creature _attacker;
 
         public void SetAttack(AttackBase attack)
@@ -15,6 +16,7 @@ namespace AttackManagement
             _battlePower = attack.Damage;
             _damagePerTick = attack.DamagePerTick;
             _canDamageSelf = attack.CanDamageSelf;
+            _attackType = attack.AttackType;
         }
 
         public void SetAttacker(Creature creature)
@@ -33,7 +35,8 @@ namespace AttackManagement
             if (c != null & _battlePower > 0)
             {
                 Debug.Log("You shouldn't see me if you're burning the tree.");
-                c.TakeDamage(_damagePerTick);
+                var mult = c.GetDamageMultiplier(_attackType);
+                c.TakeDamage((int)(_damagePerTick * mult));
                 _battlePower -= _damagePerTick;
             }
         }

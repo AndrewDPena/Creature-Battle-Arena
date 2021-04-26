@@ -6,6 +6,7 @@ public static class TypeChart
     public enum CreatureType
     {
         None,
+        Normal,
         Fire,
         Water,
         Grass,
@@ -13,13 +14,25 @@ public static class TypeChart
     }
     
     // Proper usage is DamageMult[AttackType][DefendingCreatureType]
-    public static Dictionary<CreatureType, Dictionary<CreatureType, float>> DamageMult =
+    public static readonly Dictionary<CreatureType, Dictionary<CreatureType, float>> DamageMult =
         new Dictionary<CreatureType, Dictionary<CreatureType, float>>()
     {
+        {
+            CreatureType.Normal, new Dictionary<CreatureType, float>()
+            {
+                {CreatureType.None, 1},
+                {CreatureType.Normal, 1},
+                {CreatureType.Fire, 1},
+                {CreatureType.Water, 1},
+                {CreatureType.Grass, 1},
+                {CreatureType.Electric, 1}
+            }
+        },
         {
             CreatureType.Fire, new Dictionary<CreatureType, float>()
             {
                 {CreatureType.None, 1},
+                {CreatureType.Normal, 1},
                 {CreatureType.Fire, 0.5f},
                 {CreatureType.Water, 0.5f},
                 {CreatureType.Grass, 2},
@@ -30,6 +43,7 @@ public static class TypeChart
             CreatureType.Water, new Dictionary<CreatureType, float>()
             {
                 {CreatureType.None, 1},
+                {CreatureType.Normal, 1},
                 {CreatureType.Fire, 2},
                 {CreatureType.Water, 0.5f},
                 {CreatureType.Grass, 0.5f},
@@ -40,6 +54,7 @@ public static class TypeChart
             CreatureType.Grass, new Dictionary<CreatureType, float>()
             {
                 {CreatureType.None, 1},
+                {CreatureType.Normal, 1},
                 {CreatureType.Fire, 0.5f},
                 {CreatureType.Water, 2},
                 {CreatureType.Grass, 0.5f},
@@ -50,6 +65,7 @@ public static class TypeChart
             CreatureType.Electric, new Dictionary<CreatureType, float>()
             {
                 {CreatureType.None, 1},
+                {CreatureType.Normal, 1},
                 {CreatureType.Fire, 1},
                 {CreatureType.Water, 2},
                 {CreatureType.Grass, 0.5f},
