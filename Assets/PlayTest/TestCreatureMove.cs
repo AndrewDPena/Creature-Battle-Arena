@@ -19,7 +19,7 @@ namespace PlayTest
             _collider = _gameObject.AddComponent<BoxCollider2D>();
             _collider.size = new Vector2(0.5f, 0.5f);
             _move = _gameObject.AddComponent<CreatureMove>();
-            _move.CreatureSpeed = 1000.0f;
+            _move.SetCreatureSpeed(1000.0f);
         }
 
         [TearDown]

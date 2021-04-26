@@ -10,6 +10,7 @@ public class CreatureBase : ScriptableObject
     [SerializeField] private string _name;
     [SerializeField] private int _strength;
     [SerializeField] private int _maxHealth;
+    [SerializeField] private float _creatureSpeed;
     [SerializeField] private TypeChart.CreatureType _creatureType1;
     [SerializeField] private TypeChart.CreatureType _creatureType2;
     [SerializeField] private Sprite _creatureSprite;
@@ -31,6 +32,12 @@ public class CreatureBase : ScriptableObject
     {
         get { return _maxHealth; }
         set { _maxHealth = value; }
+    }
+
+    public float CreatureSpeed
+    {
+        get { return _creatureSpeed; }
+        set { _creatureSpeed = value; }
     }
 
     public TypeChart.CreatureType CreatureType1

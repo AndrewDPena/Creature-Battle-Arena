@@ -15,6 +15,7 @@ MonoBehaviour:
   _name: Cubey
   _strength: 10
   _maxHealth: 69
+  _creatureSpeed: 1000
   _creatureType1: 2
   _creatureType2: 0
   _creatureSprite: {fileID: -6611454913772828434, guid: e7f647a0d60d106409c92442c5478f58,

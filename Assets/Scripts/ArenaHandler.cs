@@ -28,8 +28,8 @@ public class ArenaHandler : MonoBehaviour
         var playerCreatureGO = Instantiate(_creaturePrefab, PlayerSpawn.position, Quaternion.identity);
         playerCreatureGO.AddComponent<PlayerInputKeyboard>();
         var enemyCreatureGO = Instantiate(_creaturePrefab, NPCSpawn.position, Quaternion.identity);
-        var ai = enemyCreatureGO.AddComponent<BasicAI>();
-        ai.Player = playerCreatureGO;
+        //var ai = enemyCreatureGO.AddComponent<BasicAI>();
+        //ai.Player = playerCreatureGO;
 
         HumanPlayer.SetPocketHUD(PlayerPocketHud);
         NPCPlayer.SetPocketHUD(NPCHud);

@@ -10,7 +10,8 @@ public static class TypeChart
         Fire,
         Water,
         Grass,
-        Electric 
+        Electric,
+        Flying
     }
     
     // Proper usage is DamageMult[AttackType][DefendingCreatureType]
@@ -25,7 +26,8 @@ public static class TypeChart
                 {CreatureType.Fire, 1},
                 {CreatureType.Water, 1},
                 {CreatureType.Grass, 1},
-                {CreatureType.Electric, 1}
+                {CreatureType.Electric, 1},
+                {CreatureType.Flying, 1}
             }
         },
         {
@@ -36,7 +38,8 @@ public static class TypeChart
                 {CreatureType.Fire, 0.5f},
                 {CreatureType.Water, 0.5f},
                 {CreatureType.Grass, 2},
-                {CreatureType.Electric, 1}
+                {CreatureType.Electric, 1},
+                {CreatureType.Flying, 1}
             }
         },
         {
@@ -47,7 +50,8 @@ public static class TypeChart
                 {CreatureType.Fire, 2},
                 {CreatureType.Water, 0.5f},
                 {CreatureType.Grass, 0.5f},
-                {CreatureType.Electric, 1}
+                {CreatureType.Electric, 1},
+                {CreatureType.Flying, 1}
             }
         },
         {
@@ -58,7 +62,8 @@ public static class TypeChart
                 {CreatureType.Fire, 0.5f},
                 {CreatureType.Water, 2},
                 {CreatureType.Grass, 0.5f},
-                {CreatureType.Electric, 1}
+                {CreatureType.Electric, 1},
+                {CreatureType.Flying, 0.5f}
             }
         },
         {
@@ -69,7 +74,8 @@ public static class TypeChart
                 {CreatureType.Fire, 1},
                 {CreatureType.Water, 2},
                 {CreatureType.Grass, 0.5f},
-                {CreatureType.Electric, 0.5f}
+                {CreatureType.Electric, 0.5f},
+                {CreatureType.Flying, 2}
             }
         }
     };

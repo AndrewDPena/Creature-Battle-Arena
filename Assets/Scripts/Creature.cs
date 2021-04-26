@@ -8,6 +8,8 @@ public class Creature : MonoBehaviour
 {
     public CreatureData CurrentCreature;
     private SpriteRenderer _renderer;
+    private CreatureMove _move;
+    private bool _hasStarted;
     [SerializeField] private Transform[] _exitPoints;
     [SerializeField] private AttackManager _manager;
     [SerializeField] private List<AttackBase> _attacks = new List<AttackBase>();
@@ -16,8 +18,10 @@ public class Creature : MonoBehaviour
 
     private void Start()
     {
+        _move = GetComponent<CreatureMove>();
         _renderer = GetComponent<SpriteRenderer>();
         _manager = GetComponent<AttackManager>();
+        _hasStarted = true;
     }
 
     public void AssignPlayer(Player player)
@@ -27,9 +31,17 @@ public class Creature : MonoBehaviour
 
     public void Summon(CreatureData creature)
     {
+        if (!_hasStarted)
+        {
+            Start();
+        }
+
         CurrentCreature = creature;
         _attacks = creature.Attacks;
-
+        _move.SetCreatureSpeed(creature.CreatureSpeed);
+        _move.IsFlying = (creature.CreatureType1 == TypeChart.CreatureType.Flying ||
+                          creature.CreatureType2 == TypeChart.CreatureType.Flying);
+        
         try
         {
             _renderer.sprite = CurrentCreature.Sprite;

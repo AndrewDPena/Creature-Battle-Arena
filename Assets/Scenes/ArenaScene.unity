@@ -709,7 +709,7 @@ PrefabInstance:
     - target: {fileID: 7024388459213875293, guid: f32a8b2802aadf542b516b2befe2f782,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 710.7
+      value: 667.7
       objectReference: {fileID: 0}
     - target: {fileID: 7024388459213875293, guid: f32a8b2802aadf542b516b2befe2f782,
         type: 3}
@@ -812,10 +812,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0b3b4128fac340a488a5a1ef0c523cb1, type: 2}
   - {fileID: 11400000, guid: 0b3b4128fac340a488a5a1ef0c523cb1, type: 2}
   - {fileID: 11400000, guid: 87f1f5099ec44654483aa4eee184e023, type: 2}
-  - {fileID: 11400000, guid: e38444c0199439944aebf3a8f996bb54, type: 2}
+  - {fileID: 11400000, guid: aa1cb049586c90441be7722d6cbe7bba, type: 2}
   - {fileID: 11400000, guid: e38444c0199439944aebf3a8f996bb54, type: 2}
   _npcCreatures:
-  - {fileID: 11400000, guid: 0b3b4128fac340a488a5a1ef0c523cb1, type: 2}
+  - {fileID: 11400000, guid: 87f1f5099ec44654483aa4eee184e023, type: 2}
   - {fileID: 11400000, guid: e38444c0199439944aebf3a8f996bb54, type: 2}
   PlayerSpawn: {fileID: 122052405}
   NPCSpawn: {fileID: 540156894}

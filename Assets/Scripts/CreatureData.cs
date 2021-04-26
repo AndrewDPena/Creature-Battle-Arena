@@ -8,6 +8,7 @@ public class CreatureData
     public int Strength;
     public int MaxHealth;
     public int CurrentHealth;
+    public float CreatureSpeed;
     public TypeChart.CreatureType CreatureType1;
     public TypeChart.CreatureType CreatureType2;
     public Sprite Sprite;
@@ -19,6 +20,7 @@ public class CreatureData
         Strength = cBase.Strength;
         MaxHealth = cBase.MaxHealth;
         CurrentHealth = MaxHealth;
+        CreatureSpeed = cBase.CreatureSpeed;
         CreatureType1 = cBase.CreatureType1;
         CreatureType2 = cBase.CreatureType2;
         Sprite = cBase.CreatureSprite;

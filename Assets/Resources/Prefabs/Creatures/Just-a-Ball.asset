@@ -15,6 +15,7 @@ MonoBehaviour:
   _name: Just-a-Ball
   _strength: 1
   _maxHealth: 200
+  _creatureSpeed: 1000
   _creatureType1: 4
   _creatureType2: 0
   _creatureSprite: {fileID: 4940917441349728994, guid: 6ff509a44e5c8b64a9cbe47cc4f431cb,

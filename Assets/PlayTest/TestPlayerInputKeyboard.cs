@@ -22,7 +22,7 @@ namespace PlayTest
             _input = _gameObject.AddComponent<PlayerInputKeyboard>();
             _body = _gameObject.AddComponent<Rigidbody2D>();
             _move = _gameObject.AddComponent<CreatureMove>();
-            _move.CreatureSpeed = 1000.0f;
+            _move.SetCreatureSpeed(1000.0f);
             _gameObject.AddComponent<SpriteRenderer>();
             _creature = _gameObject.AddComponent<Creature>();
             _unityService = Substitute.For<IUnityService>();
