@@ -15,7 +15,7 @@ MonoBehaviour:
   _name: Pyramad
   _strength: 15
   _maxHealth: 40
-  _creatureSpeed: 1000
+  _creatureSpeed: 1500
   _creatureType1: 5
   _creatureType2: 0
   _creatureSprite: {fileID: 5947147746735066557, guid: 1141f830fba1ae74bb9e7d559ccd0e26,

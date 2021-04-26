@@ -811,7 +811,7 @@ MonoBehaviour:
   _playerCreatures:
   - {fileID: 11400000, guid: 0b3b4128fac340a488a5a1ef0c523cb1, type: 2}
   - {fileID: 11400000, guid: 0b3b4128fac340a488a5a1ef0c523cb1, type: 2}
-  - {fileID: 11400000, guid: 87f1f5099ec44654483aa4eee184e023, type: 2}
+  - {fileID: 11400000, guid: 33deac504e22b344f86830301b867cbd, type: 2}
   - {fileID: 11400000, guid: aa1cb049586c90441be7722d6cbe7bba, type: 2}
   - {fileID: 11400000, guid: e38444c0199439944aebf3a8f996bb54, type: 2}
   _npcCreatures:
