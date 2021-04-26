@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using NSubstitute;
 using NUnit.Framework;
 using UnityEngine;
@@ -142,6 +144,8 @@ namespace PlayTest
         [UnityTest]
         public IEnumerator PlayerInputCallsASwap()
         {
+            var slots = new List<string>(){"1", "2", "3", "4"};
+
             _unityService.InputString().Returns("abcde1fg");
             var pocketHud = _gameObject.AddComponent<PocketHUD>();
             pocketHud.AddHud(GameObject.Instantiate(Resources.Load<PlayerHUD>("Prefabs/PlayerHudPrefab"), 
@@ -157,6 +161,8 @@ namespace PlayTest
             
             _input.UnityService = _unityService;
             yield return new WaitForSeconds(0.1f);
+
+            Assert.That(slots.Any(s => _unityService.InputString().Contains(s)));
             
             Assert.AreEqual("test2", player.GetActiveCreature().Name, "Player Input causes creatures to swap.");
         }

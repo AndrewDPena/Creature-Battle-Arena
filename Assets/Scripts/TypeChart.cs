@@ -19,6 +19,19 @@ public static class TypeChart
         new Dictionary<CreatureType, Dictionary<CreatureType, float>>()
     {
         {
+            // A catch case for bad attacks, NO attack should have the None type
+            CreatureType.None, new Dictionary<CreatureType, float>()
+            {
+                {CreatureType.None, 0},
+                {CreatureType.Normal, 0},
+                {CreatureType.Fire, 0},
+                {CreatureType.Water, 0},
+                {CreatureType.Grass, 0},
+                {CreatureType.Electric, 0},
+                {CreatureType.Flying, 0}
+            }
+        },
+        {
             CreatureType.Normal, new Dictionary<CreatureType, float>()
             {
                 {CreatureType.None, 1},
