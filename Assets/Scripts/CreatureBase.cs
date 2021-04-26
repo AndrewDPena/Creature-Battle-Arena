@@ -1,4 +1,5 @@
-﻿using AttackManagement;
+﻿using System;
+using AttackManagement;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -9,6 +10,8 @@ public class CreatureBase : ScriptableObject
     [SerializeField] private string _name;
     [SerializeField] private int _strength;
     [SerializeField] private int _maxHealth;
+    [SerializeField] private TypeChart.CreatureType _creatureType1;
+    [SerializeField] private TypeChart.CreatureType _creatureType2;
     [SerializeField] private Sprite _creatureSprite;
     [SerializeField] private List<AttackBase> _attacks = new List<AttackBase>();
 
@@ -28,6 +31,18 @@ public class CreatureBase : ScriptableObject
     {
         get { return _maxHealth; }
         set { _maxHealth = value; }
+    }
+
+    public TypeChart.CreatureType CreatureType1
+    {
+        get { return _creatureType1; }
+        set { _creatureType1 = value; }
+    }
+
+    public TypeChart.CreatureType CreatureType2
+    {
+        get { return _creatureType2; }
+        set { _creatureType2 = value; }
     }
 
     public Sprite CreatureSprite

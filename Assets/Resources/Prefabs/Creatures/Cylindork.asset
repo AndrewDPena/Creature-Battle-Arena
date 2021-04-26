@@ -15,6 +15,8 @@ MonoBehaviour:
   _name: Cylindork
   _strength: 5
   _maxHealth: 120
+  _creatureType1: 2
+  _creatureType2: 0
   _creatureSprite: {fileID: 6359595092365016890, guid: aae2710c504880145b7e8e0932e834ed,
     type: 3}
   _attacks:
