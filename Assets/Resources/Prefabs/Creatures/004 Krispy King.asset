@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c28bdb1ba2b402cb2b93696652466e9, type: 3}
-  m_Name: Cylindork
+  m_Name: 004 Krispy King
   m_EditorClassIdentifier: 
-  _name: Cylindork
-  _strength: 5
-  _maxHealth: 120
+  _name: Krispy King
+  _strength: 25
+  _maxHealth: 80
   _creatureSpeed: 1000
-  _creatureType1: 3
-  _creatureType2: 0
-  _creatureSprite: {fileID: 6359595092365016890, guid: aae2710c504880145b7e8e0932e834ed,
+  _creatureType1: 1
+  _creatureType2: 6
+  _creatureSprite: {fileID: -2747638642953671236, guid: eb327c2bb0b8fd449818b70dfdcaf475,
     type: 3}
   _attacks:
   - {fileID: 0}

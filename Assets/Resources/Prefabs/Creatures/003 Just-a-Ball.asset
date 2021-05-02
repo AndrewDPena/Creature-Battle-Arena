@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c28bdb1ba2b402cb2b93696652466e9, type: 3}
-  m_Name: Pyramad
+  m_Name: 003 Just-a-Ball
   m_EditorClassIdentifier: 
-  _name: Pyramad
-  _strength: 15
-  _maxHealth: 40
-  _creatureSpeed: 1500
-  _creatureType1: 5
+  _name: Just-a-Ball
+  _strength: 1
+  _maxHealth: 200
+  _creatureSpeed: 1000
+  _creatureType1: 4
   _creatureType2: 0
-  _creatureSprite: {fileID: 5947147746735066557, guid: 1141f830fba1ae74bb9e7d559ccd0e26,
+  _creatureSprite: {fileID: 4940917441349728994, guid: 6ff509a44e5c8b64a9cbe47cc4f431cb,
     type: 3}
   _attacks:
   - {fileID: 0}

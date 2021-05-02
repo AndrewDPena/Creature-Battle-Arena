@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c28bdb1ba2b402cb2b93696652466e9, type: 3}
-  m_Name: Krispy King
+  m_Name: 005 Pyramad
   m_EditorClassIdentifier: 
-  _name: Krispy King
-  _strength: 25
-  _maxHealth: 80
-  _creatureSpeed: 1000
-  _creatureType1: 1
-  _creatureType2: 6
-  _creatureSprite: {fileID: -2747638642953671236, guid: eb327c2bb0b8fd449818b70dfdcaf475,
+  _name: Pyramad
+  _strength: 15
+  _maxHealth: 40
+  _creatureSpeed: 1500
+  _creatureType1: 5
+  _creatureType2: 0
+  _creatureSprite: {fileID: 5947147746735066557, guid: 1141f830fba1ae74bb9e7d559ccd0e26,
     type: 3}
   _attacks:
   - {fileID: 0}
