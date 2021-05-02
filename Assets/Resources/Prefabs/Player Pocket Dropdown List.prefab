@@ -1560,21 +1560,6 @@ MonoBehaviour:
     - m_Text: Cubey
       m_Image: {fileID: -6611454913772828434, guid: e7f647a0d60d106409c92442c5478f58,
         type: 3}
-    - m_Text: Cylindork
-      m_Image: {fileID: 6359595092365016890, guid: aae2710c504880145b7e8e0932e834ed,
-        type: 3}
-    - m_Text: Just-a-Ball
-      m_Image: {fileID: 4940917441349728994, guid: 6ff509a44e5c8b64a9cbe47cc4f431cb,
-        type: 3}
-    - m_Text: Krispy King
-      m_Image: {fileID: -2747638642953671236, guid: eb327c2bb0b8fd449818b70dfdcaf475,
-        type: 3}
-    - m_Text: Pyramad
-      m_Image: {fileID: 5947147746735066557, guid: 1141f830fba1ae74bb9e7d559ccd0e26,
-        type: 3}
-    - m_Text: Pyramad
-      m_Image: {fileID: 5947147746735066557, guid: 1141f830fba1ae74bb9e7d559ccd0e26,
-        type: 3}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

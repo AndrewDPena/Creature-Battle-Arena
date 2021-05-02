@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class ArenaHandler : MonoBehaviour
@@ -11,8 +12,8 @@ public class ArenaHandler : MonoBehaviour
     public PocketHUD PlayerPocketHud;
 
     [SerializeField] private GameObject _creaturePrefab;
-    [SerializeField] private CreatureBase[] _playerCreatures;
-    [SerializeField] private CreatureBase[] _npcCreatures;
+    [SerializeField] private static List<CreatureBase> _playerCreatures = new List<CreatureBase>();
+    [SerializeField] private static List<CreatureBase> _npcCreatures = new List<CreatureBase>();
 
 
     public Transform PlayerSpawn;
@@ -52,5 +53,12 @@ public class ArenaHandler : MonoBehaviour
 
         playerCreature.Summon(HumanPlayer.SummonCreature(0));
         enemyCreature.Summon(NPCPlayer.SummonCreature(0));
+    }
+
+    public static void SetData(List<CreatureBase> playerPocket, List<CreatureBase> npcPocket)
+    {
+        _playerCreatures = playerPocket;
+        _npcCreatures = npcPocket;
+        Debug.Log("This worked.");
     }
 }

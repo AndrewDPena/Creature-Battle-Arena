@@ -348,6 +348,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 550626842}
     m_Modifications:
+    - target: {fileID: 1071213365810008748, guid: d278e75520c164f459141b82abc15d8b,
+        type: 3}
+      propertyPath: m_Text
+      value: Cylindork
+      objectReference: {fileID: 0}
     - target: {fileID: 1847507967403633804, guid: d278e75520c164f459141b82abc15d8b,
         type: 3}
       propertyPath: m_Value
@@ -463,6 +468,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1847507968433973040, guid: d278e75520c164f459141b82abc15d8b,
+        type: 3}
+      propertyPath: m_Text
+      value: Cubey
+      objectReference: {fileID: 0}
+    - target: {fileID: 1847507968546930994, guid: d278e75520c164f459141b82abc15d8b,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -6611454913772828434, guid: e7f647a0d60d106409c92442c5478f58,
+        type: 3}
     - target: {fileID: 2393322025673035176, guid: d278e75520c164f459141b82abc15d8b,
         type: 3}
       propertyPath: m_Value
@@ -472,7 +488,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -6611454913772828434, guid: e7f647a0d60d106409c92442c5478f58,
+      objectReference: {fileID: 6359595092365016890, guid: aae2710c504880145b7e8e0932e834ed,
         type: 3}
     - target: {fileID: 7898416092836640554, guid: d278e75520c164f459141b82abc15d8b,
         type: 3}
@@ -498,7 +514,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &550626842
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3663,6 +3679,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 550626842}
     m_Modifications:
+    - target: {fileID: 1071213365810008748, guid: d278e75520c164f459141b82abc15d8b,
+        type: 3}
+      propertyPath: m_Text
+      value: Cylindork
+      objectReference: {fileID: 0}
     - target: {fileID: 1847507967403633804, guid: d278e75520c164f459141b82abc15d8b,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
@@ -3793,6 +3814,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2088844378549561187, guid: d278e75520c164f459141b82abc15d8b,
+        type: 3}
+      propertyPath: m_Text
+      value: Pyramad
+      objectReference: {fileID: 0}
     - target: {fileID: 2348568964914481029, guid: d278e75520c164f459141b82abc15d8b,
         type: 3}
       propertyPath: m_Value
@@ -3823,6 +3849,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Value
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6587643718312962859, guid: d278e75520c164f459141b82abc15d8b,
+        type: 3}
+      propertyPath: m_Text
+      value: Krispy King
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916337224063035352, guid: d278e75520c164f459141b82abc15d8b,
+        type: 3}
+      propertyPath: m_Text
+      value: Just-a-Ball
       objectReference: {fileID: 0}
     - target: {fileID: 7245026154816585952, guid: d278e75520c164f459141b82abc15d8b,
         type: 3}
