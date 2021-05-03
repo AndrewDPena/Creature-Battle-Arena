@@ -1,11 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Security.Cryptography.X509Certificates;
-using GitHub.Unity;
 using UserInterfaceScripts;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 
 public class ArenaHandler : MonoBehaviour
 {
