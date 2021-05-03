@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Security.Cryptography.X509Certificates;
+using GitHub.Unity;
 using UserInterfaceScripts;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -22,6 +24,9 @@ public class ArenaHandler : MonoBehaviour
     public Transform PlayerSpawn;
     public Transform NPCSpawn;
 
+    private Creature _playerCreature;
+    private Creature _enemyCreature;
+
     void Start()
     {
         HumanPlayer = new Player{};
@@ -38,31 +43,36 @@ public class ArenaHandler : MonoBehaviour
         HumanPlayer.SetPocketHUD(PlayerPocketHud);
         NPCPlayer.SetPocketHUD(NPCHud);
 
-        var playerCreature = playerCreatureGO.GetComponent<Creature>();
-        playerCreature.Handler = this;
+        _playerCreature = playerCreatureGO.GetComponent<Creature>();
+        _playerCreature.Handler = this;
 
-        var enemyCreature = enemyCreatureGO.GetComponent<Creature>();
-        enemyCreature.Handler = this;
+        _enemyCreature = enemyCreatureGO.GetComponent<Creature>();
+        _enemyCreature.Handler = this;
         
-        playerCreature.AssignPlayer(HumanPlayer);
+        _playerCreature.AssignPlayer(HumanPlayer);
         foreach (var cBase in _playerCreatures)
         {
             HumanPlayer.AddCreature(new CreatureData(cBase));
         }
         
-        enemyCreature.AssignPlayer(NPCPlayer);
+        _enemyCreature.AssignPlayer(NPCPlayer);
         foreach (var cBase in _npcCreatures)
         {
             NPCPlayer.AddCreature(new CreatureData(cBase));
         }
 
-        playerCreature.Summon(HumanPlayer.SummonCreature(0));
-        enemyCreature.Summon(NPCPlayer.SummonCreature(0));
+        _playerCreature.Summon(HumanPlayer.SummonCreature(0));
+        _enemyCreature.Summon(NPCPlayer.SummonCreature(0));
     }
 
-    private void SummonNewCreature(Transform Spawn, Creature creature)
+    private IEnumerator WaitForSummon()
     {
-        
+        while (_playerCreature.GetCreatureHealth() <= 0)
+        {
+                yield return new WaitForSeconds(0.1f);
+        }
+        _playerCreature.transform.position = PlayerSpawn.position;
+        _summonNext.gameObject.SetActive(false);
     }
 
     private void NpcSummon()
@@ -77,13 +87,14 @@ public class ArenaHandler : MonoBehaviour
 
     public void ReportCreatureFainted(Player player)
     {
-        Debug.Log("Faint reported successfully.");
         if (player == NPCPlayer) {NpcSummon();}
 
         if (player.HasRemainingCreatures())
         {
             _summonNext.gameObject.SetActive(true);
             _summonNext.SetKeys(player);
+            _playerCreature.transform.position = new Vector3(100,100,100);
+            StartCoroutine(WaitForSummon());
         }
     }
 
@@ -91,6 +102,5 @@ public class ArenaHandler : MonoBehaviour
     {
         _playerCreatures = playerPocket;
         _npcCreatures = npcPocket;
-        Debug.Log("This worked.");
     }
 }

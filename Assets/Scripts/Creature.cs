@@ -48,6 +48,8 @@ public class Creature : MonoBehaviour
         _move.SetCreatureSpeed(creature.CreatureSpeed);
         _move.IsFlying = (creature.CreatureType1 == CreatureType.Flying ||
                           creature.CreatureType2 == CreatureType.Flying);
+        
+        _renderer.sprite = CurrentCreature.Sprite;
     }
 
     public void Swap(int slot)
@@ -86,8 +88,8 @@ public class Creature : MonoBehaviour
         _manager.Attack(_attacks[1], direction, _exitPoints, this);
     }
 
-    public void LearnAttack(AttackBase attack)
+    public int GetCreatureHealth()
     {
-        
+        return CurrentCreature.CurrentHealth;
     }
 }
