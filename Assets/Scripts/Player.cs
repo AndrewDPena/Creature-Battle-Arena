@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UserInterfaceScripts;
 
 public class Player
 {
     public string Name;
     private PlayerHUD _hud;
     private PocketHUD _pocketHud;
+    private AttackWindowHud _ctrlHud;
+    private AttackWindowHud _shiftHud;
     private List<CreatureData> CreaturePocket = new List<CreatureData>();
     private CreatureData _activeCreature;
 
@@ -51,6 +54,12 @@ public class Player
         SetHUD(_pocketHud.GetPrimaryHud());
     }
 
+    public void SetAttackHuds(AttackWindowHud ctrl, AttackWindowHud shift)
+    {
+        _ctrlHud = ctrl;
+        _shiftHud = shift;
+    }
+
     private void UpdatePocketHUD()
     {
         for (var i = 0; i < _pocketHud.GetNumOfHuds(); i++)
@@ -60,12 +69,24 @@ public class Player
         }
     }
 
+    private void UpdateAttackHuds(CreatureData creature)
+    {
+        if (_ctrlHud == null)
+        {
+            return;
+            
+        }
+        _ctrlHud.SetAttackDesc(creature.Attacks[0]);
+        _shiftHud.SetAttackDesc(creature.Attacks[1]);
+    }
+
     public CreatureData SummonCreature(int slot)
     {
         _activeCreature = CreaturePocket[slot];
         CreaturePocket[slot] = CreaturePocket[0];
         CreaturePocket[0] = _activeCreature;
         UpdatePocketHUD();
+        UpdateAttackHuds(_activeCreature);
         return _activeCreature;
     }
 

@@ -10,6 +10,9 @@ public class ArenaHandler : MonoBehaviour
 
     public PocketHUD NPCHud;
     public PocketHUD PlayerPocketHud;
+    [SerializeField] private SummonNextCreatureWindow _swapKeyHud;
+    [SerializeField] private AttackWindowHud _ctrlHud;
+    [SerializeField] private AttackWindowHud _shiftHud;
 
     [SerializeField] private GameObject _creaturePrefab;
     [SerializeField] private SummonNextCreatureWindow _summonNext;
@@ -39,6 +42,7 @@ public class ArenaHandler : MonoBehaviour
 
         HumanPlayer.SetPocketHUD(PlayerPocketHud);
         NPCPlayer.SetPocketHUD(NPCHud);
+        HumanPlayer.SetAttackHuds(_ctrlHud, _shiftHud);
 
         _playerCreature = playerCreatureGO.GetComponent<Creature>();
         _playerCreature.Handler = this;
@@ -60,6 +64,8 @@ public class ArenaHandler : MonoBehaviour
 
         _playerCreature.Summon(HumanPlayer.SummonCreature(0));
         _enemyCreature.Summon(NPCPlayer.SummonCreature(0));
+        
+        _swapKeyHud.SetKeys(HumanPlayer);
     }
 
     private IEnumerator WaitForSummon()
@@ -70,6 +76,7 @@ public class ArenaHandler : MonoBehaviour
         }
         _playerCreature.transform.position = PlayerSpawn.position;
         _summonNext.gameObject.SetActive(false);
+        _swapKeyHud.SetKeys(HumanPlayer);
     }
 
     private void NpcSummon()

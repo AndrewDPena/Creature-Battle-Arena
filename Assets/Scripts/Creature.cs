@@ -1,6 +1,4 @@
-﻿using System;
-using AttackAreas;
-using static TypeChart;
+﻿using static TypeChart;
 using UnityEngine;
 using System.Collections.Generic;
 using AttackManagement;
