@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -71,6 +72,20 @@ public class Player
     public CreatureData GetActiveCreature()
     {
         return _activeCreature;
+    }
+
+    public int GetNextHealthyCreature()
+    {
+        for (var i = 0; i < GetPocketSize(); i++)
+        {
+            if (CanSummonCreature(i))
+            {
+                return i;
+            }
+        }
+        // A -1 should NEVER be returned; something seriously fucked up if we hit this.
+        Debug.Log("Something SERIOUSLY fucked up");
+        return -1;
     }
 
     public void UpdateHUD(CreatureData creature)

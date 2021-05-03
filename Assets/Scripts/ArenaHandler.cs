@@ -17,6 +17,7 @@ public class ArenaHandler : MonoBehaviour
 
     [SerializeField] private GameObject _creaturePrefab;
     [SerializeField] private SummonNextCreatureWindow _summonNext;
+    [SerializeField] private BattleEndWindow _battleEnd;
     [SerializeField] private static List<CreatureBase> _playerCreatures = new List<CreatureBase>();
     [SerializeField] private static List<CreatureBase> _npcCreatures = new List<CreatureBase>();
 
@@ -77,23 +78,34 @@ public class ArenaHandler : MonoBehaviour
 
     private void NpcSummon()
     {
-        
+        if (!NPCPlayer.HasRemainingCreatures()){EndScreen(true);}
+
+        _enemyCreature.transform.position = NPCSpawn.position;
+
+        _enemyCreature.Swap(NPCPlayer.GetNextHealthyCreature());
     }
 
-    private void WinScreen()
+    private void EndScreen(bool playerWonBattle)
     {
-        
+        _battleEnd.gameObject.SetActive(true);
+        _battleEnd.SetOutcome(playerWonBattle);
     }
 
     public void ReportCreatureFainted(Player player)
     {
-        if (player == NPCPlayer) {NpcSummon();}
-
-        if (player.HasRemainingCreatures())
+        if (player == NPCPlayer) 
+        {
+            NpcSummon();
+        }
+        else if (!player.HasRemainingCreatures())
+        {
+            EndScreen(false);
+        }
+        else
         {
             _summonNext.gameObject.SetActive(true);
             _summonNext.SetKeys(player);
-            _playerCreature.transform.position = new Vector3(100,100,100);
+            _playerCreature.transform.position = new Vector3(100, 100, 100);
             StartCoroutine(WaitForSummon());
         }
     }
