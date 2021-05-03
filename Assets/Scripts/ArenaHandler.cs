@@ -78,11 +78,16 @@ public class ArenaHandler : MonoBehaviour
 
     private void NpcSummon()
     {
-        if (!NPCPlayer.HasRemainingCreatures()){EndScreen(true);}
+        if (!NPCPlayer.HasRemainingCreatures())
+        {
+            EndScreen(true);
+        }
+        else
+        {
+            _enemyCreature.transform.position = NPCSpawn.position;
 
-        _enemyCreature.transform.position = NPCSpawn.position;
-
-        _enemyCreature.Swap(NPCPlayer.GetNextHealthyCreature());
+            _enemyCreature.Swap(NPCPlayer.GetNextHealthyCreature());
+        }
     }
 
     private void EndScreen(bool playerWonBattle)
