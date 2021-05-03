@@ -19,4 +19,5 @@ MonoBehaviour:
   _attackType: 3
   _areaOfEffect: {fileID: 6487142264891995890, guid: 5b12e1455c36cdd42867a9b2e370e562,
     type: 3}
-  _spriteObject: {fileID: 0}
+  _spriteObject: {fileID: 4711585498158624681, guid: dbe23cb0bf22f264a86c143ab9b6a6a9,
+    type: 3}

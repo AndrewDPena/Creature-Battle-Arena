@@ -10,7 +10,14 @@ namespace UserInterfaceScripts
 
         public void SetAttackDesc(AttackBase attack)
         {
-            _attackDesc.text = attack.Name + "\n" + attack.Damage + " DMG\n" + attack.AttackType;
+            if (attack == null)
+            {
+                _attackDesc.text = "Empty";
+            }
+            else
+            {
+                _attackDesc.text = attack.Name + "\n" + attack.Damage + " DMG\n" + attack.AttackType;
+            }        
         }
     }
 }

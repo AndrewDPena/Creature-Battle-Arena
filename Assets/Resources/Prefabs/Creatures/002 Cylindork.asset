@@ -21,5 +21,5 @@ MonoBehaviour:
   _creatureSprite: {fileID: 6359595092365016890, guid: aae2710c504880145b7e8e0932e834ed,
     type: 3}
   _attacks:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: ba70a53859adb7042a6b2b54e458724c, type: 2}
   - {fileID: 0}
