@@ -14,7 +14,7 @@ namespace UserInterfaceScripts
         {
             for (var i = 0; i < _keys.Length; i++)
             {
-                _keys[i].color = player.CanSummonCreature(i = 1) ? Color.white : Color.black;
+                _keys[i].color = player.CanSummonCreature(i + 1) ? Color.white : Color.black;
             }
         }
     }
