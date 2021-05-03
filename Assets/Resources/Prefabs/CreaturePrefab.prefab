@@ -254,6 +254,7 @@ GameObject:
   - component: {fileID: 9008446441984262246}
   - component: {fileID: 9008446441984262247}
   - component: {fileID: 9008446441984262251}
+  - component: {fileID: 7958302673143115746}
   m_Layer: 0
   m_Name: CreaturePrefab
   m_TagString: Player
@@ -346,10 +347,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e59b6a0609a98438b265713e875fd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Cubey
-  Strength: 0
-  MaxHealth: 69
-  CurrentHealth: 0
   _exitPoints:
   - {fileID: 4123705677000651467}
   - {fileID: 1441747975190738022}
@@ -359,6 +356,8 @@ MonoBehaviour:
   - {fileID: 2080635843754873059}
   - {fileID: 5309510693319673139}
   - {fileID: 3306842005287199957}
+  _manager: {fileID: 0}
+  _attacks: []
   _attack1Prefab: {fileID: 7690406326559367239, guid: a700647e74a4b8b4198bc1bc912a6eae,
     type: 3}
   _attack2Prefab: {fileID: 2076616070413368170, guid: 535178a8e6a70ed4ba7346b4e6ac6884,
@@ -427,3 +426,15 @@ PolygonCollider2D:
       - {x: 0.003871441, y: -0.0170933}
       - {x: -0.50198364, y: -0.2597791}
       - {x: 0.007948637, y: -0.50426507}
+--- !u!114 &7958302673143115746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9008446441984262242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d56e13546d14da38144f8b4b2ebb546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

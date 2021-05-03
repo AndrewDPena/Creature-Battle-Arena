@@ -1,21 +1,27 @@
-﻿using System;
+﻿using static TypeChart;
 using UnityEngine;
+using System.Collections.Generic;
+using AttackManagement;
 
-public class Creature : MonoBehaviour, ICreature
+public class Creature : MonoBehaviour
 {
     public CreatureData CurrentCreature;
     private SpriteRenderer _renderer;
+    private CreatureMove _move;
+    private bool _hasStarted;
+    private ArenaHandler _handler;
     [SerializeField] private Transform[] _exitPoints;
-    [SerializeField] private GameObject _attack1Prefab;
-    [SerializeField] private GameObject _attack2Prefab;
-    [SerializeField] private IAttackType _attack1;
-    [SerializeField] private IAttackType _attack2;
+    [SerializeField] private AttackManager _manager;
+    [SerializeField] private List<AttackBase> _attacks = new List<AttackBase>();
 
     public Player Owner;
 
     private void Start()
     {
+        _move = GetComponent<CreatureMove>();
         _renderer = GetComponent<SpriteRenderer>();
+        _manager = GetComponent<AttackManager>();
+        _hasStarted = true;
     }
 
     public void AssignPlayer(Player player)
@@ -23,18 +29,25 @@ public class Creature : MonoBehaviour, ICreature
         Owner = player;
     }
 
+    public ArenaHandler Handler
+    {
+        set { _handler = value; }
+    }
+
     public void Summon(CreatureData creature)
     {
-        CurrentCreature = creature;
+        if (!_hasStarted)
+        {
+            Start();
+        }
 
-        try
-        {
-            _renderer.sprite = CurrentCreature.Sprite;
-        }
-        catch (NullReferenceException ex)
-        {
-            Debug.Log("Why on Earth does this fail?");
-        }
+        CurrentCreature = creature;
+        _attacks = creature.Attacks;
+        _move.SetCreatureSpeed(creature.CreatureSpeed);
+        _move.IsFlying = (creature.CreatureType1 == CreatureType.Flying ||
+                          creature.CreatureType2 == CreatureType.Flying);
+        
+        _renderer.sprite = CurrentCreature.Sprite;
     }
 
     public void Swap(int slot)
@@ -45,32 +58,36 @@ public class Creature : MonoBehaviour, ICreature
         }
     }
 
+    public float GetDamageMultiplier(CreatureType attackType)
+    {
+        return DamageMult[attackType][CurrentCreature.CreatureType1] * 
+               DamageMult[attackType][CurrentCreature.CreatureType2];
+    }
+
     public void TakeDamage(int damage)
     {
         CurrentCreature.TakeDamage(damage);
         Owner.UpdateHUD(CurrentCreature);
+        if (CurrentCreature.CurrentHealth <= 0)
+        {
+            _handler.ReportCreatureFainted(Owner);
+
+        }
     }
 
     // Change to one method with a dictionary or something, potentially
     public void Attack1(Vector2 direction)
     {
-        StartCoroutine(_attack1.Attack(direction, _exitPoints, _attack1Prefab));
+        _manager.Attack(_attacks[0], direction, _exitPoints, this);
     }
 
     public void Attack2(Vector2 direction)
     {
-        StartCoroutine(_attack2.Attack(direction, _exitPoints, _attack2Prefab));
+        _manager.Attack(_attacks[1], direction, _exitPoints, this);
     }
 
-    public void LearnAttack(IAttackType attackType)
+    public int GetCreatureHealth()
     {
-        if (_attack1 == null)
-        {
-            _attack1 = attackType;
-        }
-        else
-        {
-            _attack2 = attackType;
-        }
+        return CurrentCreature.CurrentHealth;
     }
 }

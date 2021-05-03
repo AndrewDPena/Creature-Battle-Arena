@@ -14,6 +14,7 @@ namespace PlayTest
         private Creature _creature;
         private CreatureData _data;
         private PlayerHUD _playerHud;
+        private CreatureMove _move;
         private SpriteRenderer _renderer;
         
         [SetUp]
@@ -25,6 +26,7 @@ namespace PlayTest
             _player.SetHUD(_playerHud);
             _creature = _gameObject.AddComponent<Creature>();
             _renderer = _gameObject.AddComponent<SpriteRenderer>();
+            _move = _gameObject.AddComponent<CreatureMove>();
             _data = new CreatureData("Test", 10, 100);
         }
 
@@ -84,7 +86,7 @@ namespace PlayTest
             Assert.AreEqual(health - damage, _creature.CurrentCreature.CurrentHealth, 
                 "Creature passes along the correct amount of damage.");
         }
-
+        /*
         [UnityTest]
         public IEnumerator PlayerCreatureAttacks()
         {
@@ -97,7 +99,7 @@ namespace PlayTest
 
             testAttack.ReceivedWithAnyArgs().Attack(default(Vector2), default(Transform[]), default(GameObject));
             Debug.Log("Creature calls the attack coroutine successfully.");
-        }
+        }*/
 
         [UnityTest]
         public IEnumerator CreatureCanSwap()

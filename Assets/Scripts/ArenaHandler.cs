@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UserInterfaceScripts;
 using UnityEngine;
-using AttackTypes;
 
 public class ArenaHandler : MonoBehaviour
 {
@@ -10,14 +10,22 @@ public class ArenaHandler : MonoBehaviour
 
     public PocketHUD NPCHud;
     public PocketHUD PlayerPocketHud;
+    [SerializeField] private SummonNextCreatureWindow _swapKeyHud;
+    [SerializeField] private AttackWindowHud _ctrlHud;
+    [SerializeField] private AttackWindowHud _shiftHud;
 
     [SerializeField] private GameObject _creaturePrefab;
-    [SerializeField] private CreatureBase[] _playerCreatures;
-    [SerializeField] private CreatureBase[] _npcCreatures;
+    [SerializeField] private SummonNextCreatureWindow _summonNext;
+    [SerializeField] private BattleEndWindow _battleEnd;
+    [SerializeField] private static List<CreatureBase> _playerCreatures = new List<CreatureBase>();
+    [SerializeField] private static List<CreatureBase> _npcCreatures = new List<CreatureBase>();
 
 
     public Transform PlayerSpawn;
     public Transform NPCSpawn;
+
+    private Creature _playerCreature;
+    private Creature _enemyCreature;
 
     void Start()
     {
@@ -29,31 +37,90 @@ public class ArenaHandler : MonoBehaviour
         var playerCreatureGO = Instantiate(_creaturePrefab, PlayerSpawn.position, Quaternion.identity);
         playerCreatureGO.AddComponent<PlayerInputKeyboard>();
         var enemyCreatureGO = Instantiate(_creaturePrefab, NPCSpawn.position, Quaternion.identity);
-        var ai = enemyCreatureGO.AddComponent<BasicAI>();
-        ai.Player = playerCreatureGO;
+        //var ai = enemyCreatureGO.AddComponent<BasicAI>();
+        //ai.Player = playerCreatureGO;
 
         HumanPlayer.SetPocketHUD(PlayerPocketHud);
         NPCPlayer.SetPocketHUD(NPCHud);
+        HumanPlayer.SetAttackHuds(_ctrlHud, _shiftHud);
 
-        var playerCreature = playerCreatureGO.GetComponent<Creature>();
-        playerCreature.LearnAttack(new ConeAttackType());
-        playerCreature.LearnAttack(new CenteredAttackType());
+        _playerCreature = playerCreatureGO.GetComponent<Creature>();
+        _playerCreature.Handler = this;
 
-        var enemyCreature = enemyCreatureGO.GetComponent<Creature>();
+        _enemyCreature = enemyCreatureGO.GetComponent<Creature>();
+        _enemyCreature.Handler = this;
         
-        playerCreature.AssignPlayer(HumanPlayer);
+        _playerCreature.AssignPlayer(HumanPlayer);
         foreach (var cBase in _playerCreatures)
         {
             HumanPlayer.AddCreature(new CreatureData(cBase));
         }
         
-        enemyCreature.AssignPlayer(NPCPlayer);
+        _enemyCreature.AssignPlayer(NPCPlayer);
         foreach (var cBase in _npcCreatures)
         {
             NPCPlayer.AddCreature(new CreatureData(cBase));
         }
 
-        playerCreature.Summon(HumanPlayer.SummonCreature(0));
-        enemyCreature.Summon(NPCPlayer.SummonCreature(0));
+        _playerCreature.Summon(HumanPlayer.SummonCreature(0));
+        _enemyCreature.Summon(NPCPlayer.SummonCreature(0));
+        
+        _swapKeyHud.SetKeys(HumanPlayer);
+    }
+
+    private IEnumerator WaitForSummon()
+    {
+        while (_playerCreature.GetCreatureHealth() <= 0)
+        {
+                yield return new WaitForSeconds(0.1f);
+        }
+        _playerCreature.transform.position = PlayerSpawn.position;
+        _summonNext.gameObject.SetActive(false);
+        _swapKeyHud.SetKeys(HumanPlayer);
+    }
+
+    private void NpcSummon()
+    {
+        if (!NPCPlayer.HasRemainingCreatures())
+        {
+            EndScreen(true);
+        }
+        else
+        {
+            _enemyCreature.transform.position = NPCSpawn.position;
+
+            _enemyCreature.Swap(NPCPlayer.GetNextHealthyCreature());
+        }
+    }
+
+    private void EndScreen(bool playerWonBattle)
+    {
+        _battleEnd.gameObject.SetActive(true);
+        _battleEnd.SetOutcome(playerWonBattle);
+    }
+
+    public void ReportCreatureFainted(Player player)
+    {
+        if (player == NPCPlayer) 
+        {
+            NpcSummon();
+        }
+        else if (!player.HasRemainingCreatures())
+        {
+            EndScreen(false);
+        }
+        else
+        {
+            _summonNext.gameObject.SetActive(true);
+            _summonNext.SetKeys(player);
+            _playerCreature.transform.position = new Vector3(100, 100, 100);
+            StartCoroutine(WaitForSummon());
+        }
+    }
+
+    public static void SetData(List<CreatureBase> playerPocket, List<CreatureBase> npcPocket)
+    {
+        _playerCreatures = playerPocket;
+        _npcCreatures = npcPocket;
     }
 }

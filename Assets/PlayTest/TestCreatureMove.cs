@@ -19,7 +19,7 @@ namespace PlayTest
             _collider = _gameObject.AddComponent<BoxCollider2D>();
             _collider.size = new Vector2(0.5f, 0.5f);
             _move = _gameObject.AddComponent<CreatureMove>();
-            _move.CreatureSpeed = 1000.0f;
+            _move.SetCreatureSpeed(1000.0f);
         }
 
         [TearDown]
@@ -145,13 +145,16 @@ namespace PlayTest
         [UnityTest]
         public IEnumerator TerrainModifierChangesCreatureMoveSpeed()
         {
+            _move.IsFlying = false;
             _move.SetTerrainModifier(1.0f);
             _move.transform.position = new Vector2(0, 0);            
             var movementVector = new Vector2(1, 0);
             _move.SetVelocity(movementVector);
+            // Creature needs time to get up to speed
+            yield return new WaitForSeconds(3.5f);
             
+            _move.transform.position = new Vector2(0, 0);            
             yield return new WaitForSeconds(0.1f);
-
             var defaultPosition = _move.transform.position;
             
             _move.SetTerrainModifier(500.0f);
@@ -159,8 +162,32 @@ namespace PlayTest
             
             yield return new WaitForSeconds(0.1f);
 
-            Assert.Less(defaultPosition.x, _move.transform.position.x, 
+            Assert.Less((int)defaultPosition.x, (int)_move.transform.position.x, 
                 "Creature Moved less in X direction with default terrain modifier.");
+        }
+
+        [UnityTest]
+        public IEnumerator TerrainModifierDoesNotWorkOnFlyingTypes()
+        {
+            _move.IsFlying = true;
+            _move.SetTerrainModifier(1.0f);
+            _move.transform.position = new Vector2(0, 0);            
+            var movementVector = new Vector2(1, 0);
+            _move.SetVelocity(movementVector);
+            // Creature needs time to get up to speed
+            yield return new WaitForSeconds(3.5f);
+            
+            _move.transform.position = new Vector2(0, 0);  
+            yield return new WaitForSeconds(0.1f);
+            var defaultPosition = _move.transform.position;
+            
+            _move.SetTerrainModifier(500.0f);
+            _move.transform.position = new Vector2(0, 0);            
+            
+            yield return new WaitForSeconds(0.1f);
+
+            Assert.AreEqual((int)defaultPosition.x, (int)_move.transform.position.x, 
+                "Flying Creature Moved same amount in X direction regardless of terrain modifier.");
         }
     }
 }

@@ -8,8 +8,9 @@ using UnityEngine.Tilemaps;
 public class CreatureMove : MonoBehaviour
 {
     private Rigidbody2D _rigidbody2D;
-    public float CreatureSpeed;
+    private float _creatureSpeed;
     public float TerrainSpeedModifier;
+    private bool _isFlying;
     private Vector2 _velocityVector;
     public IUnityService UnityService;
 
@@ -29,14 +30,24 @@ public class CreatureMove : MonoBehaviour
         _velocityVector = velocity;
     }
 
+    public void SetCreatureSpeed(float speed)
+    {
+        _creatureSpeed = speed;
+    }
+
+    public bool IsFlying
+    {
+        set { _isFlying = value; }
+    }
+
     public void SetTerrainModifier(float modifier)
     {
-        TerrainSpeedModifier = modifier;
+        TerrainSpeedModifier = _isFlying ? 1f : modifier;            
     }
 
     private void Update()
     {
-        _rigidbody2D.AddRelativeForce(_velocityVector * UnityService.GetDeltaTime() * CreatureSpeed * TerrainSpeedModifier);
+        _rigidbody2D.AddRelativeForce(_velocityVector * UnityService.GetDeltaTime() * _creatureSpeed * TerrainSpeedModifier);
 
         // This block of code caused the adorable and hilarious rotation. Leaving it here so I can always re-enable
         // its awfulness. It is MUCH worse now that the game uses physics.

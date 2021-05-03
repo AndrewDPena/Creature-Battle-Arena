@@ -8,6 +8,7 @@ public class PlayerHUD : MonoBehaviour
     public Text Name;
     public Text HealthDisplay;
     public HealthBar HealthBar;
+    public Image CreatureSprite;
 
     public void InitializeHUD(CreatureData creature)
     {
@@ -22,6 +23,7 @@ public class PlayerHUD : MonoBehaviour
             Name.text = creature.Name;
             SetMaxHealth(creature.MaxHealth);
             SetHealth(creature.CurrentHealth);
+            CreatureSprite.sprite = creature.Sprite;
         }
         
     }

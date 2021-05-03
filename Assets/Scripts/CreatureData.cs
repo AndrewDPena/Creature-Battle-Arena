@@ -1,5 +1,6 @@
-﻿using System.Collections;
+﻿using AttackManagement;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class CreatureData
 {
@@ -7,7 +8,11 @@ public class CreatureData
     public int Strength;
     public int MaxHealth;
     public int CurrentHealth;
+    public float CreatureSpeed;
+    public TypeChart.CreatureType CreatureType1;
+    public TypeChart.CreatureType CreatureType2;
     public Sprite Sprite;
+    public List<AttackBase> Attacks = new List<AttackBase>();
 
     public CreatureData(CreatureBase cBase)
     {
@@ -15,7 +20,11 @@ public class CreatureData
         Strength = cBase.Strength;
         MaxHealth = cBase.MaxHealth;
         CurrentHealth = MaxHealth;
+        CreatureSpeed = cBase.CreatureSpeed;
+        CreatureType1 = cBase.CreatureType1;
+        CreatureType2 = cBase.CreatureType2;
         Sprite = cBase.CreatureSprite;
+        Attacks = cBase.Attacks;
     }
     
     public CreatureData(string creatureName, int strength, int maxHealth)
@@ -28,6 +37,7 @@ public class CreatureData
 
     public void TakeDamage(int damage)
     {
-        CurrentHealth -= damage;
+        var diff = CurrentHealth - damage;
+        CurrentHealth = diff <= 0 ? 0 : diff;
     }
 }

@@ -26,7 +26,7 @@ namespace PlayTest
             _box.size = new Vector2(5f, 5f);
 
             _move = _gameObject.AddComponent<CreatureMove>();
-            _move.CreatureSpeed = 100.0f;
+            _move.SetCreatureSpeed(100.0f);
             _move.TerrainSpeedModifier = 1.0f;
 
             _gameObject2 = GameObject.Instantiate(new GameObject());

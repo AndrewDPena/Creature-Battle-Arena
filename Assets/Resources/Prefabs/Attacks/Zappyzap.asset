@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77f9ed4dfcc546f39ec9dc1f8115642c, type: 3}
+  m_Name: Zappyzap
+  m_EditorClassIdentifier: 
+  _name: Zappyzap
+  _damage: 10
+  _damagePerTick: 2
+  _canDamageSelf: 0
+  _attackType: 5
+  _areaOfEffect: {fileID: 6487142264891995890, guid: 5b12e1455c36cdd42867a9b2e370e562,
+    type: 3}
+  _spriteObject: {fileID: 4711585498158624681, guid: 5ec6c4e8ea87b194fa42fbefc08b4b84,
+    type: 3}

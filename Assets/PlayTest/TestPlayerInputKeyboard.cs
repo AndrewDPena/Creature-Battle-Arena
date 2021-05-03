@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using NSubstitute;
 using NUnit.Framework;
 using UnityEngine;
@@ -22,7 +24,7 @@ namespace PlayTest
             _input = _gameObject.AddComponent<PlayerInputKeyboard>();
             _body = _gameObject.AddComponent<Rigidbody2D>();
             _move = _gameObject.AddComponent<CreatureMove>();
-            _move.CreatureSpeed = 1000.0f;
+            _move.SetCreatureSpeed(1000.0f);
             _gameObject.AddComponent<SpriteRenderer>();
             _creature = _gameObject.AddComponent<Creature>();
             _unityService = Substitute.For<IUnityService>();
@@ -96,7 +98,7 @@ namespace PlayTest
             
             Assert.NotNull(_creature, "The creature object exists and is attached to the input.");
         }
-
+        /*
         [UnityTest]
         public IEnumerator PlayerInputCallsAttackWithCtrl()
         {
@@ -116,8 +118,8 @@ namespace PlayTest
             testAttack1.ReceivedWithAnyArgs().Attack(default(Vector2), default(Transform[]), default(GameObject));
             testAttack2.DidNotReceiveWithAnyArgs().Attack(default(Vector2), default(Transform[]), default(GameObject));
             Debug.Log("PlayerInput calls the ctrl attack coroutine successfully.");
-        }
-        
+        }*/
+        /*
         [UnityTest]
         public IEnumerator PlayerInputCallsAttackWithShift()
         {
@@ -137,11 +139,13 @@ namespace PlayTest
             testAttack1.DidNotReceiveWithAnyArgs().Attack(default(Vector2), default(Transform[]), default(GameObject));
             testAttack2.ReceivedWithAnyArgs().Attack(default(Vector2), default(Transform[]), default(GameObject));
             Debug.Log("PlayerInput calls the shift attack coroutine successfully.");
-        }
+        }*/
         
         [UnityTest]
         public IEnumerator PlayerInputCallsASwap()
         {
+            var slots = new List<string>(){"1", "2", "3", "4"};
+
             _unityService.InputString().Returns("abcde1fg");
             var pocketHud = _gameObject.AddComponent<PocketHUD>();
             pocketHud.AddHud(GameObject.Instantiate(Resources.Load<PlayerHUD>("Prefabs/PlayerHudPrefab"), 
@@ -157,6 +161,8 @@ namespace PlayTest
             
             _input.UnityService = _unityService;
             yield return new WaitForSeconds(0.1f);
+
+            Assert.That(slots.Any(s => _unityService.InputString().Contains(s)));
             
             Assert.AreEqual("test2", player.GetActiveCreature().Name, "Player Input causes creatures to swap.");
         }
