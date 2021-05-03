@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using GitHub.Unity;
+using UnityEditor;
 using UnityEngine;
 
 public class Player
@@ -19,6 +19,19 @@ public class Player
     public int GetPocketSize()
     {
         return CreaturePocket.Count;
+    }
+
+    public bool HasRemainingCreatures()
+    {
+        foreach (var creature in CreaturePocket)
+        {
+            if (creature.CurrentHealth > 0)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public bool CanSummonCreature(int slot)

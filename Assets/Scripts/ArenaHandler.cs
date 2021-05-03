@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+using System.Diagnostics;
+using UserInterfaceScripts;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class ArenaHandler : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class ArenaHandler : MonoBehaviour
     public PocketHUD PlayerPocketHud;
 
     [SerializeField] private GameObject _creaturePrefab;
+    [SerializeField] private SummonNextCreatureWindow _summonNext;
     [SerializeField] private static List<CreatureBase> _playerCreatures = new List<CreatureBase>();
     [SerializeField] private static List<CreatureBase> _npcCreatures = new List<CreatureBase>();
 
@@ -36,8 +39,10 @@ public class ArenaHandler : MonoBehaviour
         NPCPlayer.SetPocketHUD(NPCHud);
 
         var playerCreature = playerCreatureGO.GetComponent<Creature>();
+        playerCreature.Handler = this;
 
         var enemyCreature = enemyCreatureGO.GetComponent<Creature>();
+        enemyCreature.Handler = this;
         
         playerCreature.AssignPlayer(HumanPlayer);
         foreach (var cBase in _playerCreatures)
@@ -53,6 +58,33 @@ public class ArenaHandler : MonoBehaviour
 
         playerCreature.Summon(HumanPlayer.SummonCreature(0));
         enemyCreature.Summon(NPCPlayer.SummonCreature(0));
+    }
+
+    private void SummonNewCreature(Transform Spawn, Creature creature)
+    {
+        
+    }
+
+    private void NpcSummon()
+    {
+        
+    }
+
+    private void WinScreen()
+    {
+        
+    }
+
+    public void ReportCreatureFainted(Player player)
+    {
+        Debug.Log("Faint reported successfully.");
+        if (player == NPCPlayer) {NpcSummon();}
+
+        if (player.HasRemainingCreatures())
+        {
+            _summonNext.gameObject.SetActive(true);
+            _summonNext.SetKeys(player);
+        }
     }
 
     public static void SetData(List<CreatureBase> playerPocket, List<CreatureBase> npcPocket)

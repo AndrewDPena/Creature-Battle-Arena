@@ -37,6 +37,7 @@ public class CreatureData
 
     public void TakeDamage(int damage)
     {
-        CurrentHealth -= damage;
+        var diff = CurrentHealth - damage;
+        CurrentHealth = diff <= 0 ? 0 : diff;
     }
 }

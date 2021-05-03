@@ -11,6 +11,7 @@ public class Creature : MonoBehaviour
     private SpriteRenderer _renderer;
     private CreatureMove _move;
     private bool _hasStarted;
+    private ArenaHandler _handler;
     [SerializeField] private Transform[] _exitPoints;
     [SerializeField] private AttackManager _manager;
     [SerializeField] private List<AttackBase> _attacks = new List<AttackBase>();
@@ -30,6 +31,11 @@ public class Creature : MonoBehaviour
         Owner = player;
     }
 
+    public ArenaHandler Handler
+    {
+        set { _handler = value; }
+    }
+
     public void Summon(CreatureData creature)
     {
         if (!_hasStarted)
@@ -42,15 +48,6 @@ public class Creature : MonoBehaviour
         _move.SetCreatureSpeed(creature.CreatureSpeed);
         _move.IsFlying = (creature.CreatureType1 == CreatureType.Flying ||
                           creature.CreatureType2 == CreatureType.Flying);
-        
-        try
-        {
-            _renderer.sprite = CurrentCreature.Sprite;
-        }
-        catch (NullReferenceException ex)
-        {
-            Debug.Log("Why on Earth does this fail?");
-        }
     }
 
     public void Swap(int slot)
@@ -71,6 +68,11 @@ public class Creature : MonoBehaviour
     {
         CurrentCreature.TakeDamage(damage);
         Owner.UpdateHUD(CurrentCreature);
+        if (CurrentCreature.CurrentHealth <= 0)
+        {
+            _handler.ReportCreatureFainted(Owner);
+
+        }
     }
 
     // Change to one method with a dictionary or something, potentially
