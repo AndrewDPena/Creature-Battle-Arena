@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 287764707529801251}
   m_Layer: 0
-  m_Name: FireBreathObject
+  m_Name: BubbleObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103,7 +103,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: aba4c7d97b2baf141a3d71642ba02ef5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dbbce473d262fae4ab5834370f5c37b2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

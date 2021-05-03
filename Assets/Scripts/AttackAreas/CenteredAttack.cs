@@ -11,7 +11,7 @@ namespace AttackAreas
         {
             var spriteObject = attackBase.SpriteObject;
             var attack = Instantiate(spriteObject, exitPoints[6].position, Quaternion.identity);
-            var damage = attack.GetComponent<DamageManager>();
+            var damage = attack.GetComponentInChildren<DamageManager>();
             damage.SetAttack(attackBase);
             damage.SetAttacker(creature);
 

@@ -20,7 +20,7 @@ namespace AttackAreas
             var spriteObject = attackBase.SpriteObject;
             var attack = Instantiate(spriteObject, exitPoints[point].position, Quaternion.identity);
             attack.transform.rotation = Quaternion.AngleAxis(cast, Vector3.forward);
-            var damage = attack.GetComponent<DamageManager>();
+            var damage = attack.GetComponentInChildren<DamageManager>();
             damage.SetAttack(attackBase);
             damage.SetAttacker(creature);
 
