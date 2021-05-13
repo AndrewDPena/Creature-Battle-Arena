@@ -16,14 +16,14 @@ namespace PlayTest
         {
             _gameObject = GameObject.Instantiate(new GameObject());
             SceneManager.LoadScene("Start Menu");
-            _menu = GameObject.FindObjectOfType<MainMenu>();
         }
         
         [TearDown]
         public void Teardown()
         {
-            SceneManager.UnloadSceneAsync("Start Menu");
-            GameObject.Destroy(_gameObject);
+            foreach (var o in GameObject.FindObjectsOfType<GameObject>()) {
+                GameObject.Destroy(o);
+            }
         }
         
         [UnityTest]
@@ -41,6 +41,7 @@ namespace PlayTest
         public IEnumerator ArenaSceneIsLoadedByMainMenuAction()
         {
             yield return new WaitForSeconds(0.1f);
+            _menu = GameObject.FindObjectOfType<MainMenu>();
             
             Assert.IsNotNull(_menu, "The menu should attach correctly.");
             _menu.LoadBattleScene();
