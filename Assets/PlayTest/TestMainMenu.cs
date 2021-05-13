@@ -11,18 +11,18 @@ namespace PlayTest
         private GameObject _gameObject;
         private MainMenu _menu;
         
-        
         [SetUp]
         public void Setup()
         {
             _gameObject = GameObject.Instantiate(new GameObject());
-            _menu = _gameObject.AddComponent<MainMenu>();
             SceneManager.LoadScene("Start Menu");
+            _menu = GameObject.FindObjectOfType<MainMenu>();
         }
         
         [TearDown]
         public void Teardown()
         {
+            SceneManager.UnloadSceneAsync("Start Menu");
             GameObject.Destroy(_gameObject);
         }
         
@@ -31,21 +31,24 @@ namespace PlayTest
         {
             yield return new WaitForSeconds(0.1f);
 
-            var Scene = SceneManager.GetActiveScene();
+            var scene = SceneManager.GetActiveScene();
             
-            Assert.AreNotEqual(SceneManager.GetSceneByName("ArenaScene"), Scene, 
+            Assert.AreNotEqual(SceneManager.GetSceneByName("ArenaScene"), scene, 
                 "The default scene is not the ArenaScene.");
         }
         
         [UnityTest]
-        public IEnumerator ArenaSceneIsNotLoadedByMainMenuAction()
+        public IEnumerator ArenaSceneIsLoadedByMainMenuAction()
         {
+            yield return new WaitForSeconds(0.1f);
+            
+            Assert.IsNotNull(_menu, "The menu should attach correctly.");
             _menu.LoadBattleScene();
             yield return new WaitForSeconds(0.1f);
 
-            var Scene = SceneManager.GetActiveScene();
+            var scene = SceneManager.GetActiveScene();
             
-            Assert.AreEqual(SceneManager.GetSceneByName("ArenaScene"), Scene, 
+            Assert.AreEqual(SceneManager.GetSceneByName("ArenaScene"), scene, 
                 "The ArenaScene is loaded upon MainMenu method call.");
         }
     }

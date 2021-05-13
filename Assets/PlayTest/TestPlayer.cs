@@ -1,12 +1,8 @@
 ﻿using System.Collections;
-using System.Data;
 using System.Reflection;
-using NSubstitute;
 using NUnit.Framework;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.TestTools;
-using UnityEngine.UI;
 using UserInterfaceScripts;
 
 namespace PlayTest
@@ -41,7 +37,7 @@ namespace PlayTest
         [TearDown]
         public void Teardown()
         {
-            foreach (GameObject o in Object.FindObjectsOfType<GameObject>()) {
+            foreach (GameObject o in FindObjectsOfType<GameObject>()) {
                 Destroy(o);
             }
         }
