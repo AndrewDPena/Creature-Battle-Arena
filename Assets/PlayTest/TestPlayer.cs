@@ -99,5 +99,31 @@ namespace PlayTest
             Assert.AreEqual(90, _playerHud.GetHealth(), "Player can update HUD values.");
 
         }
+
+        [UnityTest]
+        public IEnumerator PlayerReportsRemainingCreatures()
+        {
+            yield return new WaitForSeconds(0.1f);
+            Assert.False(_player.HasRemainingCreatures(), "Player starts with no remaining creatures.");
+            
+            _player.AddCreature(new CreatureData("Test", 10, 10));
+            yield return new WaitForSeconds(0.1f);
+            Assert.True(_player.HasRemainingCreatures(), "Player has remaining creatures after a creature is added.");
+        }
+        
+        [UnityTest]
+        public IEnumerator PlayerReportsNoRemainingCreaturesOnZeroHp()
+        {
+            var creature = new CreatureData("test", 10, 10);
+            _player.AddCreature(creature);
+            yield return new WaitForSeconds(0.1f);
+            Assert.True(_player.HasRemainingCreatures(), "Player has remaining creatures after a creature is added.");
+            
+            
+            creature.TakeDamage(10);
+            yield return new WaitForSeconds(0.1f);
+            Assert.False(_player.HasRemainingCreatures(), 
+                "Player has no remaining creatures when all creatures HP is zero.");
+        }
     }
 }

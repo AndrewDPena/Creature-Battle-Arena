@@ -22,4 +22,4 @@ MonoBehaviour:
     type: 3}
   _attacks:
   - {fileID: 11400000, guid: ba70a53859adb7042a6b2b54e458724c, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 3cf68639f64d6bb40bc136d7219c65eb, type: 2}
