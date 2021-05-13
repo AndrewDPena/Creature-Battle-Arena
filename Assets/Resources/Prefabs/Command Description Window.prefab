@@ -238,6 +238,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1984634508521881878}
+  - component: {fileID: 7462398392798739916}
   m_Layer: 5
   m_Name: Command Description Window
   m_TagString: Untagged
@@ -267,3 +268,16 @@ RectTransform:
   m_AnchoredPosition: {x: -61.051, y: -0.615}
   m_SizeDelta: {x: 85, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7462398392798739916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8820502606227402778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8adf412cfe549a78f2ab499038e902e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackDesc: {fileID: 6978426443683988235}

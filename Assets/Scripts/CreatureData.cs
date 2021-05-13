@@ -12,7 +12,7 @@ public class CreatureData
     public TypeChart.CreatureType CreatureType1;
     public TypeChart.CreatureType CreatureType2;
     public Sprite Sprite;
-    public List<AttackBase> Attacks = new List<AttackBase>();
+    public List<AttackBase> Attacks = new List<AttackBase>(2);
 
     public CreatureData(CreatureBase cBase)
     {

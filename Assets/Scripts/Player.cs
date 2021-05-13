@@ -71,7 +71,7 @@ public class Player
 
     private void UpdateAttackHuds(CreatureData creature)
     {
-        if (_ctrlHud == null)
+        if (_ctrlHud == null || creature.Attacks.Count < 1)
         {
             return;
             

@@ -1,4 +1,5 @@
-﻿using AttackManagement;
+﻿using System;
+using AttackManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,5 +20,7 @@ namespace UserInterfaceScripts
                 _attackDesc.text = attack.Name + "\n" + attack.Damage + " DMG\n" + attack.AttackType;
             }        
         }
+
+        public String AttackDesc => _attackDesc.text;
     }
 }
