@@ -73,4 +73,14 @@ public class MainMenu : MonoBehaviour
         _playerSlots[0].value -= 1; // Not really necessary, just leaves options in place when returning to menu.
         _npcSlots[0].value -= 1;
     }
+
+    public Creaturedex CreatureDex => _creatureDex;
+
+    public List<CreatureBase> PlayerCreatures => _playerCreatures;
+
+    public List<CreatureBase> NpcCreatures => _npcCreatures;
+
+    public Dropdown[] PlayerSlots => _playerSlots;
+
+    public Dropdown[] NpcSlots => _npcSlots;
 }
