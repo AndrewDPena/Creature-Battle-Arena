@@ -17,8 +17,10 @@ public class ArenaHandler : MonoBehaviour
     [SerializeField] private GameObject _creaturePrefab;
     [SerializeField] private SummonNextCreatureWindow _summonNext;
     [SerializeField] private BattleEndWindow _battleEnd;
-    [SerializeField] private static List<CreatureBase> _playerCreatures = new List<CreatureBase>();
-    [SerializeField] private static List<CreatureBase> _npcCreatures = new List<CreatureBase>();
+    [SerializeField] private List<CreatureBase> _playerCreatures = new List<CreatureBase>();
+    [SerializeField] private List<CreatureBase> _npcCreatures = new List<CreatureBase>();
+    private static List<CreatureBase> _playerIncomingBases;
+    private static List<CreatureBase> _npcIncomingBases;
 
 
     public Transform PlayerSpawn;
@@ -33,6 +35,16 @@ public class ArenaHandler : MonoBehaviour
         HumanPlayer.Name = "Human";
         NPCPlayer = new Player{};
         NPCPlayer.Name = "NPC";
+
+        if (_playerIncomingBases != null)
+        {
+            _playerCreatures = _playerIncomingBases;
+        }
+
+        if (_npcIncomingBases != null)
+        {
+            _npcCreatures = _npcIncomingBases;
+        }
 
         var playerCreatureGO = Instantiate(_creaturePrefab, PlayerSpawn.position, Quaternion.identity);
         playerCreatureGO.AddComponent<PlayerInputKeyboard>();
@@ -120,7 +132,11 @@ public class ArenaHandler : MonoBehaviour
 
     public static void SetData(List<CreatureBase> playerPocket, List<CreatureBase> npcPocket)
     {
-        _playerCreatures = playerPocket;
-        _npcCreatures = npcPocket;
+        _playerIncomingBases = playerPocket;
+        _npcIncomingBases = npcPocket;
     }
+
+    public List<CreatureBase> PlayerCreatures => _playerCreatures;
+
+    public List<CreatureBase> NpcCreatures => _npcCreatures;
 }

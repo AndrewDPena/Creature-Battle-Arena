@@ -2703,6 +2703,10 @@ MonoBehaviour:
     type: 3}
   _summonNext: {fileID: 1523155701}
   _battleEnd: {fileID: 2093816627}
+  _playerCreatures:
+  - {fileID: 11400000, guid: 0b3b4128fac340a488a5a1ef0c523cb1, type: 2}
+  _npcCreatures:
+  - {fileID: 11400000, guid: e38444c0199439944aebf3a8f996bb54, type: 2}
   PlayerSpawn: {fileID: 122052405}
   NPCSpawn: {fileID: 540156894}
 --- !u!4 &1226704241
