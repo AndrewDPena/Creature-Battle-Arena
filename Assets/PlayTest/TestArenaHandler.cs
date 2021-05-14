@@ -1,21 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using NSubstitute;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
+using UserInterfaceScripts;
+using UnityEngine.UI;
 
 namespace PlayTest
 {
     public class TestArenaHandler : MonoBehaviour
     {
+        private GameObject _gameObject;
         private ArenaHandler _handler;
         
         [SetUp]
         public void Setup()
         {
             SceneManager.LoadScene("ArenaScene");
+            _gameObject = Instantiate(new GameObject());
         }
 
         [TearDown]
@@ -70,6 +75,64 @@ namespace PlayTest
             
             Assert.AreEqual(testPocket2, _handler.NpcCreatures, 
                 "The SetData method correctly assigns the NPC pocket.");
+        }
+
+        [UnityTest]
+        public IEnumerator NpcLosesTheBattleWithNoCreaturesRemaining()
+        {
+            yield return new WaitForSeconds(0.1f);
+            _handler = FindObjectOfType<ArenaHandler>();
+
+            var type = typeof(ArenaHandler).GetField("_battleEnd", 
+                BindingFlags.NonPublic | BindingFlags.Instance);  
+            var battleEndValue = (BattleEndWindow)type.GetValue(_handler);
+
+            _gameObject = Instantiate(new GameObject());
+            var defaultBattleEnd = _gameObject.AddComponent<BattleEndWindow>();
+            var defaultText = _gameObject.AddComponent<Text>();
+            defaultBattleEnd.GetType().GetField("_outcomeText", 
+                BindingFlags.NonPublic | BindingFlags.Instance)?.SetValue(defaultBattleEnd, defaultText);
+
+            defaultBattleEnd.SetOutcome(true);
+
+            var player = Substitute.For<ISummoner>();
+            _handler.NPCPlayer = player;
+            player.HasRemainingCreatures().Returns(false);
+            _handler.ReportCreatureFainted(player);
+            
+            yield return new WaitForSeconds(0.1f);
+            
+            Assert.AreEqual(defaultBattleEnd.OutcomeText, battleEndValue.OutcomeText, 
+                "Victory screen shown when NPC creature faints and NPC has no creatures remaining.");
+        }
+        
+        [UnityTest]
+        public IEnumerator PlayerLosesTheBattleWithNoCreaturesRemaining()
+        {
+            yield return new WaitForSeconds(0.1f);
+            _handler = FindObjectOfType<ArenaHandler>();
+
+            var type = typeof(ArenaHandler).GetField("_battleEnd", 
+                BindingFlags.NonPublic | BindingFlags.Instance);  
+            var battleEndValue = (BattleEndWindow)type.GetValue(_handler);
+
+            _gameObject = Instantiate(new GameObject());
+            var defaultBattleEnd = _gameObject.AddComponent<BattleEndWindow>();
+            var defaultText = _gameObject.AddComponent<Text>();
+            defaultBattleEnd.GetType().GetField("_outcomeText", 
+                BindingFlags.NonPublic | BindingFlags.Instance)?.SetValue(defaultBattleEnd, defaultText);
+
+            defaultBattleEnd.SetOutcome(false);
+
+            var player = Substitute.For<ISummoner>();
+            _handler.HumanPlayer = player;
+            player.HasRemainingCreatures().Returns(false);
+            _handler.ReportCreatureFainted(player);
+            
+            yield return new WaitForSeconds(0.1f);
+            
+            Assert.AreEqual(defaultBattleEnd.OutcomeText, battleEndValue.OutcomeText, 
+                "Loss screen shown when player creature faints and player has no creatures remaining.");
         }
     }
 }

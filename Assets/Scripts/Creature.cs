@@ -14,7 +14,7 @@ public class Creature : MonoBehaviour
     [SerializeField] private AttackManager _manager;
     [SerializeField] private List<AttackBase> _attacks = new List<AttackBase>();
 
-    public Player Owner;
+    public ISummoner Owner;
 
     private void Start()
     {
@@ -24,7 +24,7 @@ public class Creature : MonoBehaviour
         _hasStarted = true;
     }
 
-    public void AssignPlayer(Player player)
+    public void AssignPlayer(ISummoner player)
     {
         Owner = player;
     }

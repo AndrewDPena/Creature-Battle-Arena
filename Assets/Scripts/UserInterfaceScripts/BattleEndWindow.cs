@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -22,5 +23,7 @@ namespace UserInterfaceScripts
         {
             SceneManager.LoadScene("Start Menu");
         }
+
+        public string OutcomeText => _outcomeText.text;
     }
 }

@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class ArenaHandler : MonoBehaviour
 {
-    public Player HumanPlayer;
-    public Player NPCPlayer;
+    public ISummoner HumanPlayer;
+    public ISummoner NPCPlayer;
 
     public PocketHUD NPCHud;
     public PocketHUD PlayerPocketHud;
@@ -111,7 +111,7 @@ public class ArenaHandler : MonoBehaviour
         _battleEnd.SetOutcome(playerWonBattle);
     }
 
-    public void ReportCreatureFainted(Player player)
+    public void ReportCreatureFainted(ISummoner player)
     {
         if (player == NPCPlayer) 
         {
@@ -124,7 +124,7 @@ public class ArenaHandler : MonoBehaviour
         else
         {
             _summonNext.gameObject.SetActive(true);
-            _summonNext.SetKeys(player);
+            _summonNext.SetKeys(HumanPlayer);
             _playerCreature.transform.position = new Vector3(100, 100, 100);
             StartCoroutine(WaitForSummon());
         }
