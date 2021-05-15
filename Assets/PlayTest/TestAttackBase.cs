@@ -61,7 +61,7 @@ namespace PlayTest
             
             yield return new WaitForSeconds(0.1f);
             
-            Assert.True(damageSelf, "Boolean value of test attack is correctly read.");
+            Assert.False(damageSelf, "Boolean value of test attack is correctly read.");
         }
         
         [UnityTest]

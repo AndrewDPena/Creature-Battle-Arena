@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Testo
   _strength: 10
-  _maxHealth: 10
+  _maxHealth: 100
   _creatureSpeed: 1000
   _creatureType1: 1
   _creatureType2: 0
@@ -22,4 +22,4 @@ MonoBehaviour:
     type: 3}
   _attacks:
   - {fileID: 11400000, guid: 38e42810cbdca394fb2dc845b95b1180, type: 2}
-  - {fileID: 11400000, guid: 38e42810cbdca394fb2dc845b95b1180, type: 2}
+  - {fileID: 11400000, guid: 24da09e9a87e5be4892e8307f84242ea, type: 2}
