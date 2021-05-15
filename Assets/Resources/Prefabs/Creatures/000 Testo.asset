@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Testo
   _strength: 10
-  _maxHealth: 100
+  _maxHealth: 1000
   _creatureSpeed: 1000
   _creatureType1: 1
   _creatureType2: 0
