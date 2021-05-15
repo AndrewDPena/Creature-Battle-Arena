@@ -107,6 +107,39 @@ namespace PlayTest
         }
         
         [UnityTest]
+        public IEnumerator NpcContinuesTheBattleWithCreaturesRemaining()
+        {
+            yield return new WaitForSeconds(0.1f);
+            _handler = FindObjectOfType<ArenaHandler>();
+
+            var player = Substitute.For<ISummoner>();
+            _handler.NPCPlayer = player;
+            player.HasRemainingCreatures().Returns(true);
+            var creature = new CreatureData("Test", 10, 10);
+            player.GetNextHealthyCreature().Returns(1);
+            player.CanSummonCreature(1).Returns(true);
+            player.SummonCreature(1).Returns(creature);
+                        
+            var type = typeof(ArenaHandler).GetField("_enemyCreature", 
+                BindingFlags.NonPublic | BindingFlags.Instance);
+            var currentNpcCreature = (Creature) type.GetValue(_handler);
+            currentNpcCreature.AssignPlayer(player);
+            
+            _handler.ReportCreatureFainted(player);
+
+            
+            yield return new WaitForSeconds(0.1f);
+
+            player.Received().HasRemainingCreatures();
+            player.Received().GetNextHealthyCreature();
+            player.ReceivedWithAnyArgs().CanSummonCreature(1);
+            player.ReceivedWithAnyArgs().SummonCreature(1);
+            
+            Assert.AreEqual(creature.Name, currentNpcCreature.CurrentCreature.Name, 
+                "NPC summons its next healthy creature when NPC creature faints and NPC has creatures remaining.");
+        }
+        
+        [UnityTest]
         public IEnumerator PlayerLosesTheBattleWithNoCreaturesRemaining()
         {
             yield return new WaitForSeconds(0.1f);
@@ -133,6 +166,38 @@ namespace PlayTest
             
             Assert.AreEqual(defaultBattleEnd.OutcomeText, battleEndValue.OutcomeText, 
                 "Loss screen shown when player creature faints and player has no creatures remaining.");
+        }
+
+        [UnityTest]
+        public IEnumerator PlayerIsAbleToSwapCreaturesOnFaint()
+        {
+            yield return new WaitForSeconds(0.1f);
+            _handler = FindObjectOfType<ArenaHandler>();
+            
+            var player = Substitute.For<ISummoner>();
+            _handler.HumanPlayer = player;
+            player.HasRemainingCreatures().Returns(true);
+            var creature = new CreatureData("Test", 10, 10);
+            player.CanSummonCreature(1).Returns(true);
+            player.SummonCreature(1).Returns(creature);
+            
+            var type = typeof(ArenaHandler).GetField("_playerCreature", 
+                BindingFlags.NonPublic | BindingFlags.Instance);
+            var playerCreature = (Creature) type.GetValue(_handler);
+            playerCreature.AssignPlayer(player);
+            playerCreature.CurrentCreature.TakeDamage(10000);
+            
+            _handler.ReportCreatureFainted(player);
+            yield return new WaitForSeconds(0.1f);
+            
+            Assert.AreNotEqual(creature.Name, playerCreature.CurrentCreature.Name, 
+                "Creatures are not the same after a faint until  player calls a swap.");
+            
+            playerCreature.Swap(1);
+            yield return new WaitForSeconds(0.1f);
+            
+            Assert.AreEqual(creature.Name, playerCreature.CurrentCreature.Name,
+                "After a faint, a player can call a swap and get the next creature.");
         }
     }
 }

@@ -13,7 +13,6 @@ namespace PlayTest
     {
         private GameObject _gameObject;
         private PlayerInputKeyboard _input;
-        //private Rigidbody2D _body;
         private ISummoner _player;
         private CreatureMove _move;
         private Creature _creature;
@@ -156,32 +155,5 @@ namespace PlayTest
             _player.Received().SummonCreature(1);
             Debug.Log("The player received a swap call from the input string.");
         }
-        
-        /* This method swaps back and forth repeatedly, which is why it has failed/succeeded intermittently
-        [UnityTest]
-        public IEnumerator PlayerInputCallsASwap()
-        {
-            var slots = new List<string>(){"1", "2", "3", "4"};
-
-            _unityService.InputString().Returns("abcde1fg");
-            var pocketHud = _gameObject.AddComponent<PocketHUD>();
-            pocketHud.AddHud(Instantiate(Resources.Load<PlayerHUD>("Prefabs/PlayerHudPrefab"), 
-                Vector3.zero, Quaternion.identity));
-
-            var player = new Player { };
-            player.AddCreature(new CreatureData("test1", 10, 10));
-            player.SetPocketHUD(pocketHud);
-            _creature.AssignPlayer(player);
-            _creature.Summon(player.SummonCreature(0));
-            player.AddCreature(new CreatureData("test2", 10, 10));
-            Assert.True(player.CanSummonCreature(1));
-            
-            _input.UnityService = _unityService;
-            yield return new WaitForSeconds(0.1f);
-
-            Assert.That(slots.Any(s => _unityService.InputString().Contains(s)));
-            
-            Assert.AreEqual("test2", player.GetActiveCreature().Name, "Player Input causes creatures to swap.");
-        }*/
     }
 }
