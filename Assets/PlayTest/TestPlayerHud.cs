@@ -89,19 +89,5 @@ namespace PlayTest
                 "The currect scene becomes the Start Menu upon play again button press.");
             SceneManager.UnloadSceneAsync("Start Menu");
         }
-
-        [UnityTest]
-        public IEnumerator BattleEndWindowCanCallApplicationQuit()
-        {
-            var exitCode = 9999;
-            
-            var go = Instantiate(new GameObject());
-            _battleEnd = go.AddComponent<BattleEndWindow>();
-            exitCode = _battleEnd.EndGame();
-            
-            yield return new WaitForSeconds(0.1f);
-            
-            Assert.AreEqual(-1, exitCode, "Exit code successfully returned, Application.Quit() was called.");
-        }
     }
 }
