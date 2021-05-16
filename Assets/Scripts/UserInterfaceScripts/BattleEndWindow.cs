@@ -14,10 +14,9 @@ namespace UserInterfaceScripts
             _outcomeText.text = playerWonBattle ? "You won!" : "You lost...";
         }
         
-        public int EndGame()
+        public void EndGame()
         {
             Application.Quit();
-            return -1;
         }
 
         public void StartNewGame()
