@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class ArenaHandler : MonoBehaviour
 {
-    public Player HumanPlayer;
-    public Player NPCPlayer;
+    public ISummoner HumanPlayer;
+    public ISummoner NPCPlayer;
 
     public PocketHUD NPCHud;
     public PocketHUD PlayerPocketHud;
@@ -17,8 +17,10 @@ public class ArenaHandler : MonoBehaviour
     [SerializeField] private GameObject _creaturePrefab;
     [SerializeField] private SummonNextCreatureWindow _summonNext;
     [SerializeField] private BattleEndWindow _battleEnd;
-    [SerializeField] private static List<CreatureBase> _playerCreatures = new List<CreatureBase>();
-    [SerializeField] private static List<CreatureBase> _npcCreatures = new List<CreatureBase>();
+    [SerializeField] private List<CreatureBase> _playerCreatures = new List<CreatureBase>();
+    [SerializeField] private List<CreatureBase> _npcCreatures = new List<CreatureBase>();
+    private static List<CreatureBase> _playerIncomingBases;
+    private static List<CreatureBase> _npcIncomingBases;
 
 
     public Transform PlayerSpawn;
@@ -34,11 +36,21 @@ public class ArenaHandler : MonoBehaviour
         NPCPlayer = new Player{};
         NPCPlayer.Name = "NPC";
 
+        if (_playerIncomingBases != null)
+        {
+            _playerCreatures = _playerIncomingBases;
+        }
+
+        if (_npcIncomingBases != null)
+        {
+            _npcCreatures = _npcIncomingBases;
+        }
+
         var playerCreatureGO = Instantiate(_creaturePrefab, PlayerSpawn.position, Quaternion.identity);
         playerCreatureGO.AddComponent<PlayerInputKeyboard>();
         var enemyCreatureGO = Instantiate(_creaturePrefab, NPCSpawn.position, Quaternion.identity);
-        //var ai = enemyCreatureGO.AddComponent<BasicAI>();
-        //ai.Player = playerCreatureGO;
+        var ai = enemyCreatureGO.AddComponent<BasicAI>();
+        ai.Player = playerCreatureGO;
 
         HumanPlayer.SetPocketHUD(PlayerPocketHud);
         NPCPlayer.SetPocketHUD(NPCHud);
@@ -99,7 +111,7 @@ public class ArenaHandler : MonoBehaviour
         _battleEnd.SetOutcome(playerWonBattle);
     }
 
-    public void ReportCreatureFainted(Player player)
+    public void ReportCreatureFainted(ISummoner player)
     {
         if (player == NPCPlayer) 
         {
@@ -112,7 +124,7 @@ public class ArenaHandler : MonoBehaviour
         else
         {
             _summonNext.gameObject.SetActive(true);
-            _summonNext.SetKeys(player);
+            _summonNext.SetKeys(HumanPlayer);
             _playerCreature.transform.position = new Vector3(100, 100, 100);
             StartCoroutine(WaitForSummon());
         }
@@ -120,7 +132,11 @@ public class ArenaHandler : MonoBehaviour
 
     public static void SetData(List<CreatureBase> playerPocket, List<CreatureBase> npcPocket)
     {
-        _playerCreatures = playerPocket;
-        _npcCreatures = npcPocket;
+        _playerIncomingBases = playerPocket;
+        _npcIncomingBases = npcPocket;
     }
+
+    public List<CreatureBase> PlayerCreatures => _playerCreatures;
+
+    public List<CreatureBase> NpcCreatures => _npcCreatures;
 }

@@ -19,5 +19,7 @@ namespace UserInterfaceScripts
                 _attackDesc.text = attack.Name + "\n" + attack.Damage + " DMG\n" + attack.AttackType;
             }        
         }
+
+        public string AttackDesc => _attackDesc.text;
     }
 }

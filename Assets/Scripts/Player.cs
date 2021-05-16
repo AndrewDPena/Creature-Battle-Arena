@@ -5,15 +5,21 @@ using UnityEditor;
 using UnityEngine;
 using UserInterfaceScripts;
 
-public class Player
+public class Player : ISummoner
 {
-    public string Name;
+    private string _name;
     private PlayerHUD _hud;
     private PocketHUD _pocketHud;
     private AttackWindowHud _ctrlHud;
     private AttackWindowHud _shiftHud;
     private List<CreatureData> CreaturePocket = new List<CreatureData>();
     private CreatureData _activeCreature;
+
+    public string Name
+    {
+        get { return _name; }
+        set { _name = value; }
+    }
 
     public void AddCreature(CreatureData creature)
     {
@@ -71,7 +77,7 @@ public class Player
 
     private void UpdateAttackHuds(CreatureData creature)
     {
-        if (_ctrlHud == null)
+        if (_ctrlHud == null || creature.Attacks.Count < 1)
         {
             return;
             

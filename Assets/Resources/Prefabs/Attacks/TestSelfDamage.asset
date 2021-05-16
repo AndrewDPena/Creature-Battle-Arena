@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 77f9ed4dfcc546f39ec9dc1f8115642c, type: 3}
-  m_Name: TestAttack
+  m_Name: TestSelfDamage
   m_EditorClassIdentifier: 
   _name: Test
   _damage: 20
   _damagePerTick: 5
-  _canDamageSelf: 0
+  _canDamageSelf: 1
   _attackType: 1
-  _areaOfEffect: {fileID: 6487142264891995890, guid: 633712aaf26d23946bfc1c792c98f83e,
+  _areaOfEffect: {fileID: 6487142264891995890, guid: 5b12e1455c36cdd42867a9b2e370e562,
     type: 3}
   _spriteObject: {fileID: 2076616070413368170, guid: 535178a8e6a70ed4ba7346b4e6ac6884,
     type: 3}

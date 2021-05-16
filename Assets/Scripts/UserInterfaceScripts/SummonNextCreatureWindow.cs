@@ -10,7 +10,7 @@ namespace UserInterfaceScripts
     {
         [SerializeField] private Image[] _keys;
 
-        public void SetKeys(Player player)
+        public void SetKeys(ISummoner player)
         {
             for (var i = 0; i < _keys.Length; i++)
             {

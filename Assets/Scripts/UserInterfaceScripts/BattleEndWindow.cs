@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -13,14 +14,17 @@ namespace UserInterfaceScripts
             _outcomeText.text = playerWonBattle ? "You won!" : "You lost...";
         }
         
-        public void EndGame()
+        public int EndGame()
         {
             Application.Quit();
+            return -1;
         }
 
         public void StartNewGame()
         {
             SceneManager.LoadScene("Start Menu");
         }
+
+        public string OutcomeText => _outcomeText.text;
     }
 }
