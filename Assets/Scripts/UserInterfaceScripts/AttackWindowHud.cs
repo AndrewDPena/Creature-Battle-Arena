@@ -1,5 +1,4 @@
-﻿using System;
-using AttackManagement;
+﻿using AttackManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +20,6 @@ namespace UserInterfaceScripts
             }        
         }
 
-        public String AttackDesc => _attackDesc.text;
+        public string AttackDesc => _attackDesc.text;
     }
 }

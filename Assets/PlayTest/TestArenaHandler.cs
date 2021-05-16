@@ -185,9 +185,9 @@ namespace PlayTest
                 BindingFlags.NonPublic | BindingFlags.Instance);
             var playerCreature = (Creature) type.GetValue(_handler);
             playerCreature.AssignPlayer(player);
-            playerCreature.CurrentCreature.TakeDamage(10000);
+            playerCreature.TakeDamage(10000);
             
-            _handler.ReportCreatureFainted(player);
+            //_handler.ReportCreatureFainted(player);
             yield return new WaitForSeconds(0.1f);
             
             Assert.AreNotEqual(creature.Name, playerCreature.CurrentCreature.Name, 

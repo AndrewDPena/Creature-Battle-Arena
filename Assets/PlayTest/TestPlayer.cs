@@ -43,6 +43,17 @@ namespace PlayTest
         }
 
         [UnityTest]
+        public IEnumerator PlayerPropertiesWorkCorrectly()
+        {
+            var pName = "TestPlayer";
+            _player.Name = pName;
+            
+            yield return new WaitForSeconds(0.1f);
+            Assert.AreEqual(pName, _player.Name, "C# isn't broken and the properties of the player work.");
+        }
+        
+
+        [UnityTest]
         public IEnumerator PlayerCreates()
         {
             yield return new WaitForSeconds(0.1f);
